@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Resume Job Matching</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        />
+    </head>
+    <body class="bg-light">
+        <div class="container mt-5">
+            <h2 class="text-center mb-4">📂 Upload Resumes for Job Matching</h2>
+
+            <!-- File Upload Form -->
+            <form id="upload-form" enctype="multipart/form-data" class="mb-4">
+                <div class="mb-3">
+                    <input
+                        type="file"
+                        name="files[]"
+                        id="file-input"
+                        multiple
+                        class="form-control"
+                        accept=".pdf,.docx,.txt"
+                        required
+                    />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Upload & Analyze
+                </button>
+            </form>
+
+            <!-- Results Section -->
+            <div id="results" class="mt-4"></div>
+        </div>
+
+        <script>
+            document
+                .getElementById("upload-form")
+                .addEventListener("submit", async function (event) {
+                    event.preventDefault();
+
+                    let formData = new FormData();
+                    let files = document.getElementById("file-input").files;
+                    for (let i = 0; i < files.length; i++) {
+                        formData.append("files[]", files[i]);
+                    }
+
+                    let resultsDiv = document.getElementById("results");
+                    resultsDiv.innerHTML =
+                        "<p class='text-center'>⏳ Processing resumes...</p>";
+
+                    try {
+                        let response = await fetch("/upload", {
+                            method: "POST",
+                            body: formData,
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`Server Error: ${response.status}`);
+                        }
+
+                        let data = await response.json(); // ✅ Ensure JSON is correctly parsed
+
+                        resultsDiv.innerHTML = ""; // Clear results
+
+                        if (!data.resumes || data.resumes.length === 0) {
+                            resultsDiv.innerHTML =
+                                "<p class='text-danger text-center'>⚠️ No suitable jobs found.</p>";
+                            return;
+                        }
+
+                        // ✅ Display results properly
+                        data.resumes.forEach((resume) => {
+                            let resultHTML = `
+                                <div class="card shadow-sm mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">📄 ${
+                                            resume.filename
+                                        }</h5>
+                                        <h6>🧠 Top Job Matches:</h6>
+                                        <ul class="list-group mb-3">
+                                            ${resume.top_jobs
+                                                .map(
+                                                    (job) => `
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    ${job.role}
+                                                    <span class="badge bg-success">${job.score}</span>
+                                                </li>
+                                            `
+                                                )
+                                                .join("")}
+                                        </ul>
+                                        <h6>🔍 Skills & Experience Analysis:</h6>
+                                        <p><strong>Skills:</strong> ${
+                                            resume.analysis.skills ||
+                                            "Not detected"
+                                        }</p>
+                                        <p><strong>Experience:</strong> ${
+                                            resume.analysis.experience ||
+                                            "Not provided"
+                                        }</p>
+                                    </div>
+                                </div>
+                            `;
+                            resultsDiv.innerHTML += resultHTML;
+                        });
+                    } catch (error) {
+                        console.error("Error processing resumes:", error); // ✅ Log error in console
+                        resultsDiv.innerHTML = `<p class='text-danger text-center'>❌ ${error.message}</p>`;
+                    }
+                });
+        </script>
+    </body>
+</html>
