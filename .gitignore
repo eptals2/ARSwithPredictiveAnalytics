@@ -8,4 +8,7 @@ ARS-dataset
 temps
 
 *.docx
-
+*.jpg
+*.png
+*.jpeg
+*.pdf
