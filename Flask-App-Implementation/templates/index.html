@@ -59,69 +59,31 @@
                                     Uploaded resumes will appear here...
                                 </span>
                             </div>
-
-                            <!-- Job Requirements Section -->
-                            <h5 class="card-title mb-2 mt-2">
-                                <i class="fas fa-briefcase me-1"></i>
-                                Upload Job Requirement
-                            </h5>
-                            <div
-                                class="custom-file-upload"
-                                id="jobRequirementUpload"
-                            >
-                                <i
-                                    class="fas fa-cloud-upload-alt fa-2x mb-1"
-                                ></i>
-                                <p class="mb-0">
-                                    Drag & Drop Job Requirement Here
-                                </p>
-                                <p class="text-muted small">
-                                    or click to browse (.pdf, .doc, .docx)
-                                </p>
-                                <input
-                                    type="file"
-                                    id="jobInput"
-                                    accept=".pdf,.doc,.docx"
-                                    class="d-none"
-                                />
-                            </div>
-                            <div
-                                class="resume-list p-2"
-                                id="uploadedJob"
-                                style="
-                                    height: 70px;
-                                    border: 2px dashed#f7e8d2c8;
-                                "
-                            >
-                                <span
-                                    id="uploadedJobFile"
-                                    class="text-muted text-center"
-                                >
-                                    Uploaded job requirement will appear here...
-                                </span>
-                            </div>
-
+                            <!--Extract entity such age, gender, address, skills, experience, 
+                            education level, course, certification on each resume using Roberta NER
+                            Then -->
                             <div class="mt-2">
                                 <button
                                     type="button"
-                                    id="scoringButton"
+                                    id="entityExtractionPrediction"
                                     class="btn btn-primary w-100"
                                 >
                                     <i class="fas fa-star-half-stroke me-2"></i>
-                                    Get Resume Scores
+                                    Extract entity to predict suitable job
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Middle Section - Results -->
+                <!-- Display Extracted Entities on each uploaded resume then analyze extracted entities 
+                 to predict candidate suitability based  job using XGBoost  -->
                 <div class="col-md-4 ps-md-2 mt-4 mt-md-0">
                     <div class="card shadow-sm" style="min-height: 580px">
                         <div class="card-body">
                             <h4 class="card-title mb-4">
-                                <i class="fas fa-star-half-stroke me-2"></i>
-                                Resume Scores
+                                <i class="fas fa-chart-bar me-2"></i>
+                                Predicted Suitable Job Role for Resumes
                             </h4>
 
                             <div id="analysisProgress" class="d-none">
@@ -133,52 +95,47 @@
                                     ></div>
                                 </div>
                                 <p class="text-center text-muted">
-                                    Scoring resumes...
+                                    Analyzing Suitable Job...
                                 </p>
                             </div>
 
-                            <div id="scoringResults" style="height: 450px">
+                            <div id="analysisResultsDiv" style="height: 450px">
                                 <!-- Results will be populated here -->
                                 <div class="text-center text-muted py-5">
                                     <i
                                         class="fas fa-rectangle-list fa-3x mb-3"
                                     ></i>
                                     <p>
-                                        Upload resumes and set job requirement
-                                        to see scores of resumes
+                                        Upload resumes for candidate suitability
+                                        assessment
                                     </p>
                                 </div>
                             </div>
                             <div
-                                id="scoringResults"
+                                id="analysisResults"
                                 style="
                                     display: none;
                                     overflow-y: scroll;
                                     max-height: 450px;
                                 "
                             ></div>
-                            <div class="mt-2">
-                                <button
-                                    type="button"
-                                    id="analyzeButton"
-                                    class="btn btn-success w-100"
-                                >
-                                    <i class="fas fa-chart-bar me-2"></i>
-                                    Analyze Top Scoring Resume
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Section - Results -->
+                <!-- Upload Company Job Description or Preferred Character/Attitude/Soft Skills) to Predict Candidate Suitability in a Company -->
                 <div class="col-md-4 ps-md-2 mt-4 mt-md-0">
                     <div class="card shadow-sm" style="min-height: 580px">
                         <div class="card-body">
                             <h4 class="card-title mb-4">
-                                <i class="fas fa-chart-bar me-2"></i>Analytics
+                                <i class="fas fa-chart-bar me-2"></i>Analysis
                                 Result
                             </h4>
+                            <p>
+                                Ex. Candidate 1 soft skills: hardworking -
+                                Suitable Ex. Candidate 2 soft skills: flexible -
+                                Suitable
+                            </p>
 
                             <div id="analysisProgress" class="d-none">
                                 <div class="progress mb-3">
