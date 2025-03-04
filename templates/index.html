@@ -1,638 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Analysis System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-            padding-top: 20px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e9ecef;
-        }
-        .header h1 {
-            color: #343a40;
-            font-weight: 700;
-        }
-        .header p {
-            color: #6c757d;
-            font-size: 1.1rem;
-        }
-        .card {
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        .card-header {
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-            font-weight: 600;
-            padding: 15px 20px;
-        }
-        .card-body {
-            padding: 20px;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-            padding: 10px 20px;
-            font-weight: 500;
-        }
-        .btn-primary:hover {
-            background-color: #0069d9;
-            border-color: #0062cc;
-        }
-        .btn-success {
-            background-color: #28a745;
-            border-color: #28a745;
-            padding: 10px 20px;
-            font-weight: 500;
-        }
-        .btn-success:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
-        }
-        .entity-item {
-            background-color: #f8f9fa;
-            padding: 10px 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border-left: 4px solid #007bff;
-        }
-        .entity-title {
-            font-weight: 600;
-            color: #343a40;
-            margin-bottom: 5px;
-        }
-        .entity-value {
-            color: #6c757d;
-        }
-        .progress {
-            height: 10px;
-            margin-bottom: 10px;
-        }
-        .assessment-result {
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-        .assessment-score {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #343a40;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .assessment-category {
-            margin-bottom: 15px;
-        }
-        .assessment-category-title {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        .assessment-recommendation {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-            font-weight: 500;
-        }
-        .excellent {
-            color: #28a745;
-        }
-        .good {
-            color: #17a2b8;
-        }
-        .average {
-            color: #ffc107;
-        }
-        .below-average {
-            color: #dc3545;
-        }
-        .hidden {
-            display: none;
-        }
-        #loadingSpinner {
-            display: none;
-            text-align: center;
-            margin: 20px 0;
-        }
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
-        }
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .comparison-table th, .comparison-table td {
-            border: 1px solid #dee2e6;
-            padding: 12px;
-            text-align: center;
-        }
-        .comparison-table th {
-            background-color: #f8f9fa;
-            font-weight: 600;
-        }
-        .comparison-table tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-        .comparison-table .best-candidate {
-            background-color: #d4edda;
-            font-weight: 600;
-        }
-        .candidate-card {
-            margin-bottom: 20px;
-            border: 1px solid #dee2e6;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .candidate-card-header {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-bottom: 1px solid #dee2e6;
-            font-weight: 600;
-        }
-        .candidate-card-body {
-            padding: 15px;
-        }
-        .candidate-list {
-            max-height: 500px;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-        #compareBtn {
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Resume Analysis System with Predictive Analytics</h1>
-            <p>Extract information from resumes and assess candidate suitability using AI</p>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        Upload Resumes
-                    </div>
-                    <div class="card-body">
-                        <form id="resumeForm" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <label for="resumeFiles" class="form-label">Select resume files (PDF, DOCX, or TXT)</label>
-                                <input class="form-control" type="file" id="resumeFiles" name="resumes[]" accept=".pdf,.docx,.txt" multiple>
-                                <div class="form-text">You can select multiple files by holding Ctrl (or Cmd on Mac) while selecting files.</div>
-                            </div>
-                            <button type="submit" class="btn btn-primary" id="extractBtn">
-                                <i class="bi bi-search"></i> Extract & Analyze Resumes
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                
-                <div id="loadingSpinner">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    <p class="mt-2">Processing...</p>
-                </div>
-                
-                <div id="resultsContainer" class="hidden">
-                    <h4 class="mt-4 mb-3">Analysis Results</h4>
-                    <div id="candidateList" class="candidate-list">
-                        <!-- Candidate cards will be displayed here -->
-                    </div>
-                    <button id="compareBtn" class="btn btn-success w-100 hidden">
-                        <i class="bi bi-bar-chart-line"></i> Compare Candidates
-                    </button>
-                </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            Automated Resume Screening with Predictive Analytics for Candidate
+            Suitability Assessment
+        </title>
+        <link href="static/css/bootstrap-5.3.1.css" rel="stylesheet" />
+        <link rel="stylesheet" href="static/css/style.css" />
+        <style></style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>
+                    Automated Resume Screening System with Predictive Analytics
+                </h1>
             </div>
-            
-            <div class="col-md-6">
-                <div id="comparisonCard" class="card hidden">
-                    <div class="card-header">
-                        Candidate Comparison
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Upload Resumes</div>
+                        <div class="card-body">
+                            <form id="resumeForm" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="resumeFiles" class="form-label"
+                                        >Select resume files (PDF, DOCX)</label
+                                    >
+                                    <input
+                                        class="form-control"
+                                        type="file"
+                                        id="resumeFiles"
+                                        name="resumes[]"
+                                        accept=".pdf,.docx,.txt"
+                                        multiple
+                                    />
+                                    <div class="form-text">
+                                        You can select multiple resumes
+                                    </div>
+                                </div>
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary"
+                                    id="extractBtn"
+                                >
+                                    <i class="bi bi-search"></i> Extract &
+                                    Analyze Resumes
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="card-body" id="comparisonContainer">
-                        <!-- Comparison results will be displayed here -->
+
+                    <div id="loadingSpinner">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Processing...</p>
+                    </div>
+
+                    <div id="resultsContainer" class="hidden">
+                        <h4 class="mt-4 mb-3">Analysis Results</h4>
+                        <div id="candidateList" class="candidate-list">
+                            <!-- Candidate cards will be displayed here -->
+                        </div>
+                        <button
+                            id="compareBtn"
+                            class="btn btn-success w-100 hidden"
+                        >
+                            <i class="bi bi-bar-chart-line"></i> Compare
+                            Candidates
+                        </button>
                     </div>
                 </div>
-                
-                <div id="assessmentCard" class="card hidden">
-                    <div class="card-header">
-                        Candidate Assessment Results
+
+                <div class="col-md-6">
+                    <div id="comparisonCard" class="card hidden">
+                        <div class="card-header">Candidate Comparison</div>
+                        <div
+                            class="card-body"
+                            id="comparisonContainer"
+                            style="
+                                max-width: 600px;
+                                max-height: 600px;
+                                overflow-y: scroll;
+                            "
+                        >
+                            <!-- Comparison results will be displayed here -->
+                        </div>
                     </div>
-                    <div class="card-body" id="assessmentContainer">
-                        <!-- Assessment results will be displayed here -->
+
+                    <div id="assessmentCard" class="card hidden">
+                        <div class="card-header">
+                            Candidate Assessment Results
+                        </div>
+                        <div class="card-body" id="assessmentContainer">
+                            <!-- Assessment results will be displayed here -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const resumeForm = document.getElementById('resumeForm');
-            const extractBtn = document.getElementById('extractBtn');
-            const compareBtn = document.getElementById('compareBtn');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            const resultsContainer = document.getElementById('resultsContainer');
-            const candidateList = document.getElementById('candidateList');
-            const comparisonCard = document.getElementById('comparisonCard');
-            const comparisonContainer = document.getElementById('comparisonContainer');
-            const assessmentCard = document.getElementById('assessmentCard');
-            const assessmentContainer = document.getElementById('assessmentContainer');
-            
-            let analysisResults = [];
-            
-            // Hide loading spinner initially
-            loadingSpinner.style.display = 'none';
-            
-            // Handle form submission for resume upload
-            resumeForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const fileInput = document.getElementById('resumeFiles');
-                if (!fileInput.files.length) {
-                    alert('Please select at least one resume file.');
-                    return;
-                }
-                
-                const formData = new FormData();
-                for (let i = 0; i < fileInput.files.length; i++) {
-                    formData.append('resumes[]', fileInput.files[i]);
-                }
-                
-                // Show loading spinner
-                loadingSpinner.style.display = 'block';
-                resultsContainer.classList.add('hidden');
-                comparisonCard.classList.add('hidden');
-                assessmentCard.classList.add('hidden');
-                
-                // Send request to extract information
-                fetch('/extract', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        analysisResults = data.results;
-                        displayResults(analysisResults);
-                        resultsContainer.classList.remove('hidden');
-                        
-                        // Show compare button only if there are multiple results
-                        if (analysisResults.length > 1) {
-                            compareBtn.classList.remove('hidden');
-                        } else {
-                            compareBtn.classList.add('hidden');
-                        }
-                    } else {
-                        alert('Error: ' + data.error);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while processing the resumes.');
-                })
-                .finally(() => {
-                    loadingSpinner.style.display = 'none';
-                });
-            });
-            
-            // Handle compare button click
-            compareBtn.addEventListener('click', function() {
-                if (analysisResults.length <= 1) {
-                    alert('You need at least two candidates to compare.');
-                    return;
-                }
-                
-                // Show loading spinner
-                loadingSpinner.style.display = 'block';
-                comparisonCard.classList.add('hidden');
-                
-                // Send request to compare candidates
-                fetch('/compare', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ results: analysisResults })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        displayComparison(data.comparison);
-                        comparisonCard.classList.remove('hidden');
-                        assessmentCard.classList.add('hidden');
-                    } else {
-                        alert('Error: ' + data.error);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while comparing candidates.');
-                })
-                .finally(() => {
-                    loadingSpinner.style.display = 'none';
-                });
-            });
-            
-            // Function to display results for all candidates
-            function displayResults(results) {
-                candidateList.innerHTML = '';
-                
-                results.forEach((result, index) => {
-                    const candidateCard = document.createElement('div');
-                    candidateCard.className = 'candidate-card';
-                    
-                    const cardHeader = document.createElement('div');
-                    cardHeader.className = 'candidate-card-header';
-                    cardHeader.textContent = result.filename;
-                    
-                    const cardBody = document.createElement('div');
-                    cardBody.className = 'candidate-card-body';
-                    
-                    // Display score and suitability
-                    const scoreDiv = document.createElement('div');
-                    scoreDiv.className = 'mb-3';
-                    scoreDiv.innerHTML = `
-                        <strong>Score:</strong> ${result.assessment.overall_score}% - 
-                        <span class="${result.assessment.suitability.toLowerCase().replace(' ', '-')}">${result.assessment.suitability}</span>
-                    `;
-                    
-                    // Create view details button
-                    const viewDetailsBtn = document.createElement('button');
-                    viewDetailsBtn.className = 'btn btn-outline-primary btn-sm';
-                    viewDetailsBtn.textContent = 'View Details';
-                    viewDetailsBtn.addEventListener('click', function() {
-                        displayAssessment(result.assessment, result.entities);
-                        assessmentCard.classList.remove('hidden');
-                        comparisonCard.classList.add('hidden');
-                    });
-                    
-                    cardBody.appendChild(scoreDiv);
-                    cardBody.appendChild(viewDetailsBtn);
-                    
-                    candidateCard.appendChild(cardHeader);
-                    candidateCard.appendChild(cardBody);
-                    candidateList.appendChild(candidateCard);
-                });
-            }
-            
-            // Function to display comparison results
-            function displayComparison(comparison) {
-                comparisonContainer.innerHTML = '';
-                
-                // Create best candidate alert
-                const bestCandidateAlert = document.createElement('div');
-                bestCandidateAlert.className = 'alert alert-success';
-                bestCandidateAlert.innerHTML = `
-                    <strong>Best Candidate:</strong> ${comparison.best_candidate.name} with a score of ${comparison.best_candidate.score}%
-                `;
-                comparisonContainer.appendChild(bestCandidateAlert);
-                
-                // Create comparison table
-                const table = document.createElement('table');
-                table.className = 'comparison-table';
-                
-                // Create table header
-                const thead = document.createElement('thead');
-                const headerRow = document.createElement('tr');
-                
-                const categoryHeader = document.createElement('th');
-                categoryHeader.textContent = 'Category';
-                headerRow.appendChild(categoryHeader);
-                
-                comparison.candidates.forEach(candidate => {
-                    const candidateHeader = document.createElement('th');
-                    candidateHeader.textContent = candidate;
-                    headerRow.appendChild(candidateHeader);
-                });
-                
-                thead.appendChild(headerRow);
-                table.appendChild(thead);
-                
-                // Create table body
-                const tbody = document.createElement('tbody');
-                
-                // Overall score row
-                const overallRow = document.createElement('tr');
-                const overallLabel = document.createElement('td');
-                overallLabel.textContent = 'Overall Score';
-                overallRow.appendChild(overallLabel);
-                
-                comparison.overall_scores.forEach((score, index) => {
-                    const scoreCell = document.createElement('td');
-                    scoreCell.textContent = score + '%';
-                    
-                    if (index === comparison.best_candidate.index) {
-                        scoreCell.className = 'best-candidate';
-                    }
-                    
-                    overallRow.appendChild(scoreCell);
-                });
-                
-                tbody.appendChild(overallRow);
-                
-                // Category scores rows
-                const categories = [
-                    { key: 'soft_skills', title: 'Soft Skills' },
-                    { key: 'hard_skills', title: 'Hard Skills' },
-                    { key: 'education', title: 'Education' },
-                    { key: 'experience', title: 'Experience' },
-                    { key: 'certification', title: 'Certification' }
-                ];
-                
-                categories.forEach(category => {
-                    const categoryRow = document.createElement('tr');
-                    const categoryLabel = document.createElement('td');
-                    categoryLabel.textContent = category.title;
-                    categoryRow.appendChild(categoryLabel);
-                    
-                    comparison.category_scores[category.key].forEach(score => {
-                        const scoreCell = document.createElement('td');
-                        scoreCell.textContent = score + '%';
-                        categoryRow.appendChild(scoreCell);
-                    });
-                    
-                    tbody.appendChild(categoryRow);
-                });
-                
-                // Suitability row
-                const suitabilityRow = document.createElement('tr');
-                const suitabilityLabel = document.createElement('td');
-                suitabilityLabel.textContent = 'Suitability';
-                suitabilityRow.appendChild(suitabilityLabel);
-                
-                comparison.suitability.forEach(suitability => {
-                    const suitabilityCell = document.createElement('td');
-                    suitabilityCell.textContent = suitability;
-                    suitabilityRow.appendChild(suitabilityCell);
-                });
-                
-                tbody.appendChild(suitabilityRow);
-                
-                table.appendChild(tbody);
-                comparisonContainer.appendChild(table);
-                
-                // Create recommendations section
-                const recommendationsDiv = document.createElement('div');
-                recommendationsDiv.className = 'mt-4';
-                recommendationsDiv.innerHTML = '<h5>Recommendations:</h5>';
-                
-                const recommendationsList = document.createElement('ul');
-                comparison.candidates.forEach((candidate, index) => {
-                    const recommendationItem = document.createElement('li');
-                    recommendationItem.innerHTML = `<strong>${candidate}:</strong> ${comparison.recommendations[index]}`;
-                    recommendationsList.appendChild(recommendationItem);
-                });
-                
-                recommendationsDiv.appendChild(recommendationsList);
-                comparisonContainer.appendChild(recommendationsDiv);
-            }
-            
-            // Function to display assessment results for a single candidate
-            function displayAssessment(assessment, entities) {
-                assessmentContainer.innerHTML = '';
-                
-                // Overall score
-                const scoreDiv = document.createElement('div');
-                scoreDiv.className = 'assessment-score';
-                scoreDiv.textContent = assessment.overall_score + '%';
-                
-                // Suitability level
-                const suitabilityDiv = document.createElement('div');
-                suitabilityDiv.className = 'text-center mb-4';
-                suitabilityDiv.innerHTML = `<h4>Suitability: <span class="${assessment.suitability.toLowerCase().replace(' ', '-')}">${assessment.suitability}</span></h4>`;
-                
-                assessmentContainer.appendChild(scoreDiv);
-                assessmentContainer.appendChild(suitabilityDiv);
-                
-                // Display extracted entities
-                const entitiesDiv = document.createElement('div');
-                entitiesDiv.className = 'mb-4';
-                entitiesDiv.innerHTML = '<h5>Extracted Information:</h5>';
-                
-                const entityCategories = [
-                    { key: 'age', title: 'Age' },
-                    { key: 'gender', title: 'Gender' },
-                    { key: 'address', title: 'Address' },
-                    { key: 'soft_skills', title: 'Soft Skills' },
-                    { key: 'hard_skills', title: 'Hard Skills' },
-                    { key: 'education_level', title: 'Education Level' },
-                    { key: 'course', title: 'Course/Major' },
-                    { key: 'experience', title: 'Experience' },
-                    { key: 'certification', title: 'Certification' }
-                ];
-                
-                entityCategories.forEach(category => {
-                    const values = entities[category.key];
-                    
-                    if (values && values.length > 0) {
-                        const entityItem = document.createElement('div');
-                        entityItem.className = 'entity-item';
-                        
-                        const entityTitle = document.createElement('div');
-                        entityTitle.className = 'entity-title';
-                        entityTitle.textContent = category.title;
-                        
-                        const entityValue = document.createElement('div');
-                        entityValue.className = 'entity-value';
-                        entityValue.textContent = values.join(', ');
-                        
-                        entityItem.appendChild(entityTitle);
-                        entityItem.appendChild(entityValue);
-                        entitiesDiv.appendChild(entityItem);
-                    }
-                });
-                
-                assessmentContainer.appendChild(entitiesDiv);
-                
-                // Category scores
-                const categoryScoresDiv = document.createElement('div');
-                categoryScoresDiv.className = 'mb-4';
-                categoryScoresDiv.innerHTML = '<h5>Category Scores:</h5>';
-                
-                const categories = [
-                    { key: 'soft_skills', title: 'Soft Skills' },
-                    { key: 'hard_skills', title: 'Hard Skills' },
-                    { key: 'education', title: 'Education' },
-                    { key: 'experience', title: 'Experience' },
-                    { key: 'certification', title: 'Certification' }
-                ];
-                
-                categories.forEach(category => {
-                    const score = assessment.category_scores[category.key];
-                    
-                    const categoryDiv = document.createElement('div');
-                    categoryDiv.className = 'assessment-category';
-                    
-                    const categoryTitle = document.createElement('div');
-                    categoryTitle.className = 'assessment-category-title';
-                    categoryTitle.textContent = `${category.title}: ${score}%`;
-                    
-                    const progressDiv = document.createElement('div');
-                    progressDiv.className = 'progress';
-                    
-                    let progressClass = 'bg-danger';
-                    if (score >= 70) {
-                        progressClass = 'bg-success';
-                    } else if (score >= 50) {
-                        progressClass = 'bg-warning';
-                    }
-                    
-                    progressDiv.innerHTML = `<div class="progress-bar ${progressClass}" role="progressbar" style="width: ${score}%" aria-valuenow="${score}" aria-valuemin="0" aria-valuemax="100"></div>`;
-                    
-                    categoryDiv.appendChild(categoryTitle);
-                    categoryDiv.appendChild(progressDiv);
-                    categoryScoresDiv.appendChild(categoryDiv);
-                });
-                
-                assessmentContainer.appendChild(categoryScoresDiv);
-                
-                // Strengths
-                const strengthsDiv = document.createElement('div');
-                strengthsDiv.className = 'mb-3';
-                strengthsDiv.innerHTML = `<h5>Strengths:</h5><ul>${assessment.strengths.map(s => `<li>${s}</li>`).join('')}</ul>`;
-                assessmentContainer.appendChild(strengthsDiv);
-                
-                // Areas for improvement
-                const areasDiv = document.createElement('div');
-                areasDiv.className = 'mb-3';
-                areasDiv.innerHTML = `<h5>Areas for Improvement:</h5><ul>${assessment.areas_for_improvement.map(a => `<li>${a}</li>`).join('')}</ul>`;
-                assessmentContainer.appendChild(areasDiv);
-                
-                // Recommendation
-                const recommendationDiv = document.createElement('div');
-                recommendationDiv.className = 'assessment-recommendation';
-                recommendationDiv.innerHTML = `<strong>Recommendation:</strong> ${assessment.recommendation}`;
-                assessmentContainer.appendChild(recommendationDiv);
-            }
-        });
-    </script>
-</body>
+
+        <script src="static/js/bootstrap-5.3.1.bundle.min.js"></script>
+        <script src="static/js/custom.js"></script>
+    </body>
 </html>
