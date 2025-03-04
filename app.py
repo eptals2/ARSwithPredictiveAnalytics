@@ -370,40 +370,79 @@ def index():
 
 @app.route('/extract', methods=['POST'])
 def extract():
-    if 'resume' not in request.files:
+    if 'resumes[]' not in request.files:
         return jsonify({'error': 'No file part'})
     
-    file = request.files['resume']
+    files = request.files.getlist('resumes[]')
     
-    if file.filename == '':
+    if not files or files[0].filename == '':
         return jsonify({'error': 'No selected file'})
     
-    if file:
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-        file.save(file_path)
-        
-        # Extract text from resume
-        resume_text = extract_text_from_resume(file_path)
-        
-        # Extract entities using NER model
-        entities = ner_model.extract_entities(resume_text)
-        
-        return jsonify({
-            'status': 'success',
-            'entities': entities
-        })
-
-@app.route('/analyze', methods=['POST'])
-def analyze():
-    data = request.json
-    entities = data.get('entities', {})
+    results = []
     
-    # Analyze candidate using the assessment model
-    assessment = assessment_model.assess_candidate(entities)
+    for file in files:
+        if file:
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            file.save(file_path)
+            
+            # Extract text from resume
+            resume_text = extract_text_from_resume(file_path)
+            
+            # Extract entities using NER model
+            entities = ner_model.extract_entities(resume_text)
+            
+            # Add the assessment directly
+            assessment = assessment_model.assess_candidate(entities)
+            
+            results.append({
+                'filename': file.filename,
+                'entities': entities,
+                'assessment': assessment
+            })
     
     return jsonify({
         'status': 'success',
-        'assessment': assessment
+        'results': results
+    })
+
+@app.route('/compare', methods=['POST'])
+def compare():
+    data = request.json
+    results = data.get('results', [])
+    
+    if not results:
+        return jsonify({'error': 'No results to compare'})
+    
+    # Extract assessments from results
+    assessments = [result.get('assessment', {}) for result in results]
+    filenames = [result.get('filename', f"Candidate {i+1}") for i, result in enumerate(results)]
+    
+    # Prepare comparison data
+    comparison = {
+        'candidates': filenames,
+        'overall_scores': [assessment.get('overall_score', 0) for assessment in assessments],
+        'category_scores': {
+            'soft_skills': [assessment.get('category_scores', {}).get('soft_skills', 0) for assessment in assessments],
+            'hard_skills': [assessment.get('category_scores', {}).get('hard_skills', 0) for assessment in assessments],
+            'education': [assessment.get('category_scores', {}).get('education', 0) for assessment in assessments],
+            'experience': [assessment.get('category_scores', {}).get('experience', 0) for assessment in assessments],
+            'certification': [assessment.get('category_scores', {}).get('certification', 0) for assessment in assessments]
+        },
+        'suitability': [assessment.get('suitability', 'N/A') for assessment in assessments],
+        'recommendations': [assessment.get('recommendation', 'N/A') for assessment in assessments]
+    }
+    
+    # Find the best candidate based on overall score
+    best_candidate_index = comparison['overall_scores'].index(max(comparison['overall_scores']))
+    comparison['best_candidate'] = {
+        'index': best_candidate_index,
+        'name': filenames[best_candidate_index],
+        'score': comparison['overall_scores'][best_candidate_index]
+    }
+    
+    return jsonify({
+        'status': 'success',
+        'comparison': comparison
     })
 
 if __name__ == '__main__':

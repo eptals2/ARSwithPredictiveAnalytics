@@ -4,7 +4,7 @@ A Flask-based web application that extracts information from resumes using RoBER
 
 ## Features
 
-- **Resume Information Extraction**: Extract key information from resumes including:
+- **Resume Information Extraction**: Extract key information from resumes using RoBERTa NER including:
   - Age
   - Gender
   - Address
@@ -20,6 +20,11 @@ A Flask-based web application that extracts information from resumes using RoBER
   - Category-wise scores
   - Strengths and areas for improvement
   - Hiring recommendation
+
+- **Multiple Resume Analysis**: Upload and analyze multiple resumes at once to:
+  - Compare candidates side by side
+  - Identify the best candidate based on overall score
+  - View detailed assessment for each candidate
 
 ## Installation
 
@@ -52,13 +57,16 @@ A Flask-based web application that extracts information from resumes using RoBER
    http://127.0.0.1:5000/
    ```
 
-3. Upload a resume file (PDF, DOCX, or TXT format).
+3. Upload one or multiple resume files (PDF, DOCX, or TXT format).
+   - You can select multiple files by holding Ctrl (or Cmd on Mac) while selecting files.
 
-4. Click the "Extract Information" button to extract key information from the resume.
+4. Click the "Extract & Analyze Resumes" button to process all the uploaded resumes.
 
-5. Review the extracted information and click "Analyze Candidate" to perform the suitability assessment.
+5. Review the list of candidates with their overall scores and suitability ratings.
 
-6. View the assessment results, including the overall score, category scores, strengths, areas for improvement, and recommendation.
+6. Click "View Details" on any candidate card to see the detailed assessment, including extracted information, category scores, strengths, areas for improvement, and recommendation.
+
+7. If you've uploaded multiple resumes, click the "Compare Candidates" button to see a side-by-side comparison of all candidates.
 
 ## Technical Details
 
@@ -89,5 +97,6 @@ A Flask-based web application that extracts information from resumes using RoBER
 - Train a real XGBoost model with labeled data for more accurate predictions
 - Add support for more file formats
 - Implement user authentication and resume storage
-- Add ability to compare multiple candidates
-- Provide more detailed analysis and visualizations
+- Add more advanced comparison metrics and visualizations
+- Implement filtering and sorting options for candidate comparison
+- Add export functionality for assessment reports
