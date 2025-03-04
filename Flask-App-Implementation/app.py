@@ -3,8 +3,6 @@ from flask_wtf.csrf import CSRFProtect
 from werkzeug.utils import secure_filename
 import os
 from utilities.jaccard_RoBERTa_ranking import calculate_resume_similarities
-from utilities.text_extraction import extract_text  # Function to extract text from files
-from utilities.ner_extraction import extract_entities  # Function to extract named entities
 
 app = Flask(__name__)
 
