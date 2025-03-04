@@ -1,4 +1,4 @@
-# Resume Analysis System with Predictive Analytics
+# Resume Screening System with Predictive Analytics for Candidate Suitability Analysis
 
 A Flask-based web application that extracts information from resumes using RoBERTa NER (Named Entity Recognition) and performs candidate suitability assessment using XGBoost predictive analytics.
 
@@ -8,10 +8,8 @@ A Flask-based web application that extracts information from resumes using RoBER
   - Age
   - Gender
   - Address
-  - Soft Skills
-  - Hard Skills
-  - Education Level
-  - Course/Major
+  - Skills
+  - Education
   - Experience
   - Certifications
 
@@ -57,8 +55,8 @@ A Flask-based web application that extracts information from resumes using RoBER
    http://127.0.0.1:5000/
    ```
 
-3. Upload one or multiple resume files (PDF, DOCX, or TXT format).
-   - You can select multiple files by holding Ctrl (or Cmd on Mac) while selecting files.
+3. Upload one or multiple resume files (PDF or DOCX).
+   - You can select multiple files by holding 'Ctrl' while selecting files.
 
 4. Click the "Extract & Analyze Resumes" button to process all the uploaded resumes.
 
