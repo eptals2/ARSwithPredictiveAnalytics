@@ -363,44 +363,56 @@
             
             // Function to display results for all candidates
             function displayResults(results) {
-                candidateList.innerHTML = '';
+                resultsContainer.innerHTML = '';
                 
                 results.forEach((result, index) => {
-                    const candidateCard = document.createElement('div');
-                    candidateCard.className = 'candidate-card';
+                    const name = result.entities.name || `Candidate ${index + 1}`;
                     
+                    // Create a card for each candidate
+                    const card = document.createElement('div');
+                    card.className = 'candidate-card';
+                    
+                    // Card header with candidate name
                     const cardHeader = document.createElement('div');
                     cardHeader.className = 'candidate-card-header';
-                    cardHeader.textContent = result.filename;
+                    cardHeader.textContent = name;
                     
+                    // Card body with assessment summary
                     const cardBody = document.createElement('div');
                     cardBody.className = 'candidate-card-body';
                     
-                    // Display score and suitability
-                    const scoreDiv = document.createElement('div');
-                    scoreDiv.className = 'mb-3';
-                    scoreDiv.innerHTML = `
-                        <strong>Score:</strong> ${result.assessment.overall_score}% - 
-                        <span class="${result.assessment.suitability.toLowerCase().replace(' ', '-')}">${result.assessment.suitability}</span>
+                    // Best job match information
+                    let jobMatchHtml = '';
+                    if (result.assessment.best_job_match) {
+                        jobMatchHtml = `<p><strong>Best Job Match:</strong> ${result.assessment.best_job_match.title}</p>`;
+                    }
+                    
+                    cardBody.innerHTML = `
+                        <p><strong>Overall Score:</strong> ${result.assessment.overall_score}%</p>
+                        <p><strong>Suitability:</strong> ${result.assessment.suitability}</p>
+                        ${jobMatchHtml}
+                        <button class="btn btn-primary view-details-btn" data-index="${index}">View Details</button>
                     `;
                     
-                    // Create view details button
-                    const viewDetailsBtn = document.createElement('button');
-                    viewDetailsBtn.className = 'btn btn-outline-primary btn-sm';
-                    viewDetailsBtn.textContent = 'View Details';
-                    viewDetailsBtn.addEventListener('click', function() {
-                        displayAssessment(result.assessment, result.entities);
-                        assessmentCard.classList.remove('hidden');
-                        comparisonCard.classList.add('hidden');
-                    });
-                    
-                    cardBody.appendChild(scoreDiv);
-                    cardBody.appendChild(viewDetailsBtn);
-                    
-                    candidateCard.appendChild(cardHeader);
-                    candidateCard.appendChild(cardBody);
-                    candidateList.appendChild(candidateCard);
+                    card.appendChild(cardHeader);
+                    card.appendChild(cardBody);
+                    resultsContainer.appendChild(card);
                 });
+                
+                // Add event listeners to view details buttons
+                document.querySelectorAll('.view-details-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = this.getAttribute('data-index');
+                        displayAssessment(results[index].assessment, results[index].entities);
+                    });
+                });
+                
+                // Show compare button if there are multiple results
+                if (results.length > 1) {
+                    compareBtn.style.display = 'block';
+                } else {
+                    compareBtn.style.display = 'none';
+                }
             }
             
             // Function to display comparison results
@@ -458,6 +470,46 @@
                 
                 tbody.appendChild(overallRow);
                 
+                // Suitability row
+                const suitabilityRow = document.createElement('tr');
+                const suitabilityLabel = document.createElement('td');
+                suitabilityLabel.textContent = 'Suitability';
+                suitabilityRow.appendChild(suitabilityLabel);
+                
+                comparison.suitability.forEach((suitability, index) => {
+                    const suitabilityCell = document.createElement('td');
+                    suitabilityCell.textContent = suitability;
+                    
+                    if (index === comparison.best_candidate.index) {
+                        suitabilityCell.className = 'best-candidate';
+                    }
+                    
+                    suitabilityRow.appendChild(suitabilityCell);
+                });
+                
+                tbody.appendChild(suitabilityRow);
+                
+                // Best job match row
+                const jobMatchRow = document.createElement('tr');
+                const jobMatchLabel = document.createElement('td');
+                jobMatchLabel.textContent = 'Best Job Match';
+                jobMatchRow.appendChild(jobMatchLabel);
+                
+                if (comparison.job_matches && comparison.job_matches.length > 0) {
+                    comparison.job_matches.forEach((jobMatch, index) => {
+                        const jobMatchCell = document.createElement('td');
+                        jobMatchCell.textContent = jobMatch.title;
+                        
+                        if (index === comparison.best_candidate.index) {
+                            jobMatchCell.className = 'best-candidate';
+                        }
+                        
+                        jobMatchRow.appendChild(jobMatchCell);
+                    });
+                    
+                    tbody.appendChild(jobMatchRow);
+                }
+                
                 // Category scores rows
                 const categories = [
                     { key: 'soft_skills', title: 'Soft Skills' },
@@ -473,28 +525,19 @@
                     categoryLabel.textContent = category.title;
                     categoryRow.appendChild(categoryLabel);
                     
-                    comparison.category_scores[category.key].forEach(score => {
-                        const scoreCell = document.createElement('td');
-                        scoreCell.textContent = score + '%';
-                        categoryRow.appendChild(scoreCell);
+                    comparison.category_scores[category.key].forEach((score, index) => {
+                        const categoryCell = document.createElement('td');
+                        categoryCell.textContent = score + '%';
+                        
+                        if (index === comparison.best_candidate.index) {
+                            categoryCell.className = 'best-candidate';
+                        }
+                        
+                        categoryRow.appendChild(categoryCell);
                     });
                     
                     tbody.appendChild(categoryRow);
                 });
-                
-                // Suitability row
-                const suitabilityRow = document.createElement('tr');
-                const suitabilityLabel = document.createElement('td');
-                suitabilityLabel.textContent = 'Suitability';
-                suitabilityRow.appendChild(suitabilityLabel);
-                
-                comparison.suitability.forEach(suitability => {
-                    const suitabilityCell = document.createElement('td');
-                    suitabilityCell.textContent = suitability;
-                    suitabilityRow.appendChild(suitabilityCell);
-                });
-                
-                tbody.appendChild(suitabilityRow);
                 
                 table.appendChild(tbody);
                 comparisonContainer.appendChild(table);
@@ -524,10 +567,20 @@
                 scoreDiv.className = 'assessment-score';
                 scoreDiv.textContent = assessment.overall_score + '%';
                 
-                // Suitability level
+                // Suitability level and best job match
                 const suitabilityDiv = document.createElement('div');
                 suitabilityDiv.className = 'text-center mb-4';
-                suitabilityDiv.innerHTML = `<h4>Suitability: <span class="${assessment.suitability.toLowerCase().replace(' ', '-')}">${assessment.suitability}</span></h4>`;
+                
+                // Check if best_job_match exists in the assessment
+                let jobMatchHtml = '';
+                if (assessment.best_job_match) {
+                    jobMatchHtml = `<h5>Best Job Match: <span class="text-primary">${assessment.best_job_match.title}</span></h5>`;
+                }
+                
+                suitabilityDiv.innerHTML = `
+                    <h4>Suitability: <span class="${assessment.suitability.toLowerCase().replace(' ', '-')}">${assessment.suitability}</span></h4>
+                    ${jobMatchHtml}
+                `;
                 
                 assessmentContainer.appendChild(scoreDiv);
                 assessmentContainer.appendChild(suitabilityDiv);

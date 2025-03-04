@@ -223,6 +223,70 @@ class CandidateAssessmentModel:
             'mathematics': 0.7,
             'statistics': 0.8
         }
+        
+        # Job role categories based on skills and education
+        self.job_categories = {
+            'software_developer': {
+                'skills': ['python', 'java', 'c++', 'javascript', 'html', 'css', 'sql', 'git'],
+                'courses': ['computer science', 'software engineering', 'information technology'],
+                'title': 'Software Developer'
+            },
+            'web_developer': {
+                'skills': ['javascript', 'html', 'css', 'react', 'angular', 'vue', 'node.js'],
+                'courses': ['computer science', 'web development', 'information technology'],
+                'title': 'Web Developer'
+            },
+            'data_scientist': {
+                'skills': ['python', 'r', 'sql', 'machine learning', 'data analysis', 'tensorflow', 'pytorch', 'statistics'],
+                'courses': ['data science', 'computer science', 'statistics', 'mathematics'],
+                'title': 'Data Scientist'
+            },
+            'data_analyst': {
+                'skills': ['sql', 'python', 'r', 'excel', 'powerbi', 'tableau', 'data analysis'],
+                'courses': ['data science', 'statistics', 'business administration', 'economics'],
+                'title': 'Data Analyst'
+            },
+            'machine_learning_engineer': {
+                'skills': ['python', 'tensorflow', 'pytorch', 'machine learning', 'ai', 'nlp', 'computer vision'],
+                'courses': ['computer science', 'artificial intelligence', 'data science', 'mathematics'],
+                'title': 'Machine Learning Engineer'
+            },
+            'devops_engineer': {
+                'skills': ['docker', 'kubernetes', 'aws', 'azure', 'gcp', 'ci/cd', 'git', 'devops'],
+                'courses': ['computer science', 'information technology', 'software engineering'],
+                'title': 'DevOps Engineer'
+            },
+            'frontend_developer': {
+                'skills': ['javascript', 'html', 'css', 'react', 'angular', 'vue'],
+                'courses': ['computer science', 'web development', 'information technology'],
+                'title': 'Frontend Developer'
+            },
+            'backend_developer': {
+                'skills': ['python', 'java', 'c++', 'sql', 'django', 'flask', 'node.js'],
+                'courses': ['computer science', 'software engineering', 'information technology'],
+                'title': 'Backend Developer'
+            },
+            'fullstack_developer': {
+                'skills': ['javascript', 'html', 'css', 'react', 'angular', 'vue', 'python', 'java', 'sql', 'django', 'flask', 'node.js'],
+                'courses': ['computer science', 'software engineering', 'information technology'],
+                'title': 'Full Stack Developer'
+            },
+            'database_administrator': {
+                'skills': ['sql', 'database', 'oracle', 'mysql', 'postgresql', 'mongodb'],
+                'courses': ['computer science', 'information technology', 'database management'],
+                'title': 'Database Administrator'
+            },
+            'project_manager': {
+                'skills': ['leadership', 'communication', 'teamwork', 'time management', 'project management'],
+                'courses': ['business administration', 'project management', 'computer science'],
+                'title': 'Project Manager'
+            },
+            'business_analyst': {
+                'skills': ['communication', 'critical thinking', 'sql', 'excel', 'powerbi', 'tableau'],
+                'courses': ['business administration', 'economics', 'finance', 'information technology'],
+                'title': 'Business Analyst'
+            }
+        }
     
     def assess_candidate(self, entities):
         scores = {
@@ -294,6 +358,9 @@ class CandidateAssessmentModel:
         
         overall_score = sum(scores[key] * weights[key] for key in weights)
         
+        # Determine the best job match based on skills and education
+        job_match = self._determine_job_match(entities)
+        
         # Generate assessment result
         assessment = {
             'overall_score': round(overall_score * 100, 2),
@@ -301,10 +368,220 @@ class CandidateAssessmentModel:
             'suitability': self._get_suitability_level(overall_score),
             'strengths': self._get_strengths(scores),
             'areas_for_improvement': self._get_areas_for_improvement(scores),
-            'recommendation': self._get_recommendation(overall_score)
+            'recommendation': self._get_recommendation(overall_score, job_match),
+            'best_job_match': job_match
         }
         
         return assessment
+    
+    def _determine_job_match(self, entities):
+        # Extract all skills (both hard and soft) from the entities
+        all_skills = []
+        if entities['hard_skills']:
+            all_skills.extend([skill.lower() for skill in entities['hard_skills']])
+        if entities['soft_skills']:
+            all_skills.extend([skill.lower() for skill in entities['soft_skills']])
+        
+        # Extract all courses from the entities
+        all_courses = []
+        if entities['course']:
+            all_courses.extend([course.lower() for course in entities['course']])
+        
+        # Calculate match score for each job category
+        job_scores = {}
+        for job_key, job_info in self.job_categories.items():
+            skill_match = sum(1 for skill in all_skills if skill in job_info['skills'])
+            course_match = sum(1 for course in all_courses if course in job_info['courses'])
+            
+            # Calculate weighted score (skills are more important than courses)
+            if job_info['skills']:
+                skill_score = skill_match / len(job_info['skills'])
+            else:
+                skill_score = 0
+                
+            if job_info['courses'] and all_courses:
+                course_score = course_match / len(job_info['courses'])
+            else:
+                course_score = 0
+                
+            job_scores[job_key] = (skill_score * 0.7) + (course_score * 0.3)
+        
+        # Find the job with the highest match score
+        if job_scores:
+            best_job_key = max(job_scores, key=job_scores.get)
+            best_job_score = job_scores[best_job_key]
+            
+            # Return the best match regardless of score threshold
+            return {
+                'title': self.job_categories[best_job_key]['title'],
+                'match_score': round(best_job_score * 100, 2)
+            }
+        
+        # If no skills or courses match, determine a job based on experience or education
+        # This ensures we always return a specific job title
+        fallback_jobs = self._determine_fallback_job(entities)
+        return fallback_jobs
+    
+    def _determine_fallback_job(self, entities):
+        """Determine a job based on experience or education when no good skill match is found"""
+        # Check for keywords in experience
+        experience_keywords = {
+            'developer': 'Software Developer',
+            'engineer': 'Software Engineer',
+            'analyst': 'Business Analyst',
+            'manager': 'Project Manager',
+            'designer': 'Graphic Designer',
+            'assistant': 'Administrative Assistant',
+            'marketing': 'Marketing Specialist',
+            'sales': 'Sales Representative',
+            'customer': 'Customer Service Representative',
+            'support': 'Technical Support Specialist',
+            'teacher': 'Teacher',
+            'writer': 'Content Writer',
+            'editor': 'Editor',
+            'accountant': 'Accountant',
+            'finance': 'Financial Analyst',
+            'hr': 'HR Specialist',
+            'human resources': 'HR Specialist',
+            'recruiter': 'Recruiter',
+            'coordinator': 'Project Coordinator',
+            'administrator': 'System Administrator',
+            'web': 'Web Developer',
+            'data': 'Data Analyst',
+            'science': 'Data Scientist',
+            'research': 'Research Assistant',
+            'frontend': 'Frontend Developer',
+            'backend': 'Backend Developer',
+            'full stack': 'Full Stack Developer',
+            'ui': 'UI Designer',
+            'ux': 'UX Designer',
+            'graphic': 'Graphic Designer',
+            'content': 'Content Creator',
+            'social media': 'Social Media Manager',
+            'qa': 'QA Engineer',
+            'quality': 'QA Engineer',
+            'test': 'QA Engineer',
+            'devops': 'DevOps Engineer',
+            'cloud': 'Cloud Engineer',
+            'security': 'Security Analyst',
+            'network': 'Network Administrator',
+            'database': 'Database Administrator',
+            'product': 'Product Manager',
+            'scrum': 'Scrum Master',
+            'agile': 'Agile Coach',
+            'mobile': 'Mobile Developer',
+            'android': 'Android Developer',
+            'ios': 'iOS Developer',
+            'machine learning': 'Machine Learning Engineer',
+            'ai': 'AI Specialist'
+        }
+        
+        if entities['experience']:
+            exp_text = ' '.join(entities['experience']).lower()
+            for keyword, job_title in experience_keywords.items():
+                if keyword in exp_text:
+                    return {
+                        'title': job_title,
+                        'match_score': 75
+                    }
+        
+        # Check for keywords in education/course
+        education_keywords = {
+            'computer science': 'Software Developer',
+            'information technology': 'IT Specialist',
+            'software engineering': 'Software Engineer',
+            'data science': 'Data Scientist',
+            'business': 'Business Analyst',
+            'marketing': 'Marketing Specialist',
+            'finance': 'Financial Analyst',
+            'accounting': 'Accountant',
+            'human resources': 'HR Specialist',
+            'psychology': 'HR Assistant',
+            'design': 'Graphic Designer',
+            'art': 'Graphic Designer',
+            'communication': 'Communications Specialist',
+            'journalism': 'Content Writer',
+            'engineering': 'Engineer',
+            'education': 'Teacher',
+            'nursing': 'Nurse',
+            'medicine': 'Medical Professional',
+            'law': 'Legal Assistant',
+            'political science': 'Policy Analyst',
+            'international relations': 'International Relations Specialist',
+            'mathematics': 'Data Analyst',
+            'statistics': 'Statistician',
+            'physics': 'Research Scientist',
+            'chemistry': 'Research Scientist',
+            'biology': 'Research Assistant',
+            'economics': 'Economic Analyst',
+            'management': 'Manager',
+            'hospitality': 'Hospitality Specialist',
+            'tourism': 'Tourism Coordinator',
+            'agriculture': 'Agricultural Specialist',
+            'environmental': 'Environmental Specialist',
+            'architecture': 'Architect',
+            'civil': 'Civil Engineer',
+            'mechanical': 'Mechanical Engineer',
+            'electrical': 'Electrical Engineer',
+            'web development': 'Web Developer',
+            'artificial intelligence': 'AI Engineer',
+            'machine learning': 'Machine Learning Engineer',
+            'cybersecurity': 'Cybersecurity Analyst',
+            'network': 'Network Administrator',
+            'database': 'Database Administrator',
+            'cloud computing': 'Cloud Engineer',
+            'mobile development': 'Mobile Developer',
+            'game development': 'Game Developer',
+            'multimedia': 'Multimedia Designer',
+            'animation': 'Animator',
+            'film': 'Video Editor',
+            'music': 'Music Producer',
+            'photography': 'Photographer'
+        }
+        
+        if entities['course']:
+            course_text = ' '.join(entities['course']).lower()
+            for keyword, job_title in education_keywords.items():
+                if keyword in course_text:
+                    return {
+                        'title': job_title,
+                        'match_score': 70
+                    }
+        
+        # If no experience or education keywords match, check for hard skills
+        if entities['hard_skills']:
+            skills_text = ' '.join(entities['hard_skills']).lower()
+            for keyword, job_title in experience_keywords.items():
+                if keyword in skills_text:
+                    return {
+                        'title': job_title,
+                        'match_score': 65
+                    }
+        
+        # Default fallback based on education level
+        if entities['education_level']:
+            edu_level = ' '.join(entities['education_level']).lower()
+            if 'master' in edu_level or 'phd' in edu_level or 'doctorate' in edu_level:
+                return {
+                    'title': 'Senior Specialist',
+                    'match_score': 60
+                }
+            elif 'bachelor' in edu_level or 'degree' in edu_level:
+                return {
+                    'title': 'Professional Specialist',
+                    'match_score': 60
+                }
+            elif 'associate' in edu_level or 'diploma' in edu_level:
+                return {
+                    'title': 'Technical Specialist',
+                    'match_score': 60
+                }
+        
+        # Final fallback options
+        return {
+            'title': 'Professional Specialist',
+            'match_score': 50
+        }
     
     def _get_suitability_level(self, score):
         if score >= 0.85:
@@ -330,15 +607,42 @@ class CandidateAssessmentModel:
                 areas.append(category.replace('_', ' ').title())
         return areas if areas else ["None identified"]
     
-    def _get_recommendation(self, score):
+    def _get_recommendation(self, score, job_match):
+        job_title = job_match['title']
+        
         if score >= 0.85:
-            return "Highly recommended for the position."
+            return f"Highly recommended for the {job_title} position. The candidate's skills and experience are an excellent match for this role."
         elif score >= 0.7:
-            return "Recommended for the position."
+            return f"Recommended for the {job_title} position. The candidate has a good set of skills and qualifications for this role."
         elif score >= 0.5:
-            return "May be considered for the position with some reservations."
+            return f"May be considered for the {job_title} position with some reservations. Additional training or experience may be beneficial."
         else:
-            return "Not recommended for the position at this time."
+            # For low scores, suggest alternative positions that might be a better fit
+            alternative_positions = self._suggest_alternative_positions(job_match['title'])
+            if alternative_positions:
+                return f"Not recommended for the {job_title} position at this time. Based on the candidate's profile, they might be better suited for: {', '.join(alternative_positions)}."
+            else:
+                return f"Not recommended for the {job_title} position at this time. The candidate may benefit from additional training and experience."
+    
+    def _suggest_alternative_positions(self, current_job):
+        # Map of job titles to potential alternative positions
+        job_alternatives = {
+            'Software Developer': ['Junior Developer', 'QA Engineer', 'Technical Support Specialist'],
+            'Web Developer': ['Web Designer', 'UI/UX Designer', 'Content Manager'],
+            'Data Scientist': ['Data Analyst', 'Business Analyst', 'Research Assistant'],
+            'Data Analyst': ['Business Intelligence Analyst', 'Market Research Analyst', 'Junior Data Scientist'],
+            'Machine Learning Engineer': ['Data Scientist', 'Software Developer', 'Research Assistant'],
+            'DevOps Engineer': ['System Administrator', 'IT Support Specialist', 'Cloud Engineer'],
+            'Frontend Developer': ['Web Designer', 'UI/UX Designer', 'HTML/CSS Developer'],
+            'Backend Developer': ['Database Administrator', 'API Developer', 'Junior Software Developer'],
+            'Full Stack Developer': ['Frontend Developer', 'Backend Developer', 'Web Developer'],
+            'Database Administrator': ['Data Analyst', 'IT Support Specialist', 'System Administrator'],
+            'Project Manager': ['Team Lead', 'Product Owner', 'Scrum Master'],
+            'Business Analyst': ['Data Analyst', 'Market Research Analyst', 'Project Coordinator'],
+            'Entry-level Position': ['Intern', 'Assistant', 'Junior Specialist']
+        }
+        
+        return job_alternatives.get(current_job, ['Entry-level Position', 'Intern', 'Assistant'])
 
 # Initialize the assessment model
 assessment_model = CandidateAssessmentModel()
@@ -410,40 +714,67 @@ def compare():
     data = request.json
     results = data.get('results', [])
     
-    if not results:
-        return jsonify({'error': 'No results to compare'})
-    
-    # Extract assessments from results
-    assessments = [result.get('assessment', {}) for result in results]
-    filenames = [result.get('filename', f"Candidate {i+1}") for i, result in enumerate(results)]
+    if not results or len(results) < 2:
+        return jsonify({'error': 'Need at least 2 candidates to compare'}), 400
     
     # Prepare comparison data
+    candidates = []
+    scores = []
+    suitability = []
+    recommendations = []
+    job_matches = []
+    category_scores = {
+        'soft_skills': [],
+        'hard_skills': [],
+        'education': [],
+        'experience': [],
+        'certification': []
+    }
+    
+    # Find the best candidate
+    best_candidate_index = 0
+    highest_score = 0
+    
+    for i, result in enumerate(results):
+        # Extract candidate name or use filename
+        name = result['entities'].get('name', f"Candidate {i+1}")
+        candidates.append(name)
+        
+        # Extract assessment data
+        assessment = result['assessment']
+        scores.append(assessment['overall_score'])
+        suitability.append(assessment['suitability'])
+        recommendations.append(assessment['recommendation'])
+        
+        # Add job match information
+        if 'best_job_match' in assessment:
+            job_matches.append(assessment['best_job_match'])
+        
+        # Extract category scores
+        for category in category_scores:
+            category_scores[category].append(assessment['category_scores'][category])
+        
+        # Check if this is the best candidate
+        if assessment['overall_score'] > highest_score:
+            highest_score = assessment['overall_score']
+            best_candidate_index = i
+    
+    # Prepare comparison result
     comparison = {
-        'candidates': filenames,
-        'overall_scores': [assessment.get('overall_score', 0) for assessment in assessments],
-        'category_scores': {
-            'soft_skills': [assessment.get('category_scores', {}).get('soft_skills', 0) for assessment in assessments],
-            'hard_skills': [assessment.get('category_scores', {}).get('hard_skills', 0) for assessment in assessments],
-            'education': [assessment.get('category_scores', {}).get('education', 0) for assessment in assessments],
-            'experience': [assessment.get('category_scores', {}).get('experience', 0) for assessment in assessments],
-            'certification': [assessment.get('category_scores', {}).get('certification', 0) for assessment in assessments]
-        },
-        'suitability': [assessment.get('suitability', 'N/A') for assessment in assessments],
-        'recommendations': [assessment.get('recommendation', 'N/A') for assessment in assessments]
+        'candidates': candidates,
+        'scores': scores,
+        'suitability': suitability,
+        'recommendations': recommendations,
+        'job_matches': job_matches,
+        'category_scores': category_scores,
+        'best_candidate': {
+            'name': candidates[best_candidate_index],
+            'index': best_candidate_index,
+            'score': highest_score
+        }
     }
     
-    # Find the best candidate based on overall score
-    best_candidate_index = comparison['overall_scores'].index(max(comparison['overall_scores']))
-    comparison['best_candidate'] = {
-        'index': best_candidate_index,
-        'name': filenames[best_candidate_index],
-        'score': comparison['overall_scores'][best_candidate_index]
-    }
-    
-    return jsonify({
-        'status': 'success',
-        'comparison': comparison
-    })
+    return jsonify({'comparison': comparison})
 
 if __name__ == '__main__':
     app.run(debug=True)
