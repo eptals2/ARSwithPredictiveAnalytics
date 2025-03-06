@@ -339,12 +339,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .join("")}</ul>`;
         assessmentContainer.appendChild(areasDiv);
 
-        // Recommendation
-        // const recommendationDiv = document.createElement("div");
-        // recommendationDiv.className = "assessment-recommendation";
-        // recommendationDiv.innerHTML = `<strong>Recommendation:</strong> ${assessment.recommendation}`;
-        // assessmentContainer.appendChild(recommendationDiv);
-
         // Display extracted entities
         const entitiesDiv = document.createElement("div");
         entitiesDiv.className = "mb-4";
@@ -353,7 +347,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const entityCategories = [
             { key: "age", title: "Age" },
             { key: "gender", title: "Gender" },
-            { key: "address", title: "Address" },
+            //{ key: "address", title: "Address" },
             { key: "soft_skills", title: "Soft Skills" },
             { key: "hard_skills", title: "Hard Skills" },
             { key: "education_level", title: "Education Level" },
@@ -384,5 +378,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         assessmentContainer.appendChild(entitiesDiv);
+
+        // Recommendation
+        // const recommendationDiv = document.createElement("div");
+        // recommendationDiv.className = "assessment-recommendation";
+        // recommendationDiv.innerHTML = `<strong>Recommendation:</strong> ${assessment.recommendation}`;
+        // assessmentContainer.appendChild(recommendationDiv);
+
+        
     }
 });
