@@ -1,0 +1,50 @@
+JOHN DOE
+Software Developer
+Age: 28 years old
+Gender: Male
+Address: 123 Tech Street, Silicon Valley, CA 94043
+
+SUMMARY
+Dedicated and innovative Software Developer with 3 years of experience in developing high-quality applications. Proficient in Python, JavaScript, and React. Strong problem-solving skills and ability to work effectively in team environments.
+
+SKILLS
+Soft Skills:
+- Problem-solving
+- Communication
+- Teamwork
+- Time management
+- Attention to detail
+- Critical thinking
+
+Hard Skills:
+- Python
+- JavaScript
+- React
+- Node.js
+- SQL
+- Git
+- Docker
+- AWS
+- Flask
+- Django
+
+EDUCATION
+Bachelor's Degree in Computer Science
+Stanford University, 2015-2019
+
+EXPERIENCE
+Software Developer
+Tech Solutions Inc., 2020-Present
+- Developed and maintained web applications using Python and JavaScript
+- Collaborated with cross-functional teams to deliver high-quality software
+- Implemented CI/CD pipelines using Docker and Jenkins
+
+Junior Developer
+StartUp Innovations, 2019-2020
+- Assisted in developing front-end components using React
+- Participated in code reviews and testing
+
+CERTIFICATIONS
+- AWS Certified Developer - Associate
+- Python Programming NCIII
+- Docker Certified Associate
