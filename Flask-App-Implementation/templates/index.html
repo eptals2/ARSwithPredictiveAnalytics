@@ -1,109 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>
-            Automated Resume Screening with Predictive Analytics for Candidate
-            Suitability Assessment
-        </title>
-        <link href="static/css/bootstrap-5.3.1.css" rel="stylesheet" />
-        <link rel="stylesheet" href="static/css/style.css" />
-        <style></style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h1>
-                    Automated Resume Screening System with Predictive Analytics
-                </h1>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Upload Resumes</div>
-                        <div class="card-body">
-                            <form id="resumeForm" enctype="multipart/form-data">
-                                <div class="mb-3">
-                                    <label for="resumeFiles" class="form-label"
-                                        >Select resume files (PDF, DOCX)</label
-                                    >
-                                    <input
-                                        class="form-control"
-                                        type="file"
-                                        id="resumeFiles"
-                                        name="resumes[]"
-                                        accept=".pdf,.docx,.txt"
-                                        multiple
-                                    />
-                                    <div class="form-text">
-                                        You can select multiple resumes
-                                    </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        Automated Resume Screening with Predictive Analytics for Candidate
+        Suitability Assessment
+    </title>
+    <link href="static/css/bootstrap-5.3.1.css" rel="stylesheet" />
+    <link rel="stylesheet" href="static/css/style.css" />
+    <style></style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                Automated Resume Screening with Predictive Analytics for Candidate Suitability Assessment
+            </h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Upload Resumes</div>
+                    <div class="card-body">
+                        <form id="resumeForm" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="resumeFiles" class="form-label">Select resume files (PDF, DOCX)</label>
+                                <input class="form-control" type="file" id="resumeFiles" name="resumes[]"
+                                    accept=".pdf,.docx,.txt" multiple />
+                                <div class="form-text">
+                                    You can select multiple resumes
                                 </div>
-                                <button
-                                    type="submit"
-                                    class="btn btn-primary"
-                                    id="extractBtn"
-                                >
-                                    <i class="bi bi-search"></i> Extract &
-                                    Analyze Resumes
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div id="loadingSpinner">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <p class="mt-2">Processing...</p>
-                    </div>
-
-                    <div id="resultsContainer" class="hidden">
-                        <h4 class="mt-4 mb-3">Analysis Results</h4>
-                        <div id="candidateList" class="candidate-list">
-                            <!-- Candidate cards will be displayed here -->
-                        </div>
-                        <button
-                            id="compareBtn"
-                            class="btn btn-success w-100 hidden"
-                        >
-                            <i class="bi bi-bar-chart-line"></i> Compare
-                            Candidates
-                        </button>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="extractBtn">
+                                <i class="bi bi-search"></i> Extract &
+                                Analyze Resumes
+                            </button>
+                        </form>
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div id="comparisonCard" class="card hidden">
-                        <div class="card-header">Candidate Comparison</div>
-                        <div
-                            class="card-body"
-                            id="comparisonContainer"
-                            style="
+                <div id="loadingSpinner">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Processing...</p>
+                </div>
+
+                <div id="resultsContainer" class="hidden">
+                    <h4 class="mt-4 mb-3">Analysis Results</h4>
+                    <div id="candidateList" class="candidate-list">
+                        <!-- Candidate cards will be displayed here -->
+                    </div>
+                    <button id="compareBtn" class="btn btn-success w-100 hidden">
+                        <i class="bi bi-bar-chart-line"></i> Compare
+                        Candidates
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div id="comparisonCard" class="card hidden">
+                    <div class="card-header">Candidate Comparison</div>
+                    <div class="card-body" id="comparisonContainer" style="
                                 max-width: 600px;
                                 max-height: 600px;
                                 overflow-y: scroll;
-                            "
-                        >
-                            <!-- Comparison results will be displayed here -->
-                        </div>
+                            ">
+                        <!-- Comparison results will be displayed here -->
                     </div>
+                </div>
 
-                    <div id="assessmentCard" class="card hidden">
-                        <div class="card-header">
-                            Candidate Assessment Results
-                        </div>
-                        <div class="card-body" id="assessmentContainer">
-                            <!-- Assessment results will be displayed here -->
-                        </div>
+                <div id="assessmentCard" class="card hidden">
+                    <div class="card-header">
+                        Candidate Assessment Results
+                    </div>
+                    <div class="card-body" id="assessmentContainer">
+                        <!-- Assessment results will be displayed here -->
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script src="static/js/bootstrap-5.3.1.bundle.min.js"></script>
-        <script src="static/js/custom.js"></script>
-    </body>
+    <script src="static/js/bootstrap-5.3.1.bundle.min.js"></script>
+    <script src="static/js/custom.js"></script>
+</body>
+
 </html>
