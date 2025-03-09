@@ -660,9 +660,9 @@ def extract_text_from_resume(file_path):
     elif file_extension == '.docx':
         doc = docx.Document(file_path)
         text = '\n'.join([paragraph.text for paragraph in doc.paragraphs])
-    elif file_extension == '.txt':
-        with open(file_path, 'r', encoding='utf-8') as file:
-            text = file.read()
+    # elif file_extension == '.txt':
+    #     with open(file_path, 'r', encoding='utf-8') as file:
+    #         text = file.read()
     else:
         text = ''
     
@@ -709,8 +709,8 @@ def extract():
         'results': results
     })
 
-@app.route('/compare', methods=['POST'])
-def compare():
+@app.route('/rank', methods=['POST'])
+def rank():
     data = request.json
     results = data.get('results', [])
     
