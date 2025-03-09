@@ -39,7 +39,8 @@ class SimpleNERModel:
             'EDUCATION_LEVEL': r'\b(?:High School|Associate\'s Degree|Bachelor\'s Degree|Master\'s Degree|PhD|Doctorate|MBA|College Graduate|Undergraduate|Graduate|Postgraduate)\b',
             'COURSE': r'\b(?:Computer Science|Information Technology|Software Engineering|Data Science|Artificial Intelligence|Business Administration|Marketing|Finance|Accounting|Economics|Engineering|Mechanical Engineering|Electrical Engineering|Civil Engineering|Psychology|Biology|Chemistry|Physics|Mathematics|Statistics)\b',
             'EXPERIENCE': r'\b(?:(\d+)\s*(?:years|yrs)(?:\s*of)?\s*experience|experience[:\s]*(\d+)\s*(?:years|yrs))\b',
-            'CERTIFICATION': r'\b(?:certification[s]?[:\s]*([\w\s]+)|certified\s+([\w\s]+)|([\w\s]+)\s+certified|([A-Z]+)(?:\s*[-–]\s*|\s+)(?:certification|certified|certificate))\b'
+            'CERTIFICATION': r'\b(?:certification[s]?[:\s]*([\w\s]+)|certified\s+([\w\s]+)|([\w\s]+)\s+certified|([A-Z]+)(?:\s*[-–]\s*|\s+)(?:certification|certified|certificate))\b',
+            'JOB_POSITION': r'\b(?:Software Engineer|Data Scientist|Full Stack Developer|Frontend Developer|Backend Developer|DevOps Engineer|System Administrator|Project Manager|Product Manager|Business Analyst|Data Analyst|Machine Learning Engineer|AI Engineer|Cloud Engineer|Network Engineer|Security Engineer|QA Engineer|UI/UX Designer|Database Administrator|IT Support|Technical Lead|Team Lead|Engineering Manager|CTO|CEO|CFO|COO|Director|VP|Senior|Junior|Mid-level|Principal|Staff|Lead)\b'
         }
     
     def extract_entities(self, text):
@@ -52,7 +53,8 @@ class SimpleNERModel:
             'education_level': [],
             'course': [],
             'experience': [],
-            'certification': []
+            'certification': [],
+            'job_position': []
         }
         
         # Convert text to lowercase for case-insensitive matching
@@ -117,6 +119,11 @@ class SimpleNERModel:
                 if group:
                     entities['certification'].append(group.strip())
                     break
+        
+        # Extract job position
+        job_position_matches = re.finditer(self.entity_patterns['JOB_POSITION'], text, re.IGNORECASE)
+        for match in job_position_matches:
+            entities['job_position'].append(match.group(0))
         
         # Remove duplicates and keep only unique values
         for key in entities:
@@ -711,70 +718,30 @@ def extract():
 
 @app.route('/rank', methods=['POST'])
 def rank():
-    data = request.json
-    results = data.get('results', [])
-    
-    if not results or len(results) < 2:
-        return jsonify({'error': 'Need at least 2 candidates to compare'}), 400
-    
-    # Prepare comparison data
-    candidates = []
-    scores = []
-    suitability = []
-    recommendations = []
-    job_matches = []
-    category_scores = {
-        'soft_skills': [],
-        'hard_skills': [],
-        'education': [],
-        'experience': [],
-        'certification': []
-    }
-    
-    # Find the best candidate
-    best_candidate_index = 0
-    highest_score = 0
-    
-    for i, result in enumerate(results):
-        # Extract candidate name or use filename
-        name = result['entities'].get('name', f"Candidate {i+1}")
-        candidates.append(name)
+    try:
+        data = request.get_json()
+        results = data.get('results', [])
         
-        # Extract assessment data
-        assessment = result['assessment']
-        scores.append(assessment['overall_score'])
-        suitability.append(assessment['suitability'])
-        recommendations.append(assessment['recommendation'])
+        # Sort results by overall score in descending order
+        sorted_results = sorted(results, key=lambda x: x['assessment']['overall_score'], reverse=True)
         
-        # Add job match information
-        if 'best_job_match' in assessment:
-            job_matches.append(assessment['best_job_match'])
-        
-        # Extract category scores
-        for category in category_scores:
-            category_scores[category].append(assessment['category_scores'][category])
-        
-        # Check if this is the best candidate
-        if assessment['overall_score'] > highest_score:
-            highest_score = assessment['overall_score']
-            best_candidate_index = i
-    
-    # Prepare comparison result
-    comparison = {
-        'candidates': candidates,
-        'scores': scores,
-        'suitability': suitability,
-        'recommendations': recommendations,
-        'job_matches': job_matches,
-        'category_scores': category_scores,
-        'best_candidate': {
-            'name': candidates[best_candidate_index],
-            'index': best_candidate_index,
-            'score': highest_score
+        # Get the best candidate
+        best_candidate = {
+            'name': sorted_results[0]['filename'],
+            'score': sorted_results[0]['assessment']['overall_score'],
+            'index': 0
         }
-    }
-    
-    return jsonify({'comparison': comparison})
+        
+        return jsonify({
+            'status': 'success',
+            'comparison': {
+                'candidates': [result['filename'] for result in sorted_results],
+                'overall_scores': [result['assessment']['overall_score'] for result in sorted_results],
+                'best_candidate': best_candidate
+            }
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'error': str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)

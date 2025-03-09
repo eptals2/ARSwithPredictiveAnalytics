@@ -109,6 +109,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function displayResults(results) {
         candidateList.innerHTML = "";
 
+        // Sort results by overall score in descending order
+        results.sort((a, b) => b.assessment.overall_score - a.assessment.overall_score);
+
         results.forEach((result, index) => {
             const candidateCard = document.createElement("div");
             candidateCard.className = "candidate-card";
@@ -120,15 +123,18 @@ document.addEventListener("DOMContentLoaded", function () {
             const cardBody = document.createElement("div");
             cardBody.className = "candidate-card-body";
 
-            // Display score and suitability
+            // Display score, suitability and position
             const scoreDiv = document.createElement("div");
             scoreDiv.className = "mb-3";
+            
+            const positions = result.entities.job_position || [];
+            const positionText = positions.length > 0 ? `<strong>Position:</strong> ${positions.join(", ")}<br>` : "";
+            
             scoreDiv.innerHTML = `
-            <strong>Score:</strong> ${result.assessment.overall_score}% - 
-            <span class="${result.assessment.suitability
-                .toLowerCase()
-                .replace(" ", "-")}">${result.assessment.suitability}</span>
-        `;
+                ${positionText}
+                <strong>Score:</strong> ${result.assessment.overall_score}% - 
+                <span class="${result.assessment.suitability.toLowerCase().replace(" ", "-")}">${result.assessment.suitability}</span>
+            `;
 
             // Create view details button
             const viewDetailsBtn = document.createElement("button");
@@ -149,6 +155,58 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Function to display assessment results for a single candidate
+    function displayAssessment(assessment, entities) {
+        assessmentContainer.innerHTML = "";
+
+        // Create score section
+        const scoreSection = document.createElement("div");
+        scoreSection.className = "mb-4";
+        
+        const positions = entities.job_position || [];
+        const positionText = positions.length > 0 ? `<p><strong>Position:</strong> ${positions.join(", ")}</p>` : "";
+
+        scoreSection.innerHTML = `
+            ${positionText}
+            <h4>Overall Assessment</h4>
+            <p><strong>Score:</strong> ${assessment.overall_score}%</p>
+            <p><strong>Suitability:</strong> <span class="${assessment.suitability.toLowerCase().replace(" ", "-")}">${assessment.suitability}</span></p>
+            <p><strong>Recommendation:</strong> ${assessment.recommendation}</p>
+        `;
+        assessmentContainer.appendChild(scoreSection);
+
+        // Create entities section
+        const entitiesSection = document.createElement("div");
+        entitiesSection.className = "mb-4";
+        entitiesSection.innerHTML = "<h4>Candidate Details</h4>";
+
+        // Display entities
+        const entityGroups = {
+            "Education": ["education_level", "course"],
+            "Skills": ["soft_skills", "hard_skills"],
+            "Experience": ["experience"],
+            "Certifications": ["certification"]
+        };
+
+        for (const [groupName, entityKeys] of Object.entries(entityGroups)) {
+            const groupDiv = document.createElement("div");
+            groupDiv.className = "mb-3";
+            groupDiv.innerHTML = `<h5>${groupName}</h5>`;
+
+            entityKeys.forEach(key => {
+                if (entities[key] && entities[key].length > 0) {
+                    const entityDiv = document.createElement("div");
+                    entityDiv.innerHTML = `<p><strong>${key.replace("_", " ").replace(/\b\w/g, l => l.toUpperCase())}:</strong> ${entities[key].join(", ")}</p>`;
+                    groupDiv.appendChild(entityDiv);
+                }
+            });
+
+            entitiesSection.appendChild(groupDiv);
+        }
+
+        assessmentContainer.appendChild(entitiesSection);
+    }
+
     // Function to display comparison results
     function displayComparison(comparison) {
         comparisonContainer.innerHTML = "";
@@ -157,8 +215,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const bestCandidateAlert = document.createElement("div");
         bestCandidateAlert.className = "alert alert-success";
         bestCandidateAlert.innerHTML = `
-        <strong>Best Candidate:</strong> ${comparison.best_candidate.name} with a score of ${comparison.best_candidate.score}%
-    `;
+            <strong>Best Candidate:</strong> ${comparison.best_candidate.name} with a score of ${comparison.best_candidate.score}%
+        `;
         comparisonContainer.appendChild(bestCandidateAlert);
 
         // Create comparison table
@@ -170,14 +228,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const headerRow = document.createElement("tr");
 
         const categoryHeader = document.createElement("th");
-        categoryHeader.textContent = "Category";
+        categoryHeader.textContent = "Candidate";
         headerRow.appendChild(categoryHeader);
 
-        comparison.candidates.forEach((candidate) => {
-            const candidateHeader = document.createElement("th");
-            candidateHeader.textContent = candidate;
-            headerRow.appendChild(candidateHeader);
-        });
+        const scoreHeader = document.createElement("th");
+        scoreHeader.textContent = "Score";
+        headerRow.appendChild(scoreHeader);
 
         thead.appendChild(headerRow);
         table.appendChild(thead);
@@ -185,206 +241,25 @@ document.addEventListener("DOMContentLoaded", function () {
         // Create table body
         const tbody = document.createElement("tbody");
 
-        // Overall score row
-        const overallRow = document.createElement("tr");
-        const overallLabel = document.createElement("td");
-        overallLabel.textContent = "Overall Score";
-        overallRow.appendChild(overallLabel);
-
-        comparison.overall_scores.forEach((score, index) => {
+        comparison.candidates.forEach((candidate, index) => {
+            const row = document.createElement("tr");
+            
+            const nameCell = document.createElement("td");
+            nameCell.textContent = candidate;
+            
             const scoreCell = document.createElement("td");
-            scoreCell.textContent = score + "%";
+            scoreCell.textContent = comparison.overall_scores[index] + "%";
 
             if (index === comparison.best_candidate.index) {
-                scoreCell.className = "best-candidate";
+                row.className = "best-candidate";
             }
 
-            overallRow.appendChild(scoreCell);
+            row.appendChild(nameCell);
+            row.appendChild(scoreCell);
+            tbody.appendChild(row);
         });
-
-        tbody.appendChild(overallRow);
-
-        // Category scores rows
-        const categories = [
-            { key: "soft_skills", title: "Soft Skills" },
-            { key: "hard_skills", title: "Hard Skills" },
-            { key: "education", title: "Education" },
-            { key: "experience", title: "Experience" },
-            { key: "certification", title: "Certification" },
-        ];
-
-        categories.forEach((category) => {
-            const categoryRow = document.createElement("tr");
-            const categoryLabel = document.createElement("td");
-            categoryLabel.textContent = category.title;
-            categoryRow.appendChild(categoryLabel);
-
-            comparison.category_scores[category.key].forEach((score) => {
-                const scoreCell = document.createElement("td");
-                scoreCell.textContent = score + "%";
-                categoryRow.appendChild(scoreCell);
-            });
-
-            tbody.appendChild(categoryRow);
-        });
-
-        // Suitability row
-        const suitabilityRow = document.createElement("tr");
-        const suitabilityLabel = document.createElement("td");
-        suitabilityLabel.textContent = "Suitability";
-        suitabilityRow.appendChild(suitabilityLabel);
-
-        comparison.suitability.forEach((suitability) => {
-            const suitabilityCell = document.createElement("td");
-            suitabilityCell.textContent = suitability;
-            suitabilityRow.appendChild(suitabilityCell);
-        });
-
-        tbody.appendChild(suitabilityRow);
 
         table.appendChild(tbody);
         comparisonContainer.appendChild(table);
-
-        // Create recommendations section
-        const recommendationsDiv = document.createElement("div");
-        recommendationsDiv.className = "mt-4";
-        recommendationsDiv.innerHTML = "<h5>Recommendations:</h5>";
-
-        const recommendationsList = document.createElement("ul");
-        comparison.candidates.forEach((candidate, index) => {
-            const recommendationItem = document.createElement("li");
-            recommendationItem.innerHTML = `<strong>${candidate}:</strong> ${comparison.recommendations[index]}`;
-            recommendationsList.appendChild(recommendationItem);
-        });
-
-        recommendationsDiv.appendChild(recommendationsList);
-        comparisonContainer.appendChild(recommendationsDiv);
-    }
-
-    // Function to display assessment results for a single candidate
-    function displayAssessment(assessment, entities) {
-        assessmentContainer.innerHTML = "";
-
-        // Overall score
-        const scoreDiv = document.createElement("div");
-        scoreDiv.className = "assessment-score";
-        scoreDiv.textContent = assessment.overall_score + "%";
-
-        // Suitability level
-        const suitabilityDiv = document.createElement("div");
-        suitabilityDiv.className = "text-center mb-4";
-        suitabilityDiv.innerHTML = `<h4>Suitability: <span class="${assessment.suitability
-            .toLowerCase()
-            .replace(" ", "-")}">${assessment.suitability}</span></h4>`;
-
-        assessmentContainer.appendChild(scoreDiv);
-        assessmentContainer.appendChild(suitabilityDiv);
-
-        
-        // Category scores
-        const categoryScoresDiv = document.createElement("div");
-        categoryScoresDiv.className = "mb-4";
-        categoryScoresDiv.innerHTML = "<h5>Category Scores:</h5>";
-
-        const categories = [
-            { key: "soft_skills", title: "Soft Skills" },
-            { key: "hard_skills", title: "Hard Skills" },
-            { key: "education", title: "Education" },
-            { key: "experience", title: "Experience" },
-            { key: "certification", title: "Certification" },
-        ];
-
-        categories.forEach((category) => {
-            const score = assessment.category_scores[category.key];
-
-            const categoryDiv = document.createElement("div");
-            categoryDiv.className = "assessment-category";
-
-            const categoryTitle = document.createElement("div");
-            categoryTitle.className = "assessment-category-title";
-            categoryTitle.textContent = `${category.title}: ${score}%`;
-
-            const progressDiv = document.createElement("div");
-            progressDiv.className = "progress";
-
-            let progressClass = "bg-danger";
-            if (score >= 70) {
-                progressClass = "bg-success";
-            } else if (score >= 50) {
-                progressClass = "bg-warning";
-            }
-
-            progressDiv.innerHTML = `<div class="progress-bar ${progressClass}" role="progressbar" style="width: ${score}%" aria-valuenow="${score}" aria-valuemin="0" aria-valuemax="100"></div>`;
-
-            categoryDiv.appendChild(categoryTitle);
-            categoryDiv.appendChild(progressDiv);
-            categoryScoresDiv.appendChild(categoryDiv);
-        });
-
-        assessmentContainer.appendChild(categoryScoresDiv);
-
-        // Strengths
-        const strengthsDiv = document.createElement("div");
-        strengthsDiv.className = "mb-3";
-        strengthsDiv.innerHTML = `<h5>Strengths:</h5><ul>${assessment.strengths
-            .map((s) => `<li>${s}</li>`)
-            .join("")}</ul>`;
-        assessmentContainer.appendChild(strengthsDiv);
-
-        // Areas for improvement
-        const areasDiv = document.createElement("div");
-        areasDiv.className = "mb-3";
-        areasDiv.innerHTML = `<h5>Areas for Improvement:</h5><ul>${assessment.areas_for_improvement
-            .map((a) => `<li>${a}</li>`)
-            .join("")}</ul>`;
-        assessmentContainer.appendChild(areasDiv);
-
-        // Display extracted entities
-        const entitiesDiv = document.createElement("div");
-        entitiesDiv.className = "mb-4";
-        entitiesDiv.innerHTML = "<h5>Extracted Information:</h5>";
-
-        const entityCategories = [
-            { key: "age", title: "Age" },
-            { key: "gender", title: "Gender" },
-            //{ key: "address", title: "Address" },
-            { key: "soft_skills", title: "Soft Skills" },
-            { key: "hard_skills", title: "Hard Skills" },
-            { key: "education_level", title: "Education Level" },
-            { key: "course", title: "Course/Major" },
-            { key: "experience", title: "Experience" },
-            { key: "certification", title: "Certification" },
-        ];
-
-        entityCategories.forEach((category) => {
-            const values = entities[category.key];
-
-            if (values && values.length > 0) {
-                const entityItem = document.createElement("div");
-                entityItem.className = "entity-item";
-
-                const entityTitle = document.createElement("div");
-                entityTitle.className = "entity-title";
-                entityTitle.textContent = category.title;
-
-                const entityValue = document.createElement("div");
-                entityValue.className = "entity-value";
-                entityValue.textContent = values.join(", ");
-
-                entityItem.appendChild(entityTitle);
-                entityItem.appendChild(entityValue);
-                entitiesDiv.appendChild(entityItem);
-            }
-        });
-
-        assessmentContainer.appendChild(entitiesDiv);
-
-        // Recommendation
-        // const recommendationDiv = document.createElement("div");
-        // recommendationDiv.className = "assessment-recommendation";
-        // recommendationDiv.innerHTML = `<strong>Recommendation:</strong> ${assessment.recommendation}`;
-        // assessmentContainer.appendChild(recommendationDiv);
-
-        
     }
 });
