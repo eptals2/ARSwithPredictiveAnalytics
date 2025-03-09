@@ -3,7 +3,7 @@ from flask_wtf.csrf import CSRFProtect
 from werkzeug.utils import secure_filename
 import os
 from utilities.text_extraction import extract_text_from_file
-from utilities.RoBERTa_NER import calculate_resume_similarities    
+from utilities.roBERTa_NER import calculate_resume_similarities    
 from utilities.XGBoost import analyze_resumes
 
 # from utilities.XGBoost import predict_job_fit

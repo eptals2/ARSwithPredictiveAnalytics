@@ -416,7 +416,7 @@
                     formData.append("job_description", jobFile);
 
                     // Score Resume - send to server
-                    fetch("/score-resume", {
+                    fetch("/score-resume-using-ner", {
                         method: "POST",
                         body: formData,
                         headers: {

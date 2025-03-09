@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 
 # Load the trained XGBoost model
 model = xgb.XGBClassifier()
-model.load_model("XGBoost-model-training/xgboost_resume_model.pkl")  # Make sure this file exists
+model.load_model("C:/Users/Acer/Desktop/ARSwithPredictiveAnalytics/XGBoost-model-training/trained-XGBoost-model/xgboost_model.json")  # Make sure this file exists
 
 # Define categorical columns
 CATEGORICAL_COLUMNS = ["Gender", "Address", "Skills", "Education", "Work Experience", "Certificates", "Course"]
