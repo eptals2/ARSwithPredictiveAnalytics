@@ -1,7 +1,6 @@
 import pickle
 import logging
 from flask import Flask, request, jsonify, render_template
-from werkzeug.utils import secure_filename
 from sklearn.metrics.pairwise import cosine_similarity
 from utilities.pre_processing import preprocess_text
 from utilities.jaccard_similarity_scoring import jaccard_similarity
