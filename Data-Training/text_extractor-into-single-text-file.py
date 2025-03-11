@@ -70,8 +70,8 @@ def extract_text(file_path):
     return text
 
 # Process each file in the specified directory
-data_dir = "Data-Training/resumes"  # Input directory
-output_dir = "Data-Training/Extracted_Text"  # Output directory
+data_dir = "Data-Training/job-req"  # Input directory
+output_dir = "Data-Training/Extracted_Text_from_job_req"  # Output directory
 
 # Create the output directory if it doesn't exist
 if not os.path.exists(output_dir):

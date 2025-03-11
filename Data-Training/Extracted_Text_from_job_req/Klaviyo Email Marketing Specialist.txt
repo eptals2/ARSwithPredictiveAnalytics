@@ -1,0 +1,32 @@
+Klaviyo Email Marketing Specialist
+
+We are looking for a Klaviyo Email Marketing Specialist to join our growth marketing team. This teammate manages drip campaigns using Braze (may also utilize previous Klaviyo experience) to implement lead-to-customer, upsell, and churn strategies while tagging and segmenting audiences for targeted marketing. Oversee the email marketing cycle, creating A/B tests and dynamic content to optimize performance and support test-and-learn initiatives.
+This is a great opportunity for someone who wants to work with a growing team and wants continuous learning and growth during their career.
+
+The Role
+Build, test, QA, deploy, and monitor emails including standalone batch communications, behaviorally triggered emails, and automated lifecycle journeys
+Develop the content calendar from the ground up for all email drip campaigns, using ChatGPT and other research to outline content that will resonate with the target audience
+Create experiments and A/B Tests for both one-off batch emails and longer email journeys
+Build segmentation and attributions within the CRM to develop email campaigns
+Monitor and optimize the performance of emails based on clicks, open rates, and other basic email marketing metrics
+Partner with Zoho customer service team to troubleshoot email challenges in the CRM
+Configuring dynamic content
+Setting up experiments and A/B tests
+Basic design set up of email campaigns using templates
+
+
+The Requirements
+Set up and manage drip campaigns using Braze (previous experience with Klaviyo will work)
+Identify and implement various types of drip campaigns, including lead-to-customer, upsell, customer education, and churn campaigns.
+Tagging and segmenting audiences for targeted email marketing.
+Manage the full email marketing cycle from planning to execution.
+Create experiments and A/B Tests for both one-off batch emails and longer email journeys
+Support test & learn efforts across the marketing team
+Monitor and optimize the performance of emails
+Configuring dynamic content
+Setting up experiments and A/B tests
+
+
+Nice to have
+Experience using Braze
+We are looking for someone who wants to grow as part of a team. Ideal candidates desire to learn and grow, take on more responsibilities along the way, and be resourceful enough to gather enough information to help provide accurate analysis and insights. Join our team now!

@@ -1,0 +1,29 @@
+Senior Full Stack .NET Vue.js Developer
+
+Is this you?
+You are energised by purpose and want to make a difference to clients
+You enjoy being challenged and are always looking for ways to develop
+You are observant and considerate of other people
+
+
+We’re looking for these types of people
+Analytical and Adaptable – you can cope with limited information, solve problems and build solutions
+Persistent and Experienced – you push to deliver amazing results
+Collaborative – you love working within a team
+Great with detail – you enjoy complex workflows and maintain systems with a high level of accuracy
+
+
+We need an experienced, talented Senior Full-Stack .NET & JavaScript Developer looking to become part of a close-knit team where you will be valued and empowered to do your best work.
+
+
+You have:
+Excellent written and verbal communication in English
+Space to work and a stable internet connection
+Your own Windows computer able to run Docker
+Experience with .NET Core (C#)
+Experience with Vue.js (Experience with React.js and Angular would be an advantage)
+Experience with a headless CMS such as Directus and Strapi is advantageous 
+Experience with modern unit testing frameworks (e.g. Jest, xUnit)
+Deep understanding of front-end and back-end architecture and data-driven development
+Tech Lead experience a strong plus: candidates with a history of leading software development projects or mentoring junior developers will be given high consideration
+
