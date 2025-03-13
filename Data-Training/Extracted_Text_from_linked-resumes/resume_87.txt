@@ -1,0 +1,15 @@
+Name: Manuel Payos
+Age: 22.0
+Gender: Male
+Address:  Cagayan De Oro City, Northern Mindanao, Philippines
+### Skills
+- Shipping & Receiving, Front-End Development, Vue.js
+### Experience
+**UX Designer** - PLDT (7 years)
+- Managed company finances and audits
+**Architect** - Nestle Philippines (8 years)
+- Designed sustainable structures
+### Education
+**BSc Education** - Technological Institute of the Philippines (2023)
+**BEng Electrical Engineering** - Far Eastern University (2024)
+### Certificates

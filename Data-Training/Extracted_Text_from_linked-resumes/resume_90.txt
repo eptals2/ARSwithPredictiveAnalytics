@@ -1,0 +1,16 @@
+Name: Francisco Buenaventura
+Age: 21.0
+Gender: Male
+Address: Davao, Davao Region, Philippines
+### Skills
+- Mobile App Development, AI Prompting, Merch
+### Experience
+**Architect** - Meralco (2 years)
+- Ensured law enforcement and security
+**Data Analyst** - Philippine Airlines (1 year)
+- Conducted mechanical system evaluations
+**Mechanical Engineer** - Meralco (9 years)
+- Managed engineering projects
+### Education
+**Bachelor of Laws** - Far Eastern University (2000)
+### Certificates

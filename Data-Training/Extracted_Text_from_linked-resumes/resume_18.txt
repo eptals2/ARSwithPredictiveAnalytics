@@ -1,0 +1,16 @@
+Name: Francisco Balasbas
+Age: 23.0
+Gender: Female
+Address: P-6 Bitan-agan Butuan City 
+### Skills
+- Communication 
+### Experience
+**Firefighter** - Meralco (2 years)
+- Designed user-friendly interfaces
+**Project Manager** - Coca-Cola Philippines (6 years)
+- Ensured law enforcement and security
+**Data Analyst** - Philippine Airlines (1 year)
+- Managed large datasets and performed data analysis
+### Education
+**BSc Psychology** - University of Asia and the Pacific (2013)
+### Certificates

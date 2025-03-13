@@ -1,0 +1,13 @@
+Name: Sweet May Ramon 
+Age: 38.0
+Gender: Female
+Address: Brgy. 1 District Adelfa Apagan Nasipit Agusan del Norte
+### Skills
+- video editing 
+### Experience
+**Electrical Engineer** - Meralco (4 years)
+- Handled employee relations and recruitment
+### Education
+**BSc Civil Engineering** - Mapua University (2019)
+**BSc Marketing** - Centro Escolar University (2000)
+### Certificates

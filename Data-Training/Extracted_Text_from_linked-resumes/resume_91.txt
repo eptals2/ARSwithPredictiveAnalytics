@@ -1,0 +1,16 @@
+Name: Francisco Buenaventura
+Age: 22.0
+Gender: Male
+Address: Bayugan City, Caraga, Philippines
+### Skills
+-  Python, PHP, Laravel
+### Experience
+**Financial Analyst** - Jollibee (5 years)
+- Provided critical medical care
+**UX Designer** - GMA Network (9 years)
+- Conducted mechanical system evaluations
+**Marketing Specialist** - Meralco (9 years)
+- Created and executed marketing strategies
+### Education
+**BSc Education** - San Beda University (2018)
+### Certificates

@@ -1,0 +1,17 @@
+Name: Gabriel Oroze
+Age: 21.0
+Gender: Female
+Address: P-5A Amparo, Butuan City 
+### Skills
+- Graphics Design
+### Experience
+**Doctor** - Nestle Philippines (4 years)
+- Created and executed marketing strategies
+**Project Manager** - Honda Philippines (10 years)
+- Conducted mechanical system evaluations
+**Nurse** - Honda Philippines (5 years)
+- Developed electrical circuits and systems
+### Education
+**BSc Marketing** - University of Santo Tomas (2004)
+**BSc Hospitality Management** - Adamson University (2001)
+### Certificates

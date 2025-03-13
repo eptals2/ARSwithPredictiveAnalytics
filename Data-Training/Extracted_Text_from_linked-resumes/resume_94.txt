@@ -1,0 +1,14 @@
+Name: Ria SalerveJane Cruza
+Age: 35.0
+Gender: Male
+Address: Caraga, Philippines
+### Skills
+- Teaching, Risk Assessment, Cybersecurity
+### Experience
+**Accountant** - Unilever Philippines (2 years)
+- Designed compelling graphics for clients
+**Accountant** - PLDT (2 years)
+- Managed large datasets and performed data analysis
+### Education
+**Bachelor of Laws** - De La Salle University (2018)
+### Certificates

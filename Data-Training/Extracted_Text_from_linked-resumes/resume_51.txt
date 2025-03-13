@@ -1,0 +1,14 @@
+Name: Claire Lape
+Age: 51.0
+Gender: Female
+Address: Ong Yiu
+### Skills
+- Dressmaking
+### Experience
+**Mechanical Engineer** - Nestle Philippines (1 year)
+- Taught various academic subjects
+**Civil Engineer** - Philippine Airlines (1 year)
+- Conducted mechanical system evaluations
+### Education
+**BSc Hospitality Management** - Pamantasan ng Lungsod ng Maynila (2019)
+### Certificates

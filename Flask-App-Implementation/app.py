@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, session, url_for
 import os
 import re
 import PyPDF2
@@ -10,11 +10,19 @@ import pandas as pd
 import nltk
 from nltk.tokenize import word_tokenize
 import json
+import secrets
+
 
 # Download necessary NLTK data
-nltk.download('punkt', quiet=True)
+# nltk.download('punkt', quiet=True)
 
 app = Flask(__name__)
+
+def generate_secret_key():
+    """Generate a secret key using the secrets module."""
+    return secrets.token_urlsafe(16)
+
+app.config['SECRET_KEY'] = generate_secret_key()
 
 # Define the upload folder
 UPLOAD_FOLDER = 'uploads'
@@ -677,7 +685,24 @@ def extract_text_from_resume(file_path):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('login_page.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login_page():
+    try:
+        if request.method == 'POST':
+            username = request.form['username']
+            password = request.form['password']
+            if username == 'admin' and password == 'admin':
+                session['username'] = username
+                return redirect(url_for('home'))
+            return render_template('login_page.html', error='Invalid username or password')
+    except Exception as e:
+        return str(e)
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
 @app.route('/extract', methods=['POST'])
 def extract():

@@ -1,0 +1,12 @@
+Name: James Gagarino
+Age: 20.0
+Gender: Male
+Address: Purok 8, Brgy.Bitan-agan, Butuan City, Agusan del Norte 
+### Skills
+- Video Editing 
+### Experience
+**Firefighter** - San Miguel Corporation (2 years)
+- Diagnosed and treated patients
+### Education
+**BSc Mechanical Engineering** - Mapua University (2010)
+### Certificates

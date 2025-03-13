@@ -1,0 +1,16 @@
+Name: Bennie Poras
+Age: 18.0
+Gender: Female
+Address: P-3B Manapa, Buenavista Agusan Del Norte 
+### Skills
+- Volleyball 
+### Experience
+**HR Manager** - Meralco (7 years)
+- Ensured law enforcement and security
+**Project Manager** - San Miguel Corporation (4 years)
+- Managed engineering projects
+**Teacher** - PLDT (6 years)
+- Managed engineering projects
+### Education
+**BSc Computer Science** - Far Eastern University (2008)
+### Certificates

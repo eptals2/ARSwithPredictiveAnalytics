@@ -1,0 +1,14 @@
+Name: Cora Tabanaw
+Age: 25.0
+Gender: Male
+Address:  Sariaya, Calabarzon, Philippines
+### Skills
+- Graphics Design, Microsoft Office, Online Marketing
+### Experience
+**Entrepreneur** - Metrobank (5 years)
+- Created and executed marketing strategies
+**Data Analyst** - Meralco (4 years)
+- Handled employee relations and recruitment
+### Education
+**BSc Mechanical Engineering** - University of the East (2009)
+### Certificates

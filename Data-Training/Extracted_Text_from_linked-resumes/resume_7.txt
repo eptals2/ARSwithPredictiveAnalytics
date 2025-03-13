@@ -1,0 +1,16 @@
+Name: Jonwel Cabaling
+Age: 26.0
+Gender: Female
+Address: Bitan Agan Butuan Cirty
+### Skills
+- Computer Literate
+### Experience
+**Doctor** - Metrobank (9 years)
+- Handled employee relations and recruitment
+**Project Manager** - Unilever Philippines (3 years)
+- Developed software applications
+**Project Manager** - ABS-CBN (1 year)
+- Provided legal consultations and representation
+### Education
+**BSc Mechanical Engineering** - Ateneo de Manila University (2024)
+### Certificates

@@ -1,0 +1,13 @@
+Name: Carlos Page
+Age: 31.0
+Gender: Female
+Address: Buenavista Agusan Del Norte
+### Skills
+- Computer Literate
+### Experience
+**Accountant** - Coca-Cola Philippines (8 years)
+- Created and executed marketing strategies
+### Education
+**BSc Business Administration** - Lyceum of the Philippines University (2007)
+**BSc Hospitality Management** - Mapua University (2010)
+### Certificates

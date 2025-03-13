@@ -1,0 +1,17 @@
+Name: Jose Abecede
+Age: 22.0
+Gender: Male
+Address: P-8 Maug, Butuan City
+### Skills
+- Video Editing 
+### Experience
+**Mechanical Engineer** - BDO Unibank (4 years)
+- Diagnosed and treated patients
+**Civil Engineer** - Procter & Gamble Philippines (2 years)
+- Performed financial risk analysis
+**Firefighter** - Philippine Airlines (7 years)
+- Taught various academic subjects
+### Education
+**BSc Nursing** - Silliman University (2001)
+**BSc Computer Science** - Ateneo de Manila University (2023)
+### Certificates

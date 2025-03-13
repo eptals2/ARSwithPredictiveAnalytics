@@ -1,0 +1,14 @@
+Name: Arnold Vicro Alabat
+Age: 20.0
+Gender: Male
+Address: Purok 4 limaha
+### Skills
+- Video editing
+### Experience
+**Lawyer** - Cebu Pacific (3 years)
+- Designed compelling graphics for clients
+**Police Officer** - Cebu Pacific (6 years)
+- Created and executed marketing strategies
+### Education
+**BSc Nursing** - Xavier University (2005)
+### Certificates

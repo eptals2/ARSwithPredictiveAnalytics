@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
             scoreDiv.className = "mb-3";
             
             const positions = result.entities.job_position || [];
-            const positionText = positions.length > 0 ? `<strong>Position:</strong> ${positions.join(", ")}<br>` : "";
+            const positionText = positions.length > 0 ? `<strong>Suitable Position:</strong> ${positions.join(", ")}<br>` : "";
             
             scoreDiv.innerHTML = `
                 ${positionText}
@@ -164,21 +164,22 @@ document.addEventListener("DOMContentLoaded", function () {
         scoreSection.className = "mb-4";
         
         const positions = entities.job_position || [];
-        const positionText = positions.length > 0 ? `<p><strong>Position:</strong> ${positions.join(", ")}</p>` : "";
+        const positionText = positions.length > 0 ? `<p><strong>Predicted Suitable Job:</strong> ${positions.join(", ")}</p>` : "";
 
         scoreSection.innerHTML = `
+            <div class="mb-3 p-2 border-bottom">
             ${positionText}
-            <h4>Overall Assessment</h4>
-            <p><strong>Score:</strong> ${assessment.overall_score}%</p>
-            <p><strong>Suitability:</strong> <span class="${assessment.suitability.toLowerCase().replace(" ", "-")}">${assessment.suitability}</span></p>
-            <p><strong>Recommendation:</strong> ${assessment.recommendation}</p>
+            <p><strong>Suitability Percentage:</strong> ${assessment.overall_score}%</p>
+            <p><strong>Suitability Status:</strong> <span class="${assessment.suitability.toLowerCase().replace(" ", "-")}">${assessment.suitability}</span></p>
+            <!--p><strong>Recommendation:</strong> $//{assessment.recommendation}</!--p>
+            </div>
         `;
         assessmentContainer.appendChild(scoreSection);
 
         // Create entities section
         const entitiesSection = document.createElement("div");
         entitiesSection.className = "mb-4";
-        entitiesSection.innerHTML = "<h4>Candidate Details</h4>";
+        entitiesSection.innerHTML = "<h4>Extracted Details</h4>";
 
         // Display entities
         const entityGroups = {

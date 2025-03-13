@@ -1,0 +1,15 @@
+Name: Carlos Page
+Age: 38.0
+Gender: Female
+Address: P-3B Manapa Buenavista, Agusan del Norte
+### Skills
+- Communication, computer literate
+### Experience
+**Graphic Designer** - Toyota Philippines (2 years)
+- Managed company finances and audits
+**Police Officer** - Nestle Philippines (6 years)
+- Handled employee relations and recruitment
+### Education
+**BSc Finance** - Centro Escolar University (2024)
+**MSc Data Science** - Xavier University (2011)
+### Certificates

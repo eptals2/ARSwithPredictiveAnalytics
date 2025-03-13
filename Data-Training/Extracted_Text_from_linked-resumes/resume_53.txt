@@ -1,0 +1,14 @@
+Name: Lea Ceres
+Age: 18.0
+Gender: Male
+Address: Bohol, Central Visayas, Philippines
+### Skills
+- Analytical Skills, Multi-tasking
+### Experience
+**Nurse** - GMA Network (8 years)
+- Taught various academic subjects
+**Marketing Specialist** - PLDT (7 years)
+- Provided critical medical care
+### Education
+**BSc Education** - Mindanao State University (2012)
+### Certificates

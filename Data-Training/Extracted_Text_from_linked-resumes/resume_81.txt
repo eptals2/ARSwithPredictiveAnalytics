@@ -1,0 +1,14 @@
+Name: Claire Lape
+Age: 20.0
+Gender: Male
+Address: Ormoc, Eastern Visayas, Philippines
+### Skills
+- Problem Solving, Creativity and Innovation, Critical Thinking
+### Experience
+**Project Manager** - SM Investments (10 years)
+- Provided critical medical care
+**Civil Engineer** - Ayala Corporation (7 years)
+- Led project teams and ensured timely delivery
+### Education
+**Doctor of Medicine** - University of Asia and the Pacific (2022)
+### Certificates

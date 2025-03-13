@@ -1,0 +1,12 @@
+Name: Jonwel Cabaling
+Age: 25.0
+Gender: Female
+Address: Pianing butuan city
+### Skills
+- Communications
+### Experience
+**Financial Analyst** - Ayala Corporation (1 year)
+- Handled employee relations and recruitment
+### Education
+**BA Graphic Design** - Technological Institute of the Philippines (2004)
+### Certificates

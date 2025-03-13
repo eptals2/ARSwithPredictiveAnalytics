@@ -1,0 +1,13 @@
+Name: Elpidio Escalante
+Age: 25.0
+Gender: Male
+Address: P-8 Ong Yiu Butuan City
+### Skills
+- Computer Servicing
+### Experience
+**Entrepreneur** - Unilever Philippines (4 years)
+- Diagnosed and treated patients
+### Education
+**BEng Electrical Engineering** - Silliman University (2021)
+**BEng Electrical Engineering** - Pamantasan ng Lungsod ng Maynila (2007)
+### Certificates

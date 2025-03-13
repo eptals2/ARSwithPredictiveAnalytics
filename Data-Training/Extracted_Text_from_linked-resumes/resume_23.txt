@@ -1,0 +1,14 @@
+Name: Sergio Maboloc
+Age: 21.0
+Gender: Male
+Address: Ecoland Davao city 
+### Skills
+- Video editor, communication 
+### Experience
+**Accountant** - San Miguel Corporation (1 year)
+- Designed sustainable structures
+**Project Manager** - ABS-CBN (2 years)
+- Designed compelling graphics for clients
+### Education
+**BSc Hospitality Management** - University of the Philippines (2015)
+### Certificates

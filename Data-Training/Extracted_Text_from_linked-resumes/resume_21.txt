@@ -1,0 +1,16 @@
+Name: Jonwel Cabaling
+Age: 16.0
+Gender: Female
+Address: Anunas, Angeles City Pampanga 
+### Skills
+- Communications
+### Experience
+**Doctor** - Philippine Airlines (2 years)
+- Designed user-friendly interfaces
+**Data Analyst** - Cebu Pacific (3 years)
+- Developed software applications
+**Financial Analyst** - GMA Network (8 years)
+- Designed sustainable structures
+### Education
+**BSc Computer Science** - Adamson University (2024)
+### Certificates

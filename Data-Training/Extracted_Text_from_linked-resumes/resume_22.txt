@@ -1,0 +1,17 @@
+Name: Bowny Andres
+Age: 22.0
+Gender: Female
+Address: Purok 4 Amparo, Butuan City
+### Skills
+- Video Editing and Graphics Design 
+### Experience
+**UX Designer** - Unilever Philippines (1 year)
+- Designed compelling graphics for clients
+**Police Officer** - Meralco (4 years)
+- Developed software applications
+**Architect** - Bank of the Philippine Islands (4 years)
+- Handled employee relations and recruitment
+### Education
+**MSc Data Science** - University of Mindanao (2006)
+**BSc Communication Arts** - Silliman University (2004)
+### Certificates

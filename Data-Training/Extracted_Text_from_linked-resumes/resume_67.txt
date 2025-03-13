@@ -1,0 +1,12 @@
+Name: Renier Caote
+Age: 21.0
+Gender: Male
+Address:  Cagayan De Oro City, Northern Mindanao, Philippines
+### Skills
+- Web Developement,  Penetration Testing, C++
+### Experience
+**Electrical Engineer** - Globe Telecom (1 year)
+- Designed compelling graphics for clients
+### Education
+**BSc Mechanical Engineering** - Pamantasan ng Lungsod ng Maynila (2023)
+### Certificates

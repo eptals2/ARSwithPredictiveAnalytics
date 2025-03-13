@@ -1,0 +1,14 @@
+Name: Prince Jeremiah Serado
+Age: 27.0
+Gender: Male
+Address: Bukidnon, Northern Mindanao, Philippines
+### Skills
+- Web Developement
+### Experience
+**Civil Engineer** - Nestle Philippines (8 years)
+- Managed company finances and audits
+**Project Manager** - Unilever Philippines (1 year)
+- Managed company finances and audits
+### Education
+**Doctor of Medicine** - Polytechnic University of the Philippines (2010)
+### Certificates

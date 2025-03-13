@@ -1,0 +1,14 @@
+Name: Jonwel Cabaling
+Age: 25.0
+Gender: Male
+Address: P1 Ong Yiu Butuan City
+### Skills
+- Computer Programming
+### Experience
+**Project Manager** - SM Investments (2 years)
+- Led project teams and ensured timely delivery
+**Project Manager** - BDO Unibank (7 years)
+- Led project teams and ensured timely delivery
+### Education
+**BA Graphic Design** - De La Salle University (2013)
+### Certificates

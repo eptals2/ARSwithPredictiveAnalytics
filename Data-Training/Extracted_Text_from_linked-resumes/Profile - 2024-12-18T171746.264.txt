@@ -1,0 +1,67 @@
+   
+Contact
+www.linkedin.com/in/iggyyuson
+(LinkedIn)
+Top Skills
+Amazon Web Services (AWS)
+DevOps
+Kubernetes
+Certifications
+AWS Certified Cloud Practitioner
+AWS Certified Solutions Architect –
+Associate
+AWS Certified Developer –
+Associate
+Honors-Awards
+1st Place, Computer Programming
+Contest
+Finalist, Science Research Summit
+1st Place, Research Fair
+1st Place, Research Fair
+1st Place, Research FairIke Gabriel Yuson
+DevSecOps Engineer | Serverless | AWS User Group Leader
+Davao del Sur, Davao Region, Philippines
+Summary
+Iggy is a DevSecOps Engineer with an expertise in implementing
+cloud-native and serverless applications in AWS. He possesses
+extensive skills in developing full-stack solutions for both web and
+mobile platforms. 
+Outside work, Iggy is also actively volunteering in the local
+community as the User Group Leader of AWS User Group Davao
+where he hosts meetups focused on educating and networking
+among AWS enthusiasts and professionals.
+Experience
+Ingenuity Software
+DevOps Engineer
+September 2023 - September 2024  (1 year 1 month)
+Davao, Davao Region, Philippines
+Elladex
+Mid-level Backend Developer
+April 2022 - March 2024  (2 years)
+Sydney, New South Wales, Australia
+Architected the company's backend infrastructure in AWS. Setup CI/CD in
+multiple environments and created functional and scalable REST APIs using
+Node.
+Tutorials Dojo
+Cloud Instructor
+September 2023 - January 2024  (5 months)
+haws
+1 year 6 months
+Back End Developer
+July 2022 - April 2023  (10 months)
+  Page 1 of 2
+   
+Full Stack Developer
+November 2021 - June 2022  (8 months)
+De La Salle University
+Summer Intern
+June 2018 - August 2018  (3 months)
+Metro Manila
+Worked closely with data science and machine learning technologies and
+practiced web scraping using Python.
+Education
+University of the Philippines
+Bachelor of Science - BS, Computer Science
+Philippine Science High School Southern Mindanao Campus
+High School Diploma 
+  Page 2 of 2

@@ -1,0 +1,13 @@
+Name: Corazon Yee
+Age: 23.0
+Gender: Male
+Address: Northern Mindanao, Philippines
+### Skills
+- Video Editing, Photography, Film Production
+### Experience
+**Graphic Designer** - Meralco (10 years)
+- Designed compelling graphics for clients
+### Education
+**Doctor of Medicine** - Adamson University (2005)
+**BSc Psychology** - De La Salle University (2008)
+### Certificates

@@ -1,0 +1,17 @@
+Name: Gabriel Oroze
+Age: 20.0
+Gender: Female
+Address:  New Orleans, Louisiana, United States
+### Skills
+- Python, Network Administration, Wireshark
+### Experience
+**Doctor** - GMA Network (7 years)
+- Developed electrical circuits and systems
+**UX Designer** - Bank of the Philippine Islands (7 years)
+- Taught various academic subjects
+**Mechanical Engineer** - Honda Philippines (9 years)
+- Provided legal consultations and representation
+### Education
+**MSc Data Science** - University of the Philippines (2020)
+**BSc Business Administration** - National University (2022)
+### Certificates

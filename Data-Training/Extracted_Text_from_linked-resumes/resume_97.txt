@@ -1,0 +1,16 @@
+Name: Manuel Payos
+Age: 20.0
+Gender: Female
+Address: Davao, Davao Region, Philippines
+### Skills
+- Proactive Leadership, Front-End Development, Event Planning, UI/UX designer
+### Experience
+**Civil Engineer** - Jollibee (9 years)
+- Developed electrical circuits and systems
+**Accountant** - Bank of the Philippine Islands (7 years)
+- Managed large datasets and performed data analysis
+**Architect** - Unilever Philippines (9 years)
+- Handled employee relations and recruitment
+### Education
+**BSc Nursing** - National University (2007)
+### Certificates

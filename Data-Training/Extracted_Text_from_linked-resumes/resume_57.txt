@@ -1,0 +1,17 @@
+Name: Gabriel Oroze
+Age: 30.0
+Gender: Male
+Address:  Caraga, Philippines
+### Skills
+- Microsoft Word
+### Experience
+**Mechanical Engineer** - Bank of the Philippine Islands (4 years)
+- Managed engineering projects
+**Software Engineer** - Metrobank (6 years)
+- Led project teams and ensured timely delivery
+**HR Manager** - Coca-Cola Philippines (2 years)
+- Managed engineering projects
+### Education
+**BSc Communication Arts** - University of the East (2010)
+**BSc Education** - Adamson University (2014)
+### Certificates

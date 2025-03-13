@@ -1,0 +1,16 @@
+Name: Maria Solis
+Age: 19.0
+Gender: Male
+Address: Butuan, Caraga, Philippines
+### Skills
+- Leadership, Critical Thinking, Logical Reasoning, HTML, Python, C Programming language
+### Experience
+**Entrepreneur** - San Miguel Corporation (6 years)
+- Taught various academic subjects
+**Marketing Specialist** - Coca-Cola Philippines (8 years)
+- Performed financial risk analysis
+**UX Designer** - Toyota Philippines (8 years)
+- Managed business operations and growth
+### Education
+**BSc Education** - Ateneo de Manila University (2006)
+### Certificates

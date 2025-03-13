@@ -1,0 +1,17 @@
+Name: James Gagarino
+Age: 25.0
+Gender: Female
+Address: P-1, Brgy. 19 Buhangin, Butuan City
+### Skills
+- Graphics Design, Video Editing, Computer Literate
+### Experience
+**Civil Engineer** - BDO Unibank (6 years)
+- Provided critical medical care
+**Accountant** - Jollibee (7 years)
+- Led fire prevention and rescue operations
+**Lawyer** - Toyota Philippines (3 years)
+- Designed sustainable structures
+### Education
+**BA Graphic Design** - University of the Philippines (2024)
+**BA Graphic Design** - Mapua University (2019)
+### Certificates

@@ -1,0 +1,16 @@
+Name: Maria Santosima
+Age: 24.0
+Gender: Female
+Address: Amparo butuan City 
+### Skills
+- Graphics 
+### Experience
+**Marketing Specialist** - Coca-Cola Philippines (9 years)
+- Managed engineering projects
+**Lawyer** - Ayala Corporation (2 years)
+- Managed company finances and audits
+**Financial Analyst** - PLDT (7 years)
+- Created and executed marketing strategies
+### Education
+**BSc Hospitality Management** - Centro Escolar University (2000)
+### Certificates

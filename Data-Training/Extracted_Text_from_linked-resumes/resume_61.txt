@@ -1,0 +1,12 @@
+Name: Joel Osmena
+Age: 22.0
+Gender: Male
+Address:  Cebu, Central Visayas, Philippines
+### Skills
+- ASP.NET, C#, MudBlazor
+### Experience
+**Accountant** - Ayala Corporation (2 years)
+- Managed company finances and audits
+### Education
+**BSc Architecture** - Xavier University (2001)
+### Certificates

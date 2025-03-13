@@ -1,0 +1,38 @@
+   
+Contact
+www.linkedin.com/in/adrian-pete-
+lagare-a96874249  (LinkedIn)
+Top Skills
+Java
+PyQt
+Reinforcement Learning
+Certifications
+Certificate of Eligibility - Professional
+ROS2 For Beginners (ROS Foxy,
+Humble - 2022)
+Honors-Awards
+Magna Cum LaudeAdrian Pete Lagare
+Digital Nomad | Entrepreneur
+Butuan, Caraga, Philippines
+Summary
+I am a Computer Science graduate currently working with AI and
+Robotics.
+Experience
+Adrian Pete R. Lagare Computer Programming Services
+Owner
+July 2019 - Present  (5 years 6 months)
+Philippines
+Caraga State University
+Project Technical Specialist I
+July 2022 - May 2024  (1 year 11 months)
+Philippines
+Project: Mine Geotechnical and Environmental Assessment Robotic System. 
+Tasked on the software development of the project which includes the
+UGV's simulations, scene understanding, state estimate, Simultaneous
+Localization and Mapping (SLAM) and Deep Reinforcement Learning (RL)
+based Navigation and Control. Also tasked to develop the UGV-UAV Software
+Interface.
+Education
+Caraga State University
+Bachelor of Science - BS, Computer Science  · (June 2015 - May 2019)
+  Page 1 of 1

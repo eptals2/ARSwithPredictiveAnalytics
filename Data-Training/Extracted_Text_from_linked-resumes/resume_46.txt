@@ -1,0 +1,17 @@
+Name: Jezel Kamota
+Age: 34.0
+Gender: Female
+Address: Buenavista agusan del norte
+### Skills
+- computer
+### Experience
+**Software Engineer** - Jollibee (7 years)
+- Handled employee relations and recruitment
+**Project Manager** - Philippine Airlines (10 years)
+- Managed business operations and growth
+**HR Manager** - Philippine Airlines (10 years)
+- Conducted mechanical system evaluations
+### Education
+**BSc Computer Science** - Xavier University (2001)
+**BSc Psychology** - University of the East (2024)
+### Certificates

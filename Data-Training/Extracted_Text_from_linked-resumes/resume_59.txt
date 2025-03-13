@@ -1,0 +1,17 @@
+Name: Gabriel Oroze
+Age: 23.0
+Gender: Male
+Address: Doha, Qatar
+### Skills
+- Graphics Design, Marketing Materials
+### Experience
+**Firefighter** - Meralco (10 years)
+- Provided critical medical care
+**Police Officer** - Toyota Philippines (8 years)
+- Created and executed marketing strategies
+**Graphic Designer** - Bank of the Philippine Islands (7 years)
+- Created and executed marketing strategies
+### Education
+**BS Accountancy** - Far Eastern University (2008)
+**BSc Marketing** - Centro Escolar University (2009)
+### Certificates

@@ -1,0 +1,15 @@
+Name: Jonwel Cabaling
+Age: 22.0
+Gender: Female
+Address:  Iligan, Northern Mindanao, Philippines
+### Skills
+- Lead Qualification, Online Lead Generation, Online Research
+### Experience
+**Architect** - San Miguel Corporation (10 years)
+- Ensured law enforcement and security
+**Software Engineer** - Procter & Gamble Philippines (9 years)
+- Led fire prevention and rescue operations
+### Education
+**Bachelor of Laws** - University of the Philippines (2010)
+**BSc Nursing** - De La Salle University (2014)
+### Certificates

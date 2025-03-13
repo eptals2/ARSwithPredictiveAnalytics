@@ -1,0 +1,64 @@
+   
+Contact
+www.linkedin.com/in/ejay-regaña-
+b35b43251  (LinkedIn)
+Top Skills
+Information Technology
+Infrastructure
+Technical Support
+Cisco NetworkingEjay Regaña
+Information Technology Specialist
+Metro Davao
+Experience
+ViewQwest
+Network Operations Center Engineer
+June 2024 - Present  (7 months)
+Philippines
+Global Staff Network
+Information Technology Technical Specialist
+May 2023 - May 2024  (1 year 1 month)
+Philippines
+Create a standard support procedure. Set up all 365 accounts locally for
+access to AAD/365 Admin Center with MFA on their phones for added
+security. Install accounting, engineering, and administrative software for users
+from various companies in our office. Provide support for 365 admin errors
+and MFA setup. Implement user time tracking with Hubstaff for performance
+monitoring and task management. Manage device inventory for remote work
+and install Malwarebytes for added security against malware, phishing, and
+other attacks. Also, work as a Security Admin for internal AAD and 365 Admin,
+ensuring user security against phishing emails. I also set up an Open Source
+Firewall for failover with the other Internet Service Provider and created
+network monitoring to block non-work-related sites for all users.
+Ulticon Builders, Inc.
+Information Technology Technical Support
+October 2020 - March 2023  (2 years 6 months)
+Daily ticket creation and processing according to standard procedures. Provide
+tailored support to users based on their needs, including satellite offices
+experiencing slow internet. Implement blocklists and whitelists for work-related
+website access. Install Satellite Internet in remote areas with no cellular signal
+for email communication. Set up user accounts with Site-to-Site VPN access.
+Deliver troubleshooting solutions for software, hardware, and network issues.
+Improve assessment techniques to meet department goals. Innovate solutions
+for common problems. Install Tracker for user monitoring. Implement VPN
+connections for satellite offices to access servers. Utilize Sangfor Technology
+for VPN tunnels and firewall
+  Page 1 of 2
+   
+CSL Printing Press
+Technical Support Representative
+August 2018 - September 2020  (2 years 2 months)
+Davao, Davao Region, Philippines
+Set up Windows Server 2016 for the Computer to Plate Machine. 
+Additionally, install an Open Source firewall (pfSense) to enhance 
+security for on-premises users. Configure Active Directory Domain 
+Services to ensure each user has their own profile. Establish folder 
+redirection for the Shared folder for local users. Configure all machines,
+including Digital Printing Machines, large-format Printers (Tarpaulin 
+Printers), and Continuous Paper Machines. Set up access rights for all folders
+for each user,ensuring they cannot access confidential files. 
+Implement failover in pfSense and configure it to support two Internet 
+Service Providers for redundancy.
+Education
+ACLC College
+Information Technology  
+  Page 2 of 2

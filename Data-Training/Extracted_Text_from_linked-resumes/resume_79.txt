@@ -1,0 +1,16 @@
+Name: Mea Rhea Tabo
+Age: 26.0
+Gender: Male
+Address: Borongan City, Eastern Visayas, Philippines
+### Skills
+- Computer Hardware Troubleshooting, Computer Literacy, Networking
+### Experience
+**Software Engineer** - BDO Unibank (10 years)
+- Managed business operations and growth
+**Police Officer** - ABS-CBN (6 years)
+- Provided critical medical care
+**Entrepreneur** - Globe Telecom (2 years)
+- Provided legal consultations and representation
+### Education
+**BSc Marketing** - Technological Institute of the Philippines (2006)
+### Certificates

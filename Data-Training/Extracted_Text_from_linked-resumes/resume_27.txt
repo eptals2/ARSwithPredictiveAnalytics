@@ -1,0 +1,15 @@
+Name: Jezel Kamota
+Age: 25.0
+Gender: Male
+Address: P-5 Ambago, Butuan City
+### Skills
+- Graphics Design
+### Experience
+**Firefighter** - Bank of the Philippine Islands (9 years)
+- Managed engineering projects
+**Marketing Specialist** - Coca-Cola Philippines (1 year)
+- Managed company finances and audits
+### Education
+**BSc Communication Arts** - Silliman University (2018)
+**BSc Civil Engineering** - De La Salle University (2009)
+### Certificates

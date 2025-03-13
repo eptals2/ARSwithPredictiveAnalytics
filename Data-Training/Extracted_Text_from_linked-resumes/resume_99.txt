@@ -1,0 +1,16 @@
+Name: Ferdinand Cabarus
+Age: 32.0
+Gender: Female
+Address: Charitoville 1 Imadejas Butuan City
+### Skills
+- Video Editing, Communications, Photography, Networking, Nails artistery
+### Experience
+**Police Officer** - Globe Telecom (1 year)
+- Led fire prevention and rescue operations
+**Teacher** - Toyota Philippines (6 years)
+- Provided legal consultations and representation
+**Nurse** - Unilever Philippines (7 years)
+- Performed financial risk analysis
+### Education
+**BS Accountancy** - Ateneo de Manila University (2021)
+### Certificates

@@ -1,0 +1,14 @@
+Name: Maria Santosima
+Age: 27.0
+Gender: Male
+Address: General Santos, Soccsksargen, Philippines
+### Skills
+- Image Design, Online Graphics, Advertising
+### Experience
+**Project Manager** - Bank of the Philippine Islands (2 years)
+- Taught various academic subjects
+**Software Engineer** - Nestle Philippines (3 years)
+- Taught various academic subjects
+### Education
+**BSc Communication Arts** - University of Santo Tomas (2005)
+### Certificates

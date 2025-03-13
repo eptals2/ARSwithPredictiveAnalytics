@@ -1,0 +1,13 @@
+Name: Gena Emilio 
+Age: 22.0
+Gender: Male
+Address:  General Santos, Soccsksargen, Philippines
+### Skills
+- Data Analysis, Network Security, Database Management System
+### Experience
+**Electrical Engineer** - Metrobank (7 years)
+- Diagnosed and treated patients
+### Education
+**BSc Business Administration** - Xavier University (2014)
+**BSc Marketing** - University of Santo Tomas (2001)
+### Certificates

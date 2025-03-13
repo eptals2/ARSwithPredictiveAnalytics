@@ -1,0 +1,14 @@
+Name: Cora Tabanaw
+Age: 40.0
+Gender: Female
+Address: P-4 Ampayon Butuan City
+### Skills
+- Computer literate
+### Experience
+**Civil Engineer** - Coca-Cola Philippines (8 years)
+- Provided legal consultations and representation
+**Lawyer** - San Miguel Corporation (3 years)
+- Led project teams and ensured timely delivery
+### Education
+**BSc Marketing** - Silliman University (2016)
+### Certificates

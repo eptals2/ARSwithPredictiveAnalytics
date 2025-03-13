@@ -1,0 +1,15 @@
+Name: Ferdinand Serrano
+Age: 36.0
+Gender: Female
+Address: Purok-3A Manapa Buenavista Agusan del Norte 
+### Skills
+- None 
+### Experience
+**Software Engineer** - Jollibee (9 years)
+- Designed user-friendly interfaces
+**Nurse** - Coca-Cola Philippines (5 years)
+- Managed company finances and audits
+### Education
+**MSc Data Science** - University of Asia and the Pacific (2021)
+**BSc Computer Science** - Lyceum of the Philippines University (2000)
+### Certificates

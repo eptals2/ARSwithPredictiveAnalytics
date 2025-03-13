@@ -1,0 +1,14 @@
+Name: Arnold Vicro Alabat
+Age: 30.0
+Gender: Female
+Address: Purok 6 macalang Buenavista Agusan del norte 
+### Skills
+- None 
+### Experience
+**UX Designer** - Cebu Pacific (9 years)
+- Managed business operations and growth
+**Firefighter** - GMA Network (10 years)
+- Designed compelling graphics for clients
+### Education
+**BSc Hospitality Management** - De La Salle University (2009)
+### Certificates

@@ -1,0 +1,16 @@
+Name: Cora Tabanaw
+Age: 22.0
+Gender: Female
+Address: Doongan
+### Skills
+- Communication 
+### Experience
+**UX Designer** - Bank of the Philippine Islands (1 year)
+- Provided legal consultations and representation
+**Mechanical Engineer** - BDO Unibank (7 years)
+- Managed engineering projects
+**Graphic Designer** - ABS-CBN (10 years)
+- Managed company finances and audits
+### Education
+**BSc Hospitality Management** - Adamson University (2009)
+### Certificates

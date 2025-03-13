@@ -1,0 +1,14 @@
+Name: Gena Emilio 
+Age: 21.0
+Gender: Male
+Address: Davao, Davao Region, Philippines
+### Skills
+- User Experience (UX),  User Interface Design
+### Experience
+**UX Designer** - GMA Network (10 years)
+- Led fire prevention and rescue operations
+**Data Analyst** - San Miguel Corporation (5 years)
+- Conducted mechanical system evaluations
+### Education
+**BSc Marketing** - Lyceum of the Philippines University (2008)
+### Certificates

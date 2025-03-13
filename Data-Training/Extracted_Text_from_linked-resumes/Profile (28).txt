@@ -1,0 +1,140 @@
+   
+Contact
+www.linkedin.com/in/allan-murillo
+(LinkedIn)
+Top Skills
+Software DevelopmentAllan Murillo
+Software Developer | Freelancer at Upwork | Windows Desktop
+Development
+Makati, National Capital Region, Philippines
+Summary
+Hi there, I'm Allan – your go-to Desktop Applications Developer and
+Website Developer with an impressive track record spanning over 4
+years. I've taken on a diverse range of projects, each a testament to
+my commitment to excellence and innovation.
+Projects and Achievements:
+Developed a robust Accounting System that streamlined financial
+operations for an Accounting Firm, boosting efficiency and accuracy.
+Engineered a Dental Clinic Management System, enhancing patient
+care and appointment scheduling.
+Engineered a Database System for InTouch Philippines, empowering
+reports data-driven actions.
+Created a Computerized Payroll System for a Guards Agency,
+simplifying payroll management for enhanced workforce satisfaction.
+Implemented a Billing and Collection System that optimized revenue
+tracking and management.
+⚖⚖ Crafted a Working Trial Balance System, providing real-time
+financial insights.
+Developed an Employee Management System for HR operations.
+Designed a Membership Management System to organize data.
+Created a Patient Record Management System to ensure organized
+data.
+Engineered an Inventory Management System for streamlined stock
+tracking and inventory control.
+Designed an Invoicing Application System for easy and accurate
+billing processes.
+Developed engaging Static Websites for a Skincare Company and a
+Security Agency Company, enhancing their online presence.
+Key Strengths and Skills:
+  Page 1 of 4
+   
+Expertise in C⚖.NET and VB.NET, delivering robust and scalable
+applications.
+Proficiency in Microsoft SQL Server 2022, ensuring seamless data
+management.
+Mastery of Visual Studio 2022, for efficient development and project
+management.
+Skilled in SAP Crystal Reports, presenting data insights in a visually
+appealing manner.
+UI Design Skills that result in user-friendly and visually engaging
+interfaces.
+Experience with DevExpress and DotNetBar, for enhanced
+application functionality.
+⚖ Proficient in MySQL, SQLite/MS Access, ensuring efficient data
+storage solutions.
+Adept at Testing and Debugging, resolving errors swiftly to ensure
+smooth user experiences.
+Proficiency in PHP, HTML/CSS, and WordPress for versatile web
+development.
+MS Excel prowess, facilitating data analysis and visualization.
+Why Choose Me:
+My passion for delivering exceptional solutions combined with my
+ability to adapt to client requirements sets me apart. Let's transform
+your vision into reality. I'm here to exceed your expectations. Reach
+out, and let's create something extraordinary together.
+Experience
+Upwork
+Freelance Software Developer
+January 2023 - Present  (2 years)
+United States
+As a remote freelancer working on multiple projects on Upwork, my job
+responsibilities would typically include:
+Understanding project requirements: Before starting work on any project, you
+will need to thoroughly understand the project requirements and specifications
+provided by the client.
+  Page 2 of 4
+   
+Designing and developing the application: Depending on the project, you
+will be responsible for designing and developing different components of the
+application. 
+Testing and debugging: Once you have developed the application, you will
+need to thoroughly test it to ensure that it is free from bugs and errors.
+Providing support: After delivering the completed project.
+Here are some brief application descriptions for my projects:
+1. Dental Clinic Management System: This system would be designed to help
+dental clinics manage patient information, appointments scheduling, sending
+SMS/email to patients, and billing and payment, generating reports such as
+AR, Sales, and expenses. It might include features such as a patient database,
+appointment scheduling system, billing system, and reporting capabilities.
+2. Invoicing Application French Language: This application would be designed
+to help French-speaking businesses create and manage invoices. It might
+include features such as invoice templates, automatic calculations, and the
+ability to generate reports on outstanding invoices.
+3. Church Membership Management System: This system would be
+designed to help churches manage their membership database, events, and
+communication with members. It might include features such as a member
+database, event scheduling system, communication platform, and reporting
+capabilities.
+4. Substicare Management System for Patient Medical Details: This system
+would be designed to help medical professionals manage patient medical
+details. It might include features such as a patient database, medical history
+tracking, appointment scheduling system, and communication capabilities.
+Acosta, Del Rosario & Associates CPAs
+Software Developer
+January 2021 - December 2022  (2 years)
+Makati, National Capital Region, Philippines
+Creator of accounting systems, payroll, and billing system: responsible for
+designing and developing software solutions that meet accounting, payroll, and
+billing needs of clients or organizations.
+  Page 3 of 4
+   
+Database administrator: responsible for maintaining and optimizing databases,
+ensuring security, reliability, and accessibility for the appropriate parties.
+IT support specialist: responsible for providing technical support to users,
+troubleshooting software and hardware issues, maintaining computer systems
+and peripherals, and providing guidance and training to ensure effective use of
+technology.
+Software developer, working all around: responsible for designing, developing,
+testing, and maintaining software solutions for a variety of needs in the
+organization, utilizing various programming languages and tools.
+HMBS
+Software Developer
+2018 - December 2020  (2 years)
+Makati, National Capital Region, Philippines
+Responsibilities:
+-Design, develop, test, and maintain software applications using C⚖ or VB and
+MS SQL database
+-Develop software solutions that meet the needs of our organization and
+clients
+-Work closely with the team to ensure software solutions are delivered on time
+and within budget
+-Utilize agile methodologies to develop and deliver software solutions
+-Maintain documentation of software design, development, and testing
+processes
+-Troubleshoot and debug software issues, working with the team to find and
+implement solutions
+-Continuously improve software development processes and methodologies
+Education
+ACLC College
+Bachelor of Science - BS, Information Technology  · (June 2014 - May 2017)
+  Page 4 of 4

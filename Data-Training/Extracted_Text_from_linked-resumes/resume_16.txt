@@ -1,0 +1,13 @@
+Name: James Gagarino
+Age: 19.0
+Gender: Male
+Address: R.T.R Balangbalang purok-1
+### Skills
+- Video Editing
+### Experience
+**Architect** - GMA Network (2 years)
+- Developed electrical circuits and systems
+### Education
+**BSc Business Administration** - University of Asia and the Pacific (2023)
+**BSc Mechanical Engineering** - Adamson University (2023)
+### Certificates

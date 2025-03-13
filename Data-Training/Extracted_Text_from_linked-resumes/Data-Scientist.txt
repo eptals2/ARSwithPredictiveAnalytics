@@ -1,0 +1,236 @@
+   
+Contact
+www.linkedin.com/in/james-earl-
+cubillas  (LinkedIn)
+Top Skills
+Virtual Learning
+Computer Animation
+Lean Six Sigma
+Certifications
+Robotics: Estimation and Learning
+Robotics: Mobility
+Essential Google Cloud
+Infrastructure: Foundation
+Robotics: Computational Motion
+Planning
+Data-Driven Decision Making
+(DDDM)
+Publications
+The application of support vector
+machine (SVM) using cielab color
+model, color intensity and color
+constancy as features for ortho
+image classification of Benthic
+Habitats in Hinatuan, Surigao del
+sur, Philippines
+DESIGN AND DEVELOPMENT OF
+A DECISION SUPPORT SYSTEM
+(DSS) FOR RICE INSECT PEST
+INFESTATION IN BUTUAN CITY,
+PHILIPPINES
+MAPPING OF HIGH VALUE CROPS
+THROUGH AN OBJECT-BASED
+SVM MODEL USING LIDAR DATA
+AND ORTHOPHOTO IN AGUSAN
+DEL NORTE PHILIPPINES.
+DESIGN AND DEVELOPMENT
+OF A STATIONARY PEST
+INFESTATION MONITORING
+DEVICE FOR RICE INSECT PESTS
+USING CONVOLUTIONAL NEURAL
+NETWORK AND RASPBERRY PI
+Coupling LiDAR Data and LANDSAT
+8 OLI in Delineating Corn Plantations
+in Butuan City, PhilippinesJames Earl Cubillas
+Researcher, Data Scientist, Computer Vision Engineer
+Caraga, Philippines
+Summary
+Experienced Researcher with a demonstrated history of working on
+government-sponsored research projects. Skilled in GIS-Remote
+Sensing, Robotics, Python,  Deep Learning, and Data Science.
+Strong engineering professional with a Master of Science - MS
+focused on Information Technology from Caraga State University.
+Experience
+Caraga State University
+1 year 5 months
+Research and Development, and Innovation (RDI) Center Chief
+January 2024 - Present  (1 year)
+Center-Chief, Virtual Learning Research Center (VLRC)
+At VLRC, we aim to bridge the gap between technological advancements and
+pedagogical strategies, ensuring that virtual learning replicates and enhances
+the traditional learning experience. We are committed to developing evidence-
+based practices that cater to diverse learning needs, fostering inclusivity,
+engagement, and accessibility in online education.
+Engagements:
+Chairperson - Pre-University Intervention Program (Manlayag Online Platform)
+of Caraga State University
+Instructor - I
+August 2023 - Present  (1 year 5 months)
+Ampayon, Butuan City
+Instructor - I - Department of Computer Science, College of Computing and
+Information Sciences.
+Project Staff L3 - Mine Geotechnical and Environmental Assessment Robotic
+Systems (MineGEARS)
+Qualfon
+Data Scientist
+  Page 1 of 6
+   
+November 2022 - April 2023  (6 months)
+Cebu, Central Visayas, Philippines
+Caraga State University
+1 year 8 months
+Data Science Researcher and Instructor I
+July 2022 - September 2022  (3 months)
+Philippines
+A faculty member of the Department of Computer Science of the College of
+Computing and Information Sciences (CCIS), Caraga State University.
+Project Staff (Level 3) - Design and Development of Intelligent Traffic Control
+and Management System
+Data Scientist/Robotics Engineer - DOST-GIA: Science Research
+Specialist II 
+June 2022 - July 2022  (2 months)
+Philippines
+Program Title: Accelerated R&D Program for Capacity Building of Research
+and Development Institutions and Industrial Competitiveness: Niche Centers
+in the Regions for R&D (NICER) Program:Sustainable Mineral and Mining
+Operations using Industry 4.0 
+Project: Project 2. Mine Geotechnical and Environmental Assessment Robotic
+System (Mine GEARS)     
+The general objective of this project is to develop a Mine Geotechnical and
+Environmental Assessment Robotic System (Mine GEARS) that will serve
+as a cost-effective platform for both the Monitoring Agency (MGB) and
+Mining company in the remote monitoring of geotechnical and environmental
+conditions.
+Specifically, this project will:
+1. Design and develop an Integrated Sensor System that can collect key
+environmental and geotechnical parameters in the mining site.
+2. Design and develop a UGV-UAV system that can carry the Integrated
+Sensor System payload and have autonomous navigation capabilities.
+This project is funded by the Department of Science and Technology in
+partnership with the Caraga State University.
+Responsibilities;
+  Page 2 of 6
+   
+- Computer Vision Specialist: Development of Computer Vision Software for
+the State Estimation of the Robotic System.
+- Develop software for semantic segmentation and other vision-based state
+estimation.
+- Develop the user interface/front-end for real-time visualization and control of
+the rover.
+- Perform and participate in project-related activities.
+Computer Vision Engineer/Data Scientist -  DOST-GIA: Computer
+Programmer II
+February 2021 - May 2022  (1 year 4 months)
+Butuan City
+DOST PCIEERD Artificial Intelligence Program Project: Design and
+Development of Intelligent Traffic Control and Management System.
+Functions and Responsibilities:
+-Develop a compact State Representation for vehicle traffic to be fed as input
+to the Deep Reinforcement Learning Agent (AI Traffic Controller).
+-Design and Develop messaging patterns for each traffic controller.
+-Design and Develop an AI Traffic controller using IoT devices.
+Project SPARTA PH
+Scholar (Data Engineer)
+January 2020 - September 2022  (2 years 9 months)
+Philippines
+Data engineer builds and manages data workflows, pipelines, ETL processes,
+and platforms. Data engineers are mainly responsible for the management
+of the entire data lifecycle: ingestion, processing, surfacing, and storage.
+They leverage their in-depth knowledge of programming, databases, data
+warehousing, ETL, and data architecture and pipelining, to use complex
+tools and techniques to handle data at scale. They also deploy machine
+learning and statistical models in production. This requires data engineers
+to understand analytics and business intelligence, together with various
+frameworks and technologies.
+For this learning pathway, you will be trained across the following
+competencies:
+Data Engineering
+Operational Analytics
+Data Governance
+  Page 3 of 6
+   
+Computing
+Data Visualization
+Data Analytics Methods and Algorithms
+Statistical Techniques
+Research Methods
+Domain Knowledge
+Manage your Associated Property and Map it for Visualization
+(MapX)
+Software Engineer/Data Scientist for Deep Learning Applications  -
+DOST-GIA: Computer Programmer III
+February 2020 - January 2021  (1 year)
+Butuan City, Philippines
+Function and Responsibilities:
+-Design and Develop Computer-Aided Parcellary Profiling.
+-Install, Configure, manage GPU-based Spatial Server.
+-Design and Develop back-end and front-end technology for Mapx Portal.
+-Develop Mapx Web API that will communicate with the android application of
+other systems that support Web API.
+Caraga State University
+Researcher and Instructor I
+January 2019 - December 2019  (1 year)
+Ampayon, Butuan City, Agusan Del Norte
+UNFAO AQUA-R Project
+Software Consultant
+September 2018 - August 2019  (1 year)
+Region XIII - Caraga, Philippines
+Supporting Aquaculture Resources Mapping and Development Planning
+through ICT-based Solutions - TCP/PHI/3602 C2
+Services for the Development of an Integrated Geographic Information System
+(GIS) Mapping -AQUAR. A Project of Food and Agriculture Organization of
+the United Nations (UNFAO) with the partnership with Bureau of Fisheries and
+Aquatic Resources (BFAR), and Caraga State University
+UNFAO EPRiMA Project: Enhanced Production and Risk
+Management in Agriculture
+Software Engineer for GIS Applications
+March 2018 - August 2018  (6 months)
+  Page 4 of 6
+   
+Philippines
+The funded research project entitled Enhanced Production and Risk
+Management in Agriculture Integrated Decision Support System (EPRiMA). A
+Project of Food and Agriculture Organization of the United Nations (UNFAO),
+Department of Agriculture and Caraga State University
+Phil-LiDAR 2.B.14, Caraga State University
+2 years 3 months
+Machine Learning Engineer -  DOST-GIA: Senior Science Research
+Specialist
+January 2016 - March 2017  (1 year 3 months)
+Region XIII - Caraga, Philippines
+Job Description: Machine Learning Engineer, Remote Sensing Specialist
+- Develop procedures using segmentation and supervised classification
+algorithms (SVM) for high-resolution classification of High-value crops on a
+derived LiDAR datasets.  
+Project 2.2.14 LiDAR Data Processing, Modelling, and Validation by HEIs
+for the Detailed Resources Assessment in Mindanao. A funded research
+project of the Department of Science and Technology (DOST-PCIEERD), in
+partnership with  Caraga State University.
+Machine Learning Engineer - DOST-GIA: Research Associate I
+January 2015 - January 2016  (1 year 1 month)
+Job Description: Machine Learning Engineer, Remote Sensing Specialist
+Responsible Mining in Mindanao- ICT Support (ICT4RM)
+Science Research Specialist
+July 2014 - December 2014  (6 months)
+Region XIII - Caraga, Philippines
+http://stprmm.carsu.edu.ph/
+CLAIMS-GIS
+GIS Analyst
+April 2013 - October 2013  (7 months)
+Region XIII - Caraga, Philippines
+http://www.carsu.edu.ph/?q=claims-gis
+Education
+  Page 5 of 6
+   
+Caraga State University
+Master of Science - MS, Information Technology  · (2018 - 2020)
+Coursera  Licenses funded by the DOST-Caraga Scholarship
+Program 
+ · (2020)
+The Johns Hopkins University
+Data Science Specialization on Coursera:  Data Science / Data
+Analytics   · (2018 - 2019)
+Caraga State University
+Bachelor of Science in Electronics and Communications
+Engineering   · (2008 - 2013)
+  Page 6 of 6

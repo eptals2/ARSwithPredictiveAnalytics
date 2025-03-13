@@ -1,0 +1,13 @@
+Name: Maria Solis
+Age: 20.0
+Gender: Female
+Address:  General Santos, Soccsksargen, Philippines
+### Skills
+- Web Developement, Programming, Cloud Computing
+### Experience
+**Lawyer** - Ayala Corporation (3 years)
+- Led fire prevention and rescue operations
+### Education
+**MBA** - De La Salle University (2016)
+**Doctor of Medicine** - Silliman University (2024)
+### Certificates

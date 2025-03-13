@@ -1,0 +1,15 @@
+Name: Jose Abecede
+Age: 33.0
+Gender: Female
+Address: San Vicente Butuan City
+### Skills
+- Microsoft Excel
+### Experience
+**Teacher** - ABS-CBN (7 years)
+- Provided critical medical care
+**Financial Analyst** - Coca-Cola Philippines (8 years)
+- Led project teams and ensured timely delivery
+### Education
+**BSc Hospitality Management** - De La Salle University (2009)
+**BSc Communication Arts** - Lyceum of the Philippines University (2023)
+### Certificates

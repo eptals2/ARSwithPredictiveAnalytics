@@ -1,0 +1,15 @@
+Name: Ben Benigno 
+Age: 22.0
+Gender: Male
+Address: Bitan-Agan Butuan City
+### Skills
+- Video Editing 
+### Experience
+**Financial Analyst** - Coca-Cola Philippines (5 years)
+- Conducted mechanical system evaluations
+**Lawyer** - Cebu Pacific (9 years)
+- Provided critical medical care
+### Education
+**BSc Hospitality Management** - University of Santo Tomas (2001)
+**BSc Nursing** - Polytechnic University of the Philippines (2020)
+### Certificates
