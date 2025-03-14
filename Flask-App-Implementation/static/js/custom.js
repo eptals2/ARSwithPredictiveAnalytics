@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
         comparisonCard.classList.add("hidden");
         assessmentCard.classList.add("hidden");
 
-        // Send request to extract information
-        fetch("/extract", {
+        // Send request to extract and analyze information
+        fetch("/extract-and-analyze", {
             method: "POST",
             body: formData,
         })
