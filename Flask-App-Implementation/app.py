@@ -13,16 +13,24 @@ app = Flask(__name__)
 
 # Load pre-trained models and vectorizer
 try:
-    with open("Flask-App-Implementation/models/xgboost_model.pkl", "rb") as f:
-        xgb_model = pickle.load(f)
-    with open("Flask-App-Implementation/models/vectorizer.pkl", "rb") as f:
+    with open("C:/Users/Acer/Desktop/ARSwithPredictiveAnalytics/Flask-App-Implementation/models/vectorizer.pkl", "rb") as f:
         vectorizer = pickle.load(f)
-    with open("Flask-App-Implementation/models/label_encoder.pkl", "rb") as f:
+    with open("C:/Users/Acer/Desktop/ARSwithPredictiveAnalytics/Flask-App-Implementation/models/label_encoder.pkl", "rb") as f:
         label_encoder = pickle.load(f)
     logging.info("Models loaded successfully.")
 except Exception as e:
     logging.error(f"Error loading models: {e}")
     raise e
+
+# Demo model class for simulation
+class DemoXGBoostModel:
+    def predict(self, X):
+        # Simulate predictions for demonstration
+        import numpy as np
+        possible_predictions = [0, 1, 2]  # Assuming we have 3 possible job categories
+        return np.random.choice(possible_predictions, size=X.shape[0])
+
+xgb_model = DemoXGBoostModel()
 
 @app.route("/")
 def index():
@@ -34,7 +42,7 @@ def upload_file():
         return jsonify({"error": "No file uploaded"}), 400
 
     resume_file = request.files["resume"]  # This is a `FileStorage` object
-    extracted_text = extract_text(resume_file)  # ✅ Use imported function
+    extracted_text = extract_text(resume_file)  # Use imported function
 
     return jsonify({"text": extracted_text})
 
@@ -70,8 +78,9 @@ def rank_resumes():
         job_cleaned = preprocess_text(job_text)
         resume_cleaned_texts = [preprocess_text(resume) for resume in resume_texts]
 
-        # Convert to TF-IDF vectors
+        # Fit the vectorizer with the job and resumes
         all_texts = [job_cleaned] + resume_cleaned_texts
+        vectorizer.fit(all_texts)  # Fit the vectorizer
         tfidf_matrix = vectorizer.transform(all_texts)
         job_vector = tfidf_matrix[0]
         resume_vectors = tfidf_matrix[1:]
