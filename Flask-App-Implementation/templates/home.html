@@ -329,7 +329,7 @@
                 console.log("Entity analysis in updateAnalysisDisplay:", ranking.entity_analysis);
 
                 const analysisHtml = `
-                    <div class="container border border-0" style="overflow: auto; max-height: 500px; min-height: 500px;">
+                    <div class="container border border-0" style="overflow-x: hidden; max-height: 450px; min-height: 450px;">
                         <div class="resume-assessment mb-3">
                             <div class="analysis-section">
                                 <div class="score-item">
@@ -341,7 +341,7 @@
                                     <span class="score-value">${ranking.overall_score}%</span>
                                 </div>
                                 <div class="score-breakdown mt-3">
-                                    <h6>Matching Entities:</h6>
+                                    <h6>Matching Status:</h6>
                                     <div class="score-breakdown-items">
                                         <div class="score-item">
                                             <span class="score-label">Skills:</span>
