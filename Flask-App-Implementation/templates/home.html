@@ -18,11 +18,11 @@
 <body class="bg-light">
     <div class="container-fluid py-2">
 
-        <div class="header text-center shadow-lg bg-primary text-white">
+        <!-- <div class="header text-center shadow-lg bg-primary text-white">
             <h6 class="display-6 p-2 fw-bold">
                 Automated Resume Screening with Predictive Analytics for <br> Candidate Suitability Assessment
             </h6>
-        </div>
+        </div> -->
         <div class="row">
             <!-- Left Section - Upload and Requirements -->
             <div class="col-md-3 ps-md-1">
@@ -44,16 +44,17 @@
                             No. of Resumes uploaded:
                         </div>
                         <div class="resume-list p-2" id="uploadedResumes" style="
-                                    min-height: 60px;
+                                    height: 40px;
+                                    max-height: 50px;
                                     border: 2px dashed#f7e8d2c8;
                                 ">
                             <span class="text-muted text-center" id="uploadedResumesPlaceholder">
                                 Uploaded resumes will appear here...
                             </span>
                         </div>
-
+                        <hr>
                         <!-- Job Requirements Section -->
-                        <h5 class="card-title mb-2 mt-2">
+                        <h5 class="card-title mb-2">
                             <i class="fas fa-briefcase me-1"></i>
                             Upload Job Requirement
                         </h5>
@@ -68,7 +69,8 @@
                             <input type="file" id="jobInput" accept=".pdf,.doc,.docx" class="d-none" />
                         </div>
                         <div class="resume-list p-2" id="uploadedJobFile" style="
-                                    min-height: 65px;
+                                    height: 50px;
+                                    max-height: 50px;
                                     border: 2px dashed#f7e8d2c8;
                                 ">
                             <span id="uploadedJobPlaceholder" class="text-muted text-center">
@@ -88,7 +90,7 @@
 
             <!-- Middle Section - Ranking Results -->
             <div class="col-md-4 ps-md-1">
-                <div class="card shadow-lg" style="min-height: 580px">
+                <div class="card shadow-lg" style="min-height: 500px">
                     <div class="card-body">
                         <h4 class="card-title mb-4">
                             <i class="fas fa-rectangle-list me-2"></i>
@@ -128,7 +130,7 @@
 
             <!-- Right Section - Analysis Results -->
             <div class="col-md-5 ps-md-1">
-                <div class="card shadow-lg" style="min-height: 580px">
+                <div class="card shadow-lg" style="min-height: 500px">
                     <div class="card-body">
                         <h4 class="card-title mb-4">
                             <i class="fas fa-chart-bar me-2"></i>
@@ -218,7 +220,7 @@
 
                             // Format the output according to the new display format
                             let analysisHtml = `
-                            <div class="container border border-0" style="overflow: auto; max-height: 500px; min-height: 500px;">
+                            <div class="container border border-0" style="overflow-x: hidden; max-height: 450px; ">
                                 <div class="resume-assessment mb-3">
                                     <div class="analysis-section">
                                         <div class="analysis-item">
@@ -327,20 +329,37 @@
                         <div class="resume-assessment mb-3">
                             <div class="analysis-section">
                                 <div class="score-item">
-                                    <span class="score-label">Overall Score:</span>
+                                    <span class="score-label">Suitability Status:</span>
+                                    <span class="score-value">${ranking.suitability_status}</span>
+                                </div>
+                                <div class="score-item mt-2">
+                                    <span class="score-label">Suitability Percentage:</span>
                                     <span class="score-value">${ranking.overall_score}%</span>
                                 </div>
-                                <div class="score-item">
-                                    <span class="score-label">XGBoost Score:</span>
-                                    <span class="score-value">${ranking.xgboost_score}%</span>
-                                </div>
-                                <div class="score-item">
-                                    <span class="score-label">Jaccard Score:</span>
-                                    <span class="score-value">${ranking.jaccard_score}%</span>
+                                <div class="score-breakdown mt-3">
+                                    <!--h6>Breakdown:</h6-->
+                                    <div class="score-breakdown-items">
+                                        <div class="score-item">
+                                            <span class="score-label">Skills:</span>
+                                            <span class="score-value">${ranking.score_breakdown.skills}%</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span class="score-label">Experience:</span>
+                                            <span class="score-value">${ranking.score_breakdown.experience}%</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span class="score-label">Education:</span>
+                                            <span class="score-value">${ranking.score_breakdown.education}%</span>
+                                        </div>
+                                        <div class="score-item">
+                                            <span class="score-label">Certification:</span>
+                                            <span class="score-value">${ranking.score_breakdown.certification}%</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="suitability-status mt-4">
                                     <h5>Recommendation</h5>
-                                    <p>Candidate is ${ranking.suitability_status} for the ${document.getElementById('jobInput').files[0].name.replace(/\.[^/.]+$/, '')}</p>
+                                    <p>Candidate is <strong>${ranking.suitability_status}</strong> for the ${document.getElementById('jobInput').files[0].name.replace(/\.[^/.]+$/, '')}</p>
                                 </div>
                                 ${ranking.recommendation ? `
                                 <div class="recommendations mt-4">
@@ -362,27 +381,25 @@
                             </div>
                             <div class="entity-details mt-4">
                                 <h5>Entity Analysis</h5>
-                                ${Object.entries(ranking.entity_analysis).map(([type, data]) => `
+                                ${Object.entries(ranking.entity_analysis || {}).map(([type, data]) => `
                                     <div class="entity-section mt-3">
-                                        <h6>${type}</h6>
+                                        <h6>${type} <span class="entity-score">(Match: ${data.matching_score ? data.matching_score.toFixed(1) : '0'}%)</span></h6>
                                         <div class="entity-item">
                                             <div class="entity-label">Required:</div>
-                                            <div class="entity-value">${data.requirements.length ? data.requirements.join(', ') : 'Not specified'}</div>
+                                            <div class="entity-value">${Array.isArray(data.requirements) && data.requirements.length ? data.requirements.join(', ') : 'Not specified'}</div>
                                         </div>
                                         <div class="entity-item">
                                             <div class="entity-label">Found:</div>
-                                            <div class="entity-value">${data.candidate.length ? data.candidate.join(', ') : 'Not found'}</div>
+                                            <div class="entity-value">${Array.isArray(data.candidate) && data.candidate.length ? data.candidate.join(', ') : 'Not found'}</div>
                                         </div>
-                                        ${data.matching ? `
                                         <div class="entity-item">
                                             <div class="entity-label">Matching:</div>
-                                            <div class="entity-value matched">${data.matching.length ? data.matching.join(', ') : 'None'}</div>
+                                            <div class="entity-value matched">${Array.isArray(data.matching) && data.matching.length ? data.matching.join(', ') : 'None'}</div>
                                         </div>
                                         <div class="entity-item">
                                             <div class="entity-label">Missing:</div>
-                                            <div class="entity-value missing">${data.missing.length ? data.missing.join(', ') : 'None'}</div>
+                                            <div class="entity-value missing">${Array.isArray(data.missing) && data.missing.length ? data.missing.join(', ') : 'None'}</div>
                                         </div>
-                                        ` : ''}
                                     </div>
                                 `).join('')}
                             </div>
@@ -394,12 +411,6 @@
                 analysisResultsDiv.setAttribute('role', 'region');
                 analysisResultsDiv.setAttribute('aria-label', 'Analysis Results');
             }
-
-            // resume elements
-            const resumeDropZone = document.getElementById("resumeUpload");
-            // job elements
-            const jobDropZone = document.getElementById("jobRequirementUpload");
-            //ranking button
 
             function handleFileUpload(
                 inputElement,
@@ -495,10 +506,12 @@
             });
 
             // Job requirements upload handlers
+            const jobDropZone = document.getElementById("jobRequirementUpload");
             jobDropZone.addEventListener("drop", handleJobDrop, false);
             jobDropZone.addEventListener("click", () => jobInput.click());
             jobInput.addEventListener("change", handleJobFiles);
 
+            const resumeDropZone = document.getElementById("resumeUpload");
             function handleResumeDrop(e) {
                 const dt = e.dataTransfer;
                 const files = dt.files;
@@ -530,9 +543,9 @@
                                                 <i class="fas fa-file-pdf me-2"></i>
                                                 ${file.name}
                                             </div>
-                                            <button class="btn btn-sm btn-outline-danger" onclick="this.parentElement.remove()">
-                                                <i class="fas fa-times"></i>
-                                            </button>
+                                            // <button class="btn btn-sm btn-outline-danger" onclick="this.parentElement.remove()">
+                                            //     <i class="fas fa-times"></i>
+                                            // </button>
                                         `;
                     uploadedResumes.appendChild(div);
                     uploadedResumeCount.innerHTML = `No. of Uploaded resumes: ${uploadedResumes.children.length}`;
@@ -553,9 +566,9 @@
                                         <i class="fas fa-file-pdf me-2"></i>
                                         ${file.name}
                                     </div>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="this.parentElement.remove()">
+                                    <!--button class="btn btn-sm btn-outline-danger" onclick="this.parentElement.remove()">
                                         <i class="fas fa-times"></i>
-                                    </button>
+                                    </!--button>
                                 `;
                     uploadedJobFile.appendChild(div);
                 }
@@ -604,7 +617,7 @@
                             let rankingResultsContainer = document.getElementById("rankingResultsDiv");
 
                             rankingResultsContainer.innerHTML = `
-                                <div class="container border border-0" style="overflow: auto; max-height: 500px; min-height: 500px;">
+                                <div class="container border border-0" style="overflow: auto; max-height: 450px;">
                                     ${rankings.length > 0
                                     ? rankings
                                         .map(
