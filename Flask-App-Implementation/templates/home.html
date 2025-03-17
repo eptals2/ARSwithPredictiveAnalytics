@@ -327,7 +327,7 @@
                 // Debug entity analysis
                 console.log("Updating analysis display with:", ranking);
                 console.log("Entity analysis in updateAnalysisDisplay:", ranking.entity_analysis);
-                
+
                 const analysisHtml = `
                     <div class="container border border-0" style="overflow: auto; max-height: 500px; min-height: 500px;">
                         <div class="resume-assessment mb-3">
@@ -361,12 +361,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="suitability-status mt-4">
-                                    <h5>Recommendation</h5>
-                                    ${ranking.suitability_status === "Not Suitable" ? 
-                                    `<p>Candidate is <strong>Not Suitable</strong> for the ${document.getElementById('jobInput').files[0].name.replace(/\.[^/.]+$/, '')}, suggested suitable job ${ranking.recommendation && ranking.recommendation.suggested_roles && ranking.recommendation.suggested_roles.length > 0 ? ranking.recommendation.suggested_roles[0].title : (ranking.predicted_role || 'NONE')}</p>` : 
-                                    `<p>Candidate is <strong>${ranking.suitability_status}</strong> for the ${document.getElementById('jobInput').files[0].name.replace(/\.[^/.]+$/, '')}</p>`}
-                                </div>
+                                
                                 ${ranking.recommendation ? `
                                 <div class="recommendations mt-4">
                                     <h5>Alternative Role Recommendations</h5>
