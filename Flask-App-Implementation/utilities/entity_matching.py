@@ -125,11 +125,12 @@ class EntityMatcher:
                     entity_analysis[entity_type]['matching'] = list(matches)
                     entity_analysis[entity_type]['missing'] = list(missing)
                     
-                    # Calculate Jaccard similarity
-                    if job_entities[entity_type]:
-                        score = len(matches) / len(set(job_entities[entity_type]))
+                    # Calculate Jaccard similarity (intersection over union)
+                    union = set(job_entities[entity_type]) | set(resume_entities[entity_type])
+                    if union:
+                        score = len(matches) / len(union)
                     else:
-                        score = 1.0 if resume_entities[entity_type] else 0.0
+                        score = 0.0
                         
                     entity_analysis[entity_type]['matching_score'] = score * 100  # Convert to percentage
                     similarity_scores[entity_type.lower()] = score
@@ -163,11 +164,15 @@ class EntityMatcher:
                 'certification': round(similarity_scores['certification'] * 100, 1)
             }
             
+            # Get XGBoost prediction
+            xgboost_result = self.predict_role_with_xgboost(entity_analysis, similarity_scores)
+            
             return {
                 'entity_analysis': entity_analysis,
                 'overall_match': overall_match,
                 'score_breakdown': score_breakdown,
-                'suitability_status': suitability_status
+                'suitability_status': suitability_status,
+                'role_confidence': xgboost_result.get('confidence', 0.0)  # Add XGBoost confidence score
             }
             
         except Exception as e:

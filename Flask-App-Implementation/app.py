@@ -121,6 +121,8 @@ def rank_resumes():
             rankings.append({
                 'resume_filename': resume_files[i].filename,
                 'overall_score': results['overall_match'],
+                'xgboost_score': results.get('role_confidence', 0.0),  # Default to 0 if not present
+                'jaccard_score': results.get('entity_analysis', {}).get('SKILLS', {}).get('matching_score', 0.0),  # Default to 0 if not present
                 'score_breakdown': results.get('score_breakdown', {
                     'skills': 0.0,
                     'experience': 0.0,

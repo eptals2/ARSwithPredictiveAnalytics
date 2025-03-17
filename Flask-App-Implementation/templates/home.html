@@ -18,7 +18,7 @@
 <body class="bg-light">
     <div class="container-fluid py-2">
 
-        <div class="header text-center shadow-sm bg-primary text-white">
+        <div class="header text-center shadow-lg bg-primary text-white">
             <h6 class="display-6 p-2 fw-bold">
                 Automated Resume Screening with Predictive Analytics for <br> Candidate Suitability Assessment
             </h6>
@@ -26,7 +26,7 @@
         <div class="row">
             <!-- Left Section - Upload and Requirements -->
             <div class="col-md-3 ps-md-1">
-                <div class="card shadow-sm ">
+                <div class="card shadow-lg ">
                     <div class="card-body">
                         <h5 class="card-title mb-2">
                             <i class="fas fa-file-alt me-2"></i>
@@ -88,7 +88,7 @@
 
             <!-- Middle Section - Ranking Results -->
             <div class="col-md-4 ps-md-1">
-                <div class="card shadow-sm" style="min-height: 580px">
+                <div class="card shadow-lg" style="min-height: 580px">
                     <div class="card-body">
                         <h4 class="card-title mb-4">
                             <i class="fas fa-rectangle-list me-2"></i>
@@ -128,7 +128,7 @@
 
             <!-- Right Section - Analysis Results -->
             <div class="col-md-5 ps-md-1">
-                <div class="card shadow-sm" style="min-height: 580px">
+                <div class="card shadow-lg" style="min-height: 580px">
                     <div class="card-body">
                         <h4 class="card-title mb-4">
                             <i class="fas fa-chart-bar me-2"></i>
@@ -326,28 +326,18 @@
                     <div class="container border border-0" style="overflow: auto; max-height: 500px; min-height: 500px;">
                         <div class="resume-assessment mb-3">
                             <div class="analysis-section">
-                                <div class="analysis-item">
-                                    <div class="analysis-label">Overall Score</div>
-                                    <div class="analysis-value">${ranking.overall_score}%</div>
+                                <div class="score-item">
+                                    <span class="score-label">Overall Score:</span>
+                                    <span class="score-value">${ranking.overall_score}%</span>
                                 </div>
-                                ${ranking.score_breakdown ? `
-                                <div class="analysis-item">
-                                    <div class="analysis-label">Skills Match</div>
-                                    <div class="analysis-value">${ranking.score_breakdown.skills}%</div>
+                                <div class="score-item">
+                                    <span class="score-label">XGBoost Score:</span>
+                                    <span class="score-value">${ranking.xgboost_score}%</span>
                                 </div>
-                                <div class="analysis-item">
-                                    <div class="analysis-label">Experience Match</div>
-                                    <div class="analysis-value">${ranking.score_breakdown.experience}%</div>
+                                <div class="score-item">
+                                    <span class="score-label">Jaccard Score:</span>
+                                    <span class="score-value">${ranking.jaccard_score}%</span>
                                 </div>
-                                <div class="analysis-item">
-                                    <div class="analysis-label">Education Match</div>
-                                    <div class="analysis-value">${ranking.score_breakdown.education}%</div>
-                                </div>
-                                <div class="analysis-item">
-                                    <div class="analysis-label">Certification Match</div>
-                                    <div class="analysis-value">${ranking.score_breakdown.certification}%</div>
-                                </div>
-                                ` : ''}
                                 <div class="suitability-status mt-4">
                                     <h5>Recommendation</h5>
                                     <p>Candidate is ${ranking.suitability_status} for the ${document.getElementById('jobInput').files[0].name.replace(/\.[^/.]+$/, '')}</p>
@@ -623,51 +613,6 @@
                                                         <div class="d-flex justify-content-between align-items-center mb-2">
                                                             <h6 class="mb-0">${ranking.resume_filename}</h6>
                                                             <span class="badge bg-primary">Rank #${index + 1}</span>
-                                                        </div>
-                                                        <div class="scores">
-                                                            <div class="score-item">
-                                                                <span class="score-label">Overall Score:</span>
-                                                                <span class="score-value">${ranking.overall_score}%</span>
-                                                            </div>
-                                                            ${ranking.score_breakdown ? `
-                                                            <div class="score-item">
-                                                                <span class="score-label">Skills Match:</span>
-                                                                <span class="score-value">${ranking.score_breakdown.skills}%</span>
-                                                            </div>
-                                                            <div class="score-item">
-                                                                <span class="score-label">Experience Match:</span>
-                                                                <span class="score-value">${ranking.score_breakdown.experience}%</span>
-                                                            </div>
-                                                            <div class="score-item">
-                                                                <span class="score-label">Education Match:</span>
-                                                                <span class="score-value">${ranking.score_breakdown.education}%</span>
-                                                            </div>
-                                                            <div class="score-item">
-                                                                <span class="score-label">Certification Match:</span>
-                                                                <span class="score-value">${ranking.score_breakdown.certification}%</span>
-                                                            </div>
-                                                            ` : ''}
-                                                            <div class="suitability-status mt-4">
-                                                                <h5>Recommendation</h5>
-                                                                <p>Candidate is ${ranking.suitability_status} for the ${document.getElementById('jobInput').files[0].name.replace(/\.[^/.]+$/, '')}</p>
-                                                            </div>
-                                                            ${ranking.recommendation ? `
-                                                            <div class="recommendations mt-4">
-                                                                <h5>Alternative Role Recommendations</h5>
-                                                                <div class="recommendation-list">
-                                                                    ${ranking.recommendation.suggested_roles.map(role => `
-                                                                        <div class="recommendation-item">
-                                                                            <div class="role-title">${role.title}</div>
-                                                                            <div class="match-score">Match Score: ${role.match_score}%</div>
-                                                                            <div class="required-skills">
-                                                                                <span class="skills-label">Required Skills:</span>
-                                                                                <span class="skills-list">${role.required_skills.join(', ')}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    `).join('')}
-                                                                </div>
-                                                            </div>
-                                                            ` : ''}
                                                         </div>
                                                     </div>`
                                         )
