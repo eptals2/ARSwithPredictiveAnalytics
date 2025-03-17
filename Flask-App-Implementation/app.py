@@ -201,6 +201,9 @@ def rank_resumes():
                     'suitability_status': suitability_status,
                     'entity_analysis': entity_analysis
                 })
+                
+                # Debug log entity analysis
+                logging.info(f"Entity analysis for {resume_files[i].filename}: {entity_analysis}")
             except Exception as e:
                 logging.error(f"Error processing resume {resume_files[i].filename}: {str(e)}")
                 continue
