@@ -1,0 +1,58 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="static/css/bootstrap-5.3.1.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="container-fluid d-flex justify-content-center align-items-center p-3">
+                <h2 class="text-center">
+                    Automated Resume Screening with Predictive Analytics
+                    <br>
+                    for
+                    <br>
+                    Candidate Suitability Assessment
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container-fluid d-flex justify-content-center align-items-center">
+                <div class="card shadow p-1 border border-rounded-5">
+                    <div class="card-header d-flex justify-content-center align-items-center">HR Staff Sign-in</div>
+                    <div class="card-body">
+                        <form action="{{ url_for('login_page') }}" method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username"
+                                    placeholder="Username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="******">
+                            </div>
+                            <div style="font-size: small;">
+                                {%if error%}
+                                <div class="alert alert-danger ">
+                                    {{ error }}
+                                </div>
+                                {%endif%}
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

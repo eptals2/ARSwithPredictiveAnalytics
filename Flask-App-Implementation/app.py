@@ -1,21 +1,26 @@
 import pickle
 import logging
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 from sklearn.metrics.pairwise import cosine_similarity
 from utilities.pre_processing import preprocess_text
 from utilities.jaccard_similarity_scoring import jaccard_similarity
 from utilities.text_extraction import extract_text
+from utilities.token_generator import generate_secret_key
+from utilities.entity_matching import EntityMatcher
+import os
+from werkzeug.utils import secure_filename
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = generate_secret_key()
 
 # Load pre-trained models and vectorizer
 try:
-    with open("C:/Users/Acer/Desktop/ARSwithPredictiveAnalytics/Flask-App-Implementation/models/vectorizer.pkl", "rb") as f:
+    with open("models/XGBoost-trained-model/vectorizer.pkl", "rb") as f:
         vectorizer = pickle.load(f)
-    with open("C:/Users/Acer/Desktop/ARSwithPredictiveAnalytics/Flask-App-Implementation/models/label_encoder.pkl", "rb") as f:
+    with open("models/XGBoost-trained-model/label_encoder.pkl", "rb") as f:
         label_encoder = pickle.load(f)
     logging.info("Models loaded successfully.")
 except Exception as e:
@@ -32,9 +37,43 @@ class DemoXGBoostModel:
 
 xgb_model = DemoXGBoostModel()
 
-@app.route("/")
+# Initialize EntityMatcher with the model path
+MODEL_PATH = "models/RoBERTa-fine-tuned-model"
+try:
+    entity_matcher = EntityMatcher(MODEL_PATH)
+    logging.info("EntityMatcher initialized successfully.")
+except Exception as e:
+    logging.error(f"Error initializing EntityMatcher: {e}")
+    raise e
+
+# Define the upload folder
+UPLOAD_FOLDER = 'uploads'
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Function to assess c
+@app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template('login_page.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login_page():
+    try:
+        if request.method == 'POST':
+            username = request.form['username']
+            password = request.form['password']
+            if username == 'admin' and password == 'admin':
+                session['username'] = username
+                return redirect(url_for('home'))
+            return render_template('login_page.html', error='Invalid username or password')
+    except Exception as e:
+        return str(e)
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
 
 @app.route("/upload", methods=["POST"])
 def upload_file():
@@ -47,10 +86,10 @@ def upload_file():
     return jsonify({"text": extracted_text})
 
 
-@app.route("/tfidf-with-jaccard-ranking", methods=["POST"])
+@app.route("/rank-resumes", methods=["POST"])
 def rank_resumes():
     try:
-        logging.info("Received request for TF-IDF + Jaccard ranking.")
+        logging.info("Received request for resume ranking with combined scoring.")
 
         if "job_requirement" not in request.files or "resumes" not in request.files:
             logging.warning("Missing job description or resumes in request.")
@@ -59,52 +98,45 @@ def rank_resumes():
         job_file = request.files["job_requirement"]
         resume_files = request.files.getlist("resumes")
 
-        if job_file.filename == "":
-            logging.warning("Job description file is empty.")
-            return jsonify({"success": False, "message": "Job description file is empty"}), 400
+        if job_file.filename == "" or not resume_files:
+            logging.warning("Empty job description or no resumes provided.")
+            return jsonify({"success": False, "message": "Missing files"}), 400
 
-        if not resume_files:
-            logging.warning("No resumes uploaded.")
-            return jsonify({"success": False, "message": "No resumes provided"}), 400
-
-        # Extract text
+        # Extract text from files
         job_text = extract_text(job_file)
         resume_texts = [extract_text(resume) for resume in resume_files]
 
-        logging.debug(f"Extracted job text: {job_text[:500]}")
-        logging.debug(f"Extracted {len(resume_texts)} resumes.")
+        # Initialize EntityMatcher with model paths
+        MODEL_PATH = "models/RoBERTa-fine-tuned-model"
+        XGBOOST_PATH = "models/XGBoost-trained-model/xgboost_model.pkl"
+        matcher = EntityMatcher(MODEL_PATH, xgboost_model_path=XGBOOST_PATH)
 
-        # Preprocess text
-        job_cleaned = preprocess_text(job_text)
-        resume_cleaned_texts = [preprocess_text(resume) for resume in resume_texts]
+        # Process each resume
+        rankings = []
+        for i, resume_text in enumerate(resume_texts):
+            # Get RoBERTa entity analysis and role prediction
+            results = matcher.analyze_resume(resume_text, job_text)
+            
+            # Add to rankings
+            rankings.append({
+                'resume_filename': resume_files[i].filename,
+                'overall_score': results['overall_match'],
+                'score_breakdown': results.get('score_breakdown', {
+                    'skills': 0.0,
+                    'experience': 0.0,
+                    'education': 0.0,
+                    'certification': 0.0
+                }),
+                'suitability_status': results['suitability_status'],
+                'entity_analysis': results.get('entity_analysis', {})
+            })
 
-        # Fit the vectorizer with the job and resumes
-        all_texts = [job_cleaned] + resume_cleaned_texts
-        vectorizer.fit(all_texts)  # Fit the vectorizer
-        tfidf_matrix = vectorizer.transform(all_texts)
-        job_vector = tfidf_matrix[0]
-        resume_vectors = tfidf_matrix[1:]
-
-        if resume_vectors.shape[0] == 0:
-            logging.warning("No valid resumes to rank.")
-            return jsonify({"success": False, "message": "No valid resumes to rank"}), 400
-
-        # Compute similarities
-        tfidf_similarities = cosine_similarity(job_vector.reshape(1, -1), resume_vectors).flatten()
-        jaccard_similarities = [jaccard_similarity(job_cleaned, resume) for resume in resume_cleaned_texts]
-
-        # Combine scores
-        final_scores = [(0.8 * tfidf_sim) + (0.2 * jaccard_sim) for tfidf_sim, jaccard_sim in zip(tfidf_similarities, jaccard_similarities)]
-
-        # Rank resumes
-        ranked_resumes = sorted(enumerate(final_scores), key=lambda x: x[1], reverse=True)
+        # Sort by overall score
+        rankings.sort(key=lambda x: x['overall_score'], reverse=True)
 
         response = {
             "success": True,
-            "rankings": [
-                {"resume_filename": resume_files[idx].filename, "score": round(score * 100, 2)}
-                for idx, score in ranked_resumes
-            ],
+            "rankings": rankings
         }
 
         logging.info("Ranking completed successfully.")
@@ -114,37 +146,97 @@ def rank_resumes():
         logging.error(f"Error in ranking resumes: {e}")
         return jsonify({"success": False, "message": str(e)}), 500
 
-@app.route("/analyze-suitability", methods=["POST"])
-def analyze_suitability():
+
+@app.route('/match', methods=['POST'])
+def match():
     try:
-        logging.info("Received request for suitability analysis.")
-        data = request.json
+        resume_file = request.files.get('resume')
+        job_file = request.files.get('job_requirements')
 
-        if "filtered_resumes" not in data or "job_requirement" not in data:
-            logging.warning("Missing data in request.")
-            return jsonify({"success": False, "message": "Missing data"}), 400
+        if not resume_file or not job_file:
+            return jsonify({"success": False, "message": "Both resume and job requirements files are required"}), 400
 
-        job_text = data["job_requirement"]
-        resume_texts = data["filtered_resumes"]
+        # Extract text from files
+        resume_text = extract_text(resume_file)
+        job_text = extract_text(job_file)
 
-        all_texts = [job_text] + resume_texts
-        tfidf_matrix = vectorizer.transform(all_texts)
-        resume_vectors = tfidf_matrix[1:]
+        # Initialize EntityMatcher with model path
+        matcher = EntityMatcher('models/RoBERTa-fine-tuned-model')
+        
+        # Get RoBERTa scores and entity analysis
+        results = matcher.analyze_resume(resume_text, job_text)
+        
+        # Get Jaccard similarity scores
+        jaccard_score = matcher.calculate_jaccard_similarity(resume_text, job_text)
+        
+        # Get XGBoost prediction score
+        xgboost_score = matcher.predict_with_xgboost(resume_text)
+        
+        # Calculate overall score
+        overall_score = matcher.calculate_overall_score(
+            roberta_score=results['roberta_score'],
+            jaccard_score=jaccard_score,
+            xgboost_score=xgboost_score,
+            entity_analysis=results['entity_analysis']
+        )
 
-        if resume_vectors.shape[0] == 0:
-            logging.warning("No valid resumes to analyze.")
-            return jsonify({"success": False, "message": "No valid resumes to analyze"}), 400
-
-        predictions = xgb_model.predict(resume_vectors)
-        predicted_labels = label_encoder.inverse_transform(predictions)
-
-        alternative_jobs = {job: round((predicted_labels.tolist().count(job) / len(predicted_labels)) * 100, 2) for job in set(predicted_labels)}
-
-        logging.info("Suitability analysis completed successfully.")
-        return jsonify({"success": True, "alternative_jobs": alternative_jobs})
+        return jsonify({
+            "success": True,
+            "roberta_score": round(results['roberta_score'] * 100, 1),
+            "jaccard_score": round(jaccard_score * 100, 1),
+            "xgboost_score": round(xgboost_score * 100, 1),
+            "overall_match": overall_score,
+            "entity_analysis": results['entity_analysis']
+        })
 
     except Exception as e:
-        logging.error(f"Error in suitability analysis: {e}")
+        logging.error(f"Error in entity matching: {e}")
+        return jsonify({"success": False, "message": str(e)}), 500
+
+@app.route('/analyze', methods=['POST'])
+def analyze():
+    try:
+        resume_file = request.files.get('resume')
+        job_file = request.files.get('job_requirements')
+
+        if not resume_file or not job_file:
+            return jsonify({"success": False, "message": "Both resume and job requirements files are required"}), 400
+
+        # Extract text from files
+        resume_text = extract_text(resume_file)
+        job_text = extract_text(job_file)
+
+        # Analyze using EntityMatcher
+        matcher = EntityMatcher('models/RoBERTa-fine-tuned-model')
+        
+        # Get RoBERTa scores and entity analysis
+        results = matcher.analyze_resume(resume_text, job_text)
+        
+        # Get Jaccard similarity scores
+        jaccard_score = matcher.calculate_jaccard_similarity(resume_text, job_text)
+        
+        # Get XGBoost prediction score
+        xgboost_score = matcher.predict_with_xgboost(resume_text)
+        
+        # Calculate overall score
+        overall_score = matcher.calculate_overall_score(
+            roberta_score=results['roberta_score'],
+            jaccard_score=jaccard_score,
+            xgboost_score=xgboost_score,
+            entity_analysis=results['entity_analysis']
+        )
+
+        return jsonify({
+            'status': 'success',
+            'roberta_score': round(results['roberta_score'] * 100, 1),
+            'jaccard_score': round(jaccard_score * 100, 1),
+            'xgboost_score': round(xgboost_score * 100, 1),
+            'overall_match': overall_score,
+            'entity_analysis': results['entity_analysis']
+        })
+
+    except Exception as e:
+        logging.error(f"Error in entity matching: {e}")
         return jsonify({"success": False, "message": str(e)}), 500
 
 if __name__ == "__main__":
