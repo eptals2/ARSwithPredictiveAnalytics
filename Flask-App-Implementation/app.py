@@ -27,16 +27,6 @@ except Exception as e:
     logging.error(f"Error loading models: {e}")
     raise e
 
-# Demo model class for simulation
-class DemoXGBoostModel:
-    def predict(self, X):
-        # Simulate predictions for demonstration
-        import numpy as np
-        possible_predictions = [0, 1, 2]  # Assuming we have 3 possible job categories
-        return np.random.choice(possible_predictions, size=X.shape[0])
-
-xgb_model = DemoXGBoostModel()
-
 # Initialize EntityMatcher with model paths
 MODEL_PATH = "models/RoBERTa-fine-tuned-model"
 XGBOOST_PATH = "models/XGBoost-trained-model/xgboost_job_matching_multi_class_model.json"
