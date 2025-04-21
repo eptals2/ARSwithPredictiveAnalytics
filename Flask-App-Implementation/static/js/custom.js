@@ -167,10 +167,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const positionText = positions.length > 0 ? `${positions.join(", ")}` : "";
 
         scoreSection.innerHTML = `
-            <p><strong>Suitable Job:</strong> ${positionText}</p>
-            <p><strong>Job Suitability Percentage:</strong> ${assessment.overall_score}%</p>
+            <!--p><strong>Suitable Job:</strong> ${positionText}</p-->
+            <p><strong>Suitability Score:</strong> ${assessment.overall_score}%</p>
             <p><strong>Suitability:</strong> <span class="${assessment.suitability.toLowerCase().replace(" ", "-")}">${assessment.suitability}</span></p>
-            <p><strong>Recommendation:</strong> ${assessment.recommendation}</p>
+            <!--p><strong>Recommendation:</strong> ${assessment.recommendation}</p-->
         `;
         assessmentContainer.appendChild(scoreSection);
 
