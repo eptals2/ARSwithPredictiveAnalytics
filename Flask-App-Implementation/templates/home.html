@@ -329,15 +329,12 @@
                 console.log("Entity analysis in updateAnalysisDisplay:", ranking.entity_analysis);
 
                 const analysisHtml = `
-                    <div class="container border border-0" style="overflow-x: hidden; max-height: 450px; min-height: 450px;">
+                    <div class="container border border-0" style="overflow:auto; max-height: 450px; min-height: 450px;">
                         <div class="resume-assessment mb-3">
                             <div class="analysis-section">
-                                <div class="score-item">
-                                    <span class="score-label">Suitability Status:</span>
-                                    <span class="score-value">${ranking.suitability_status}</span>
-                                </div>
+                                <!-- Suitability status removed as only suitable resumes are ranked -->
                                 <div class="score-item mt-2">
-                                    <span class="score-label">Suitability Percentage:</span>
+                                    <span class="score-label">Overall Match:</span>
                                     <span class="score-value">${ranking.overall_score}%</span>
                                 </div>
                                 <div class="score-breakdown mt-3">
@@ -617,23 +614,36 @@
                             let rankings = data.rankings || [];
                             let rankingResultsContainer = document.getElementById("rankingResultsDiv");
 
-                            rankingResultsContainer.innerHTML = `
-                                <div class="container border border-0" style="overflow: auto; max-height: 450px;">
-                                    ${rankings.length > 0
-                                    ? rankings
+                            if (rankings.length === 0) {
+                                rankingResultsContainer.innerHTML = `
+                                    <div class="alert alert-warning" role="alert">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        No suitable resumes found.
+                                    </div>`;
+                            } else {
+                                rankingResultsContainer.innerHTML = `
+                                    <div class="container border border-0" style="overflow: auto; max-height: 450px;">
+                                        <div class="alert alert-info mb-3">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            ${rankings.length} suitable resumes found.
+                                        </div>
+                                        ${rankings
                                         .map(
                                             (ranking, index) => `
-                                                    <div class="resume-match border border-2 rounded-3 p-3 mb-2">
-                                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                                            <h6 class="mb-0">${ranking.resume_filename}</h6>
-                                                            <span class="badge bg-primary">Rank #${index + 1}</span>
-                                                        </div>
-                                                    </div>`
+                                                        <div class="resume-match border border-2 rounded-3 p-3 mb-2">
+                                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                                <h6 class="mb-0">${ranking.resume_filename}</h6>
+                                                                <!-- Suitability badge removed as only suitable resumes are ranked -->
+                                                            </div>
+                                                            <div class="d-flex justify-content-between">
+                                                                <span class="small text-muted">Rank #${index + 1}</span>
+                                                            </div>
+                                                        </div>`
                                         )
                                         .join("")
-                                    : "<p>No resumes found</p>"
-                                }
-                                </div>`;
+                                    }
+                                    </div>`;
+                            }
 
                             // Add click event listeners to resume matches
                             const resumeMatches = rankingResultsContainer.querySelectorAll('.resume-match');
@@ -677,6 +687,287 @@
                     });
             });
         });
+
+        // Function to get text class based on suitability status
+        function getSuitabilityTextClass(status) {
+            switch (status) {
+                case 'Suitable':
+                    return 'text-success fw-bold';
+                case 'Not Suitable':
+                    return 'text-danger fw-bold';
+                default:
+                    return 'text-secondary fw-bold';
+            }
+        }
+
+        // Function to get badge class based on suitability status
+        function getSuitabilityBadgeClass(status) {
+            switch (status) {
+                case 'Suitable':
+                    return 'bg-success';
+                case 'Not Suitable':
+                    return 'bg-danger';
+                default:
+                    return 'bg-secondary';
+            }
+        }
+        
+        // Function to update the analysis display with entity matching results
+        function updateAnalysisDisplay(ranking) {
+            const analysis = ranking.entity_analysis;
+            if (!analysis) {
+                console.error('No entity analysis data available');
+                return;
+            }
+            
+            // Format the entity analysis for display
+            let analysisHtml = `
+            <div class="container border border-0" style="overflow-y: auto; max-height: 450px;">
+                <div class="card mb-3">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Resume Assessment</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <!-- Suitability status removed as only suitable resumes are ranked -->
+                                <div class="d-flex align-items-center">
+                                    <span class="me-2">Confidence:</span>
+                                    <span class="fw-bold">${ranking.confidence}%</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="me-2">Overall Score:</span>
+                                    <span class="fw-bold">${ranking.overall_score}%</span>
+                                </div>
+                                <div class="d-flex flex-wrap">
+                                    <div class="me-3 mb-1">
+                                        <span class="small text-muted">Age: </span>
+                                        <span class="small fw-bold">${ranking.score_breakdown.age}%</span>
+                                    </div>
+                                    <div class="me-3 mb-1">
+                                        <span class="small text-muted">Gender: </span>
+                                        <span class="small fw-bold">${ranking.score_breakdown.gender}%</span>
+                                    </div>
+                                    <div class="me-3 mb-1">
+                                        <span class="small text-muted">Address: </span>
+                                        <span class="small fw-bold">${ranking.score_breakdown.address}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h6 class="mb-3">Entity Matching Analysis</h6>
+                        
+                        <!-- Personal Information Section -->
+                        <div class="entity-section mb-3">
+                            <h6 class="entity-title">Personal Information</h6>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="entity-label">Age:</div>
+                                    <div class="entity-value">${analysis.AGE && analysis.AGE.candidate.length > 0 ? 
+                                        analysis.AGE.candidate.map(age => 
+                                            `<span class="badge bg-${analysis.AGE.matching.includes(age.toLowerCase()) ? 'success' : 'secondary'} me-1 mb-1">${age}</span>`
+                                        ).join('') : 
+                                        '<span class="text-muted">Not specified</span>'
+                                    }</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="entity-label">Gender:</div>
+                                    <div class="entity-value">${analysis.GENDER && analysis.GENDER.candidate.length > 0 ? 
+                                        analysis.GENDER.candidate.map(gender => 
+                                            `<span class="badge bg-${analysis.GENDER.matching.includes(gender.toLowerCase()) ? 'success' : 'secondary'} me-1 mb-1">${gender}</span>`
+                                        ).join('') : 
+                                        '<span class="text-muted">Not specified</span>'
+                                    }</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="entity-label">Address:</div>
+                                    <div class="entity-value">${analysis.ADDRESS && analysis.ADDRESS.candidate.length > 0 ? 
+                                        analysis.ADDRESS.candidate.map(address => 
+                                            `<span class="badge bg-${analysis.ADDRESS.matching.includes(address.toLowerCase()) ? 'success' : 'secondary'} me-1 mb-1">${address}</span>`
+                                        ).join('') : 
+                                        '<span class="text-muted">Not specified</span>'
+                                    }</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Skills Section -->
+                        <div class="entity-section mb-3">
+                            <h6 class="entity-title">Skills</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="entity-label">Required:</div>
+                                    <div class="entity-value">${analysis.SKILLS.requirements.length > 0 ? 
+                                        analysis.SKILLS.requirements.map(skill => 
+                                            `<span class="badge bg-secondary me-1 mb-1">${skill}</span>`
+                                        ).join('') : 
+                                        '<span class="text-muted">None specified</span>'
+                                    }</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="entity-label">Candidate's:</div>
+                                    <div class="entity-value">${analysis.SKILLS.candidate.length > 0 ? 
+                                        analysis.SKILLS.candidate.map(skill => 
+                                            `<span class="badge ${analysis.SKILLS.matching.map(m => m.toLowerCase()).includes(skill.toLowerCase()) ? 'bg-success' : 'bg-secondary'} me-1 mb-1">${skill}</span>`
+                                        ).join('') : 
+                                        '<span class="text-muted">None specified</span>'
+                                    }</div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <div class="entity-label">Matching Score:</div>
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${analysis.SKILLS.matching_score * 100}%" 
+                                            aria-valuenow="${analysis.SKILLS.matching_score * 100}" aria-valuemin="0" aria-valuemax="100">
+                                            ${Math.round(analysis.SKILLS.matching_score * 100)}%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience Section -->
+                        <div class="entity-section mb-3">
+                            <h6 class="entity-title">Experience</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="entity-label">Required:</div>
+                                    <div class="entity-value">${analysis.EXPERIENCE.requirements.length > 0 ? 
+                                        analysis.EXPERIENCE.requirements.map(exp => 
+                                            `<span class="badge bg-secondary me-1 mb-1">${exp}</span>`
+                                        ).join('') : 
+                                        '<span class="text-muted">None specified</span>'
+                                    }</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="entity-label">Candidate's:</div>
+                                    <div class="entity-value">${analysis.EXPERIENCE.candidate.length > 0 ? 
+                                        analysis.EXPERIENCE.candidate.map(exp => 
+                                            `<span class="badge ${analysis.EXPERIENCE.matching.map(m => m.toLowerCase()).includes(exp.toLowerCase()) ? 'bg-success' : 'bg-secondary'} me-1 mb-1">${exp}</span>`
+                                        ).join('') : 
+                                        '<span class="text-muted">None specified</span>'
+                                    }</div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <div class="entity-label">Matching Score:</div>
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${analysis.EXPERIENCE.matching_score * 100}%" 
+                                            aria-valuenow="${analysis.EXPERIENCE.matching_score * 100}" aria-valuemin="0" aria-valuemax="100">
+                                            ${Math.round(analysis.EXPERIENCE.matching_score * 100)}%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Education Section -->
+                        <div class="entity-section mb-3">
+                            <h6 class="entity-title">Education</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="entity-label">Required:</div>
+                                    <div class="entity-value">${analysis.EDUCATION.requirements.length > 0 ? 
+                                        analysis.EDUCATION.requirements.map(edu => 
+                                            `<span class="badge bg-secondary me-1 mb-1">${edu}</span>`
+                                        ).join('') : 
+                                        '<span class="text-muted">None specified</span>'
+                                    }</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="entity-label">Candidate's:</div>
+                                    <div class="entity-value">${analysis.EDUCATION.candidate.length > 0 ? 
+                                        analysis.EDUCATION.candidate.map(edu => 
+                                            `<span class="badge ${analysis.EDUCATION.matching.map(m => m.toLowerCase()).includes(edu.toLowerCase()) ? 'bg-success' : 'bg-secondary'} me-1 mb-1">${edu}</span>`
+                                        ).join('') : 
+                                        '<span class="text-muted">None specified</span>'
+                                    }</div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <div class="entity-label">Matching Score:</div>
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${analysis.EDUCATION.matching_score * 100}%" 
+                                            aria-valuenow="${analysis.EDUCATION.matching_score * 100}" aria-valuemin="0" aria-valuemax="100">
+                                            ${Math.round(analysis.EDUCATION.matching_score * 100)}%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Certification Section -->
+                        <div class="entity-section mb-3">
+                            <h6 class="entity-title">Certification</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="entity-label">Required:</div>
+                                    <div class="entity-value">${analysis.CERTIFICATION.requirements.length > 0 ? 
+                                        analysis.CERTIFICATION.requirements.map(cert => 
+                                            `<span class="badge bg-secondary me-1 mb-1">${cert}</span>`
+                                        ).join('') : 
+                                        '<span class="text-muted">None specified</span>'
+                                    }</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="entity-label">Candidate's:</div>
+                                    <div class="entity-value">${analysis.CERTIFICATION.candidate.length > 0 ? 
+                                        analysis.CERTIFICATION.candidate.map(cert => 
+                                            `<span class="badge ${analysis.CERTIFICATION.matching.map(m => m.toLowerCase()).includes(cert.toLowerCase()) ? 'bg-success' : 'bg-secondary'} me-1 mb-1">${cert}</span>`
+                                        ).join('') : 
+                                        '<span class="text-muted">None specified</span>'
+                                    }</div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <div class="entity-label">Matching Score:</div>
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${analysis.CERTIFICATION.matching_score * 100}%" 
+                                            aria-valuenow="${analysis.CERTIFICATION.matching_score * 100}" aria-valuemin="0" aria-valuemax="100">
+                                            ${Math.round(analysis.CERTIFICATION.matching_score * 100)}%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Personal Information -->
+                        <div class="entity-section">
+                            <h6 class="entity-title">Personal Information</h6>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="entity-label">Age:</div>
+                                    <div class="entity-value">${analysis.AGE.candidate.length > 0 ? analysis.AGE.candidate[0] : '<span class="text-muted">Not specified</span>'}</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="entity-label">Gender:</div>
+                                    <div class="entity-value">${analysis.GENDER.candidate.length > 0 ? analysis.GENDER.candidate[0] : '<span class="text-muted">Not specified</span>'}</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="entity-label">Address:</div>
+                                    <div class="entity-value">${analysis.ADDRESS.candidate.length > 0 ? analysis.ADDRESS.candidate[0] : '<span class="text-muted">Not specified</span>'}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            
+            // Update the analysis results div with the formatted HTML
+            const analysisResultsDiv = document.getElementById('analysisResultsDiv');
+            if (analysisResultsDiv) {
+                analysisResultsDiv.innerHTML = analysisHtml;
+            } else {
+                console.error('Analysis results div not found');
+            }
+        }
     </script>
 </body>
 
