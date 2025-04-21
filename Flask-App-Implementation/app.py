@@ -18,9 +18,9 @@ app.config['SECRET_KEY'] = generate_secret_key()
 
 # Load pre-trained models and vectorizer
 try:
-    with open("models/XGBoost-trained-model/vectorizer.pkl", "rb") as f:
+    with open("Flask-App-Implementation/models/XGBoost-trained-model/vectorizer.pkl", "rb") as f:
         vectorizer = pickle.load(f)
-    with open("models/XGBoost-trained-model/label_encoder.pkl", "rb") as f:
+    with open("Flask-App-Implementation/models/XGBoost-trained-model/label_encoder.pkl", "rb") as f:
         label_encoder = pickle.load(f)
     logging.info("Models loaded successfully.")
 except Exception as e:
@@ -28,8 +28,8 @@ except Exception as e:
     raise e
 
 # Initialize EntityMatcher with model paths
-MODEL_PATH = "models/RoBERTa-fine-tuned-model"
-XGBOOST_PATH = "models/XGBoost-trained-model/xgboost_job_matching_multi_class_model.json"
+MODEL_PATH = "Flask-App-Implementation/models/RoBERTa-fine-tuned-model/model.safetensors"
+XGBOOST_PATH = "Flask-App-Implementation/models/XGBoost-trained-model/xgboost_job_matching_multi_class_model.json"
 try:
     entity_matcher = EntityMatcher(MODEL_PATH, xgboost_model_path=XGBOOST_PATH)
     logging.info("EntityMatcher initialized successfully.")
