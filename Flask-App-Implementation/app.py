@@ -10,13 +10,13 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 app = Flask(__name__)
 
 # Load trained model and encoders
-with open("Flask-App-Implementation/models/label_encoder.pkl", "rb") as f:
+with open("./models/label_encoder.pkl", "rb") as f:
     label_encoder = pickle.load(f)
 
-with open("Flask-App-Implementation/models/vectorizer.pkl", "rb") as f:
+with open("./models/vectorizer.pkl", "rb") as f:
     vectorizer = pickle.load(f)
 
-with open("Flask-App-Implementation/models/xgboost_model.pkl", "rb") as f:
+with open("./models/xgboost_model.pkl", "rb") as f:
     model = pickle.load(f)
 
 # Allowed file types
