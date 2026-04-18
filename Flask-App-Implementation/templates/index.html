@@ -1,116 +1,466 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Automated Resume Screening with Predictive Analytics</title>
+        <link href="/static/css/bootstrap-5.3.0.css" rel="stylesheet" />
+        <link href="/static/css/font-awesome.css" rel="stylesheet" />
+        <link href="/static/css/custom-style.css" rel="stylesheet" />
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resume Job Matching</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-</head>
+    <body class="bg-light">
+        <div class="container-fluid py-2">
+            <!--h2 class="text-center"><h2-->
 
-<body class="bg-light">
-    <div class="container mt-5 border-3 border-primary">
-        <h2 class="text-center mb-4">📂 Automated Resume Screening With Predictive Analytics for Candidate Suitability
-            Assessment</h2>
+            <div class="row">
+                <!-- Left Section - Upload and Requirements -->
+                <div class="col-md-4 pe-md-2">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title mb-2">
+                                <i class="fas fa-file-alt me-2"></i>
+                                Upload Resumes
+                            </h5>
+                            <div
+                                class="custom-file-upload p-2"
+                                id="resumeUpload"
+                            >
+                                <i
+                                    class="fas fa-cloud-upload-alt fa-2x mb-1"
+                                ></i>
+                                <p class="mb-0">Drag & Drop Resumes Here</p>
+                                <p class="text-muted small">
+                                    or click to browse (.pdf, .doc, .docx)
+                                </p>
+                                <input
+                                    type="file"
+                                    id="resumeInput"
+                                    multiple
+                                    accept=".pdf,.doc,.docx"
+                                    class="d-none"
+                                />
+                            </div>
+                            <div
+                                id="uploadedResumeCount"
+                                class="mb-2 text-muted"
+                            >
+                                No. of Resumes uploaded:
+                            </div>
+                            <div
+                                class="resume-list p-2"
+                                id="uploadedResumes"
+                                style="
+                                    height: 70px;
+                                    border: 2px dashed#f7e8d2c8;
+                                "
+                            >
+                                <span class="text-muted text-center">
+                                    Uploaded resumes will appear here...
+                                </span>
+                            </div>
+                            <!--Extract entity such age, gender, address, skills, experience, 
+                            education level, course, certification on each resume using Roberta NER
+                            Then -->
+                            <div class="mt-2">
+                                <button
+                                    type="button"
+                                    id="entityExtractionPrediction"
+                                    class="btn btn-primary w-100"
+                                >
+                                    <i class="fas fa-star-half-stroke me-2"></i>
+                                    Extract entity to predict suitable job
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- File Upload Form -->
-        <p class="text-left text-muted">Upload your resumes to get job recommendations, skill analysis, and candidate
-            suitability scores.</p>
-        <form id="upload-form" enctype="multipart/form-data" class="mb-4">
-            <div class="mb-3">
-                <input type="file" name="files[]" id="file-input" multiple class="form-control" accept=".pdf,.docx,.txt"
-                    required />
+                <!-- Display Extracted Entities on each uploaded resume then analyze extracted entities 
+                 to predict candidate suitability based  job using XGBoost  -->
+                <div class="col-md-4 ps-md-2 mt-4 mt-md-0">
+                    <div class="card shadow-sm" style="min-height: 580px">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">
+                                <i class="fas fa-chart-bar me-2"></i>
+                                Predicted Suitable Job Role for Resumes
+                            </h4>
+
+                            <div id="analysisProgress" class="d-none">
+                                <div class="progress mb-3">
+                                    <div
+                                        class="progress-bar progress-bar-striped progress-bar-animated"
+                                        role="progressbar"
+                                        style="width: 100%"
+                                    ></div>
+                                </div>
+                                <p class="text-center text-muted">
+                                    Analyzing Suitable Job...
+                                </p>
+                            </div>
+
+                            <div id="analysisResultsDiv" style="height: 450px">
+                                <!-- Results will be populated here -->
+                                <div class="text-center text-muted py-5">
+                                    <i
+                                        class="fas fa-rectangle-list fa-3x mb-3"
+                                    ></i>
+                                    <p>
+                                        Upload resumes for candidate suitability
+                                        assessment
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                id="analysisResults"
+                                style="
+                                    display: none;
+                                    overflow-y: scroll;
+                                    max-height: 450px;
+                                "
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Company Job Description or Preferred Character/Attitude/Soft Skills) to Predict Candidate Suitability in a Company -->
+                <div class="col-md-4 ps-md-2 mt-4 mt-md-0">
+                    <div class="card shadow-sm" style="min-height: 580px">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">
+                                <i class="fas fa-chart-bar me-2"></i>Analysis
+                                Result
+                            </h4>
+                            <p>
+                                Ex. Candidate 1 soft skills: hardworking -
+                                Suitable Ex. Candidate 2 soft skills: flexible -
+                                Suitable
+                            </p>
+
+                            <div id="analysisProgress" class="d-none">
+                                <div class="progress mb-3">
+                                    <div
+                                        class="progress-bar progress-bar-striped progress-bar-animated"
+                                        role="progressbar"
+                                        style="width: 100%"
+                                    ></div>
+                                </div>
+                                <p class="text-center text-muted">
+                                    Analyzing resumes...
+                                </p>
+                            </div>
+
+                            <div id="analysisResults" style="min-height: 450px">
+                                <!-- Results will be populated here -->
+                                <div class="text-center text-muted py-5">
+                                    <i
+                                        class="fas fa-rectangle-list fa-3x mb-3"
+                                    ></i>
+                                    <p>
+                                        Click 'Analyze Top Scoring Resume' to
+                                        see suitable resumes based on the job
+                                        requirement
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                id="analysisResults"
+                                style="
+                                    display: none;
+                                    overflow-y: scroll;
+                                    overflow-x: hidden;
+                                    max-height: 474px;
+                                "
+                            ></div>
+                            <div class="mt-2">
+                                <button
+                                    type="button"
+                                    id="endAnalysisButton"
+                                    class="btn btn-danger w-100"
+                                >
+                                    <i class="fas fa-chart-bar me-2"></i>
+                                    End Analysis
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">
-                Upload & Analyze
-            </button>
-        </form>
+        </div>
 
-        <!-- Results Section -->
-        <div id="results" class="mt-4"></div>
+        <script src="/static/js/jquery-3.6.0.js"></script>
+        <script src="/static/js/bootstrap-5.3.0.bundle.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Handle drag and drop for resumes
+                const resumeDropZone = document.getElementById("resumeUpload");
+                const resumeInput = document.getElementById("resumeInput");
+                const uploadedResumes =
+                    document.getElementById("uploadedResumes");
+                const uploadedResumeCount = document.getElementById(
+                    "uploadedResumeCount"
+                );
 
-    </div>
-    <div class="container mt-4">
-        <p class="text-left text-danger">Warning: This project may lack some features (ex.job match for each resume) due
-            to
-            time constraints. Please bear with us.</p>
-    </div>
+                // Handle drag and drop for job requirements
+                const jobDropZone = document.getElementById(
+                    "jobRequirementUpload"
+                );
+                const jobInput = document.getElementById("jobInput");
+                const uploadedJob = document.getElementById("uploadedJob");
+                const uploadedJobFile =
+                    document.getElementById("uploadedJobFile");
 
-    <script>
-        document
-            .getElementById("upload-form")
-            .addEventListener("submit", async function (event) {
-                event.preventDefault();
+                const scoringButton = document.getElementById("scoringButton");
+                const analyzeButton = document.getElementById("analyzeButton");
+                const endAnalysisButton =
+                    document.getElementById("endAnalysisButton");
 
-                let formData = new FormData();
-                let files = document.getElementById("file-input").files;
-                for (let i = 0; i < files.length; i++) {
-                    formData.append("files[]", files[i]);
-                }
+                // Add drag and drop handlers for both zones
+                [resumeDropZone, jobDropZone].forEach((dropZone) => {
+                    ["dragenter", "dragover", "dragleave", "drop"].forEach(
+                        (eventName) => {
+                            dropZone.addEventListener(
+                                eventName,
+                                preventDefaults,
+                                false
+                            );
+                        }
+                    );
 
-                let resultsDiv = document.getElementById("results");
-                resultsDiv.innerHTML =
-                    "<p class='text-center'>⏳ Processing resumes...</p>";
-
-                try {
-                    let response = await fetch("/upload", {
-                        method: "POST",
-                        body: formData,
+                    ["dragenter", "dragover"].forEach((eventName) => {
+                        dropZone.addEventListener(
+                            eventName,
+                            () => highlight(dropZone),
+                            false
+                        );
                     });
 
-                    if (!response.ok) {
-                        throw new Error(`Server Error: ${response.status}`);
+                    ["dragleave", "drop"].forEach((eventName) => {
+                        dropZone.addEventListener(
+                            eventName,
+                            () => unhighlight(dropZone),
+                            false
+                        );
+                    });
+                });
+
+                function preventDefaults(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+
+                function highlight(element) {
+                    element.classList.add("border-primary");
+                }
+
+                function unhighlight(element) {
+                    element.classList.remove("border-primary");
+                }
+
+                // Resume upload handlers
+                resumeDropZone.addEventListener(
+                    "drop",
+                    handleResumeDrop,
+                    false
+                );
+                resumeDropZone.addEventListener("click", () =>
+                    resumeInput.click()
+                );
+                resumeInput.addEventListener("change", handleResumeFiles);
+
+                // Job requirements upload handlers
+                jobDropZone.addEventListener("drop", handleJobDrop, false);
+                jobDropZone.addEventListener("click", () => jobInput.click());
+                jobInput.addEventListener("change", handleJobFiles);
+
+                function handleResumeDrop(e) {
+                    const dt = e.dataTransfer;
+                    const files = dt.files;
+                    handleResumeFiles({
+                        target: {
+                            files: files,
+                        },
+                    });
+                }
+
+                function handleJobDrop(e) {
+                    const dt = e.dataTransfer;
+                    const files = dt.files;
+                    handleJobFiles({
+                        target: {
+                            files: files,
+                        },
+                    });
+                }
+
+                function handleResumeFiles(e) {
+                    const files = [...e.target.files];
+                    files.forEach((file) => {
+                        const div = document.createElement("div");
+                        div.className =
+                            "resume-item d-flex justify-content-between align-items-center";
+                        div.innerHTML = `
+                                <div>
+                                    <i class="fas fa-file-pdf me-2"></i>
+                                    ${file.name}
+                                </div>
+                                <button class="btn btn-sm btn-outline-danger" onclick="this.parentElement.remove()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            `;
+                        uploadedResumes.appendChild(div);
+                        uploadedResumeCount.innerHTML = `No. of Uploaded resumes: ${uploadedResumes.children.length}`;
+                    });
+                }
+
+                function handleJobFiles(e) {
+                    const files = [...e.target.files];
+                    if (files.length > 0) {
+                        // Only show the last uploaded file
+                        uploadedJob.innerHTML = "";
+                        const file = files[0];
+                        const div = document.createElement("div");
+                        div.className =
+                            "resume-item d-flex justify-content-between align-items-center";
+                        div.innerHTML = `
+                        <div>
+                            <i class="fas fa-file-pdf me-2"></i>
+                            ${file.name}
+                        </div>
+                        <button class="btn btn-sm btn-outline-danger" onclick="this.parentElement.remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                        uploadedJob.appendChild(div);
                     }
+                }
 
-                    let data = await response.json(); // ✅ Ensure JSON is correctly parsed
+                // Handle scoring button click
+                scoringButton.addEventListener("click", function () {
+                    const resumeFiles = Array.from(resumeInput.files);
+                    const jobFile = jobInput.files[0];
 
-                    resultsDiv.innerHTML = ""; // Clear results
-
-                    if (!data.resumes || data.resumes.length === 0) {
-                        resultsDiv.innerHTML =
-                            "<p class='text-danger text-center'>⚠️ No suitable jobs found.</p>";
+                    if (resumeFiles.length === 0) {
+                        alert("Please upload at least one resume");
                         return;
                     }
 
-                    // ✅ Display results properly
-                    data.resumes.forEach((resume) => {
-                        let resultHTML = `
-                                <div class="card shadow-sm mb-3">
-                                    <div class="card-body">
-                                        <h5 class="card-title">📄 ${resume.filename
-                            }</h5>
-                                        <h6>🧠 Top Job Matches:</h6>
-                                        <ul class="list-group mb-3">
-                                            ${resume.top_jobs
-                                .map(
-                                    (job) => `
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    ${job.role}
-                                                    <span class="badge bg-success">${job.score}</span>
-                                                </li>
-                                            `
-                                )
-                                .join("")}
-                                        </ul>
-                                        <h6>🔍 Skills & Experience Analysis:</h6>
-                                        <p><strong>Skills:</strong> ${resume.analysis.skills ||
-                            "Not detected"
-                            }</p>
-                                        <p><strong>Experience:</strong> ${resume.analysis.experience ||
-                            "Not provided"
-                            }</p>
-                                    </div>
-                                </div>
-                            `;
-                        resultsDiv.innerHTML += resultHTML;
+                    if (!jobFile) {
+                        alert("Please upload a job description");
+                        return;
+                    }
+
+                    // Show loading state
+                    scoringButton.disabled = true;
+                    scoringButton.innerHTML =
+                        '<i class="fas fa-spinner fa-spin me-2"></i>Scoring';
+                    $("#scoringResults").hide();
+                    $("#analysisProgress").removeClass("d-none");
+                    $("#analyzeButton").hide();
+                    $("#endAnalysisButton").show();
+                    analyzeButton.disabled = true;
+
+                    const formData = new FormData();
+
+                    // Add resumes
+                    resumeFiles.forEach((file, index) => {
+                        formData.append(`resumes[]`, file);
                     });
-                } catch (error) {
-                    console.error("Error processing resumes:", error); // ✅ Log error in console
-                    resultsDiv.innerHTML = `<p class='text-danger text-center'>❌ ${error.message}</p>`;
-                }
+
+                    // Add job description
+                    formData.append("job_description", jobFile);
+
+                    // Score Resume - send to server
+                    fetch("/score-resume-using-ner", {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            "X-CSRFToken": "{{ csrf_token() }}",
+                        },
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Network response was not ok");
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            if (data.success) {
+                                const results = data.data;
+                                $("#scoringResults").hide();
+                                analyzeButton.disabled = false;
+
+                                const resultsDiv =
+                                    document.getElementById("scoringResults");
+                                $("#analyzeButton").show();
+
+                                resultsDiv.innerHTML = `
+                                    <div class="card shadow-sm mb-3">
+                                        <div class="card-body" style="overflow: auto; max-height: 450px; min-height: 450px;">
+                                            ${results.resumes
+                                                .map(
+                                                    (resume, index) => `
+                                                    <div class="resume-match mb-3">
+                                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                                            <h6 class="mb-0">${
+                                                                resume.filename
+                                                            }</h6>
+                                                            <span class="badge bg-primary">${(
+                                                                resume.similarity *
+                                                                100
+                                                            ).toFixed(
+                                                                2
+                                                            )}%</span>
+                                                        </div>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                style="width: ${(
+                                                                    resume.similarity *
+                                                                    100
+                                                                ).toFixed(2)}%"
+                                                                aria-valuenow="${(
+                                                                    resume.similarity *
+                                                                    100
+                                                                ).toFixed(2)}"
+                                                                aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-2">
+                                                            <strong>Matched Entities:</strong> ${resume.intersecting_entities.join(
+                                                                ", "
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                `
+                                                )
+                                                .join("")}
+                                        </div>
+                                    </div>
+                                `;
+
+                                // Show results section
+                                resultsDiv.style.display = "block";
+                            } else {
+                                throw new Error(
+                                    data.message || "Analysis failed"
+                                );
+                            }
+                        })
+
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            alert("Error analyzing resumes: " + error.message);
+                        })
+                        .finally(() => {
+                            // Reset button state
+                            scoringButton.disabled = true;
+                            scoringButton.innerHTML =
+                                '<i class="fas fa-half-star-stroke me-2"></i>Analyze Resumes';
+                            $("#analysisProgress").addClass("d-none");
+                        });
+                });
             });
-    </script>
-
-</body>
-
+        </script>
+    </body>
 </html>

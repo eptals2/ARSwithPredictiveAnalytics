@@ -1,3 +1,5 @@
+"""Module for job suitability prediction using Flask and machine learning."""
+
 import xgboost as xgb
 import pandas as pd
 import os

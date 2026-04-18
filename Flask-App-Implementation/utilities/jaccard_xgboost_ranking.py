@@ -1,3 +1,5 @@
+"""Module for job suitability prediction using Flask and machine learning."""
+
 def calculate_jaccard_similarity(text1, text2):
     set1 = set(text1.split())  # Convert text1 into a set of words
     set2 = set(text2.split())  # Convert text2 into a set of words

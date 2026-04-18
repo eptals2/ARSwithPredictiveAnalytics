@@ -1,3 +1,5 @@
+"""Module for job suitability prediction using Flask and machine learning."""
+
 import os
 import textract
 import PyPDF2
@@ -5,60 +7,64 @@ import docx
 import pytesseract
 from PIL import Image
 
-# Set Tesseract OCR Path (Windows Only)
+# ✅ Set Tesseract OCR Path (Windows Only) - Ensure it's installed
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-def extract_text_from_docx(file_path):
+def extract_text_from_docx(file):
+    """Extract text from DOCX files."""
     try:
-        doc = docx.Document(file_path)
-        return "\n".join([para.text for para in doc.paragraphs])
+        doc = docx.Document(file)
+        return "\n".join([para.text.strip() for para in doc.paragraphs if para.text.strip()])
     except Exception as e:
-        print(f"Error extracting text from {file_path} using python-docx: {e}")
-        return None
+        print(f"❌ Error extracting text from DOCX: {e}")
+        return ""
 
-def extract_text_from_pdf(file_path):
+def extract_text_from_pdf(file):
+    """Extract text from PDFs using PyPDF2."""
     try:
-        with open(file_path, "rb") as file:
-            reader = PyPDF2.PdfReader(file)
-            text = "\n".join([page.extract_text() for page in reader.pages if page.extract_text()])
-            return text if text else None
+        reader = PyPDF2.PdfReader(file)
+        text = "\n".join([page.extract_text() or "" for page in reader.pages])
+        return text.strip() if text else ""
     except Exception as e:
-        print(f"Error extracting text from {file_path} using PyPDF2: {e}")
-        return None
+        print(f"❌ Error extracting text from PDF: {e}")
+        return ""
 
-def extract_text_from_image(file_path):
+def extract_text_from_image(file):
+    """Extract text from images using Tesseract OCR."""
     try:
-        image = Image.open(file_path)
-        text = pytesseract.image_to_string(image, config='--psm 6')
-        return text.strip() if text else None
+        image = Image.open(file)
+        text = pytesseract.image_to_string(image, config="--psm 3")  # Auto mode
+        return text.strip() if text else ""
     except Exception as e:
-        print(f"Error extracting text from {file_path} using OCR: {e}")
-        return None
+        print(f"❌ Error extracting text from image: {e}")
+        return ""
 
-def extract_text(file_path):
-    """Detect file type and extract text accordingly."""
+def extract_text(file):
+    """Detect file type and extract text accordingly, supporting Flask's FileStorage objects."""
     
-    # ✅ Ensure file_path is a string
-    if not isinstance(file_path, str):
-        print(f"🔥 ERROR: file_path is not a string! Received: {type(file_path)} → {file_path}")
-        return None
-
-    text = None
-    file_path = file_path.lower()  # Normalize case
-
-    if file_path.endswith(".docx"):
-        text = extract_text_from_docx(file_path)
-    elif file_path.endswith(".pdf"):
-        text = extract_text_from_pdf(file_path)
-    elif file_path.endswith((".jpg", ".jpeg", ".png")):
-        text = extract_text_from_image(file_path)
+    if hasattr(file, "filename"):  
+        filename = file.filename
+    else:
+        filename = file  # If it's already a string path
     
+    _, ext = os.path.splitext(filename)  # Get file extension
+    ext = ext.lower()
+
+    text = ""
+
+    if ext == ".docx":
+        text = extract_text_from_docx(file)
+    elif ext == ".pdf":
+        text = extract_text_from_pdf(file)
+    elif ext in (".jpg", ".jpeg", ".png"):
+        text = extract_text_from_image(file)
+
     # 🔄 Fallback to Textract if primary extraction fails
-    if text is None:
+    if not text:
         try:
-            text = textract.process(file_path).decode("utf-8")
+            text = textract.process(file).decode("utf-8").strip()
         except Exception as e:
-            print(f"❌ Error extracting text from {file_path} using textract: {e}")
-            return None
-    
+            print(f"❌ Error extracting text using textract: {e}")
+            return ""
+
     return text

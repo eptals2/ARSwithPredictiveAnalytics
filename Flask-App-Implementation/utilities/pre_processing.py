@@ -1,3 +1,5 @@
+"""Module for job suitability prediction using Flask and machine learning."""
+
 import string
 import nltk
 from nltk.tokenize import word_tokenize
@@ -6,8 +8,8 @@ import inflect
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 
 # Download required NLTK data
-nltk.download("punkt")
-nltk.download("wordnet")
+# nltk.download("punkt")
+# nltk.download("wordnet")
 
 # Initialize lemmatizer & inflect engine for number conversion
 lemmatizer = WordNetLemmatizer()
@@ -26,7 +28,7 @@ def convert_numbers_to_words(text):
     return " ".join(converted_words)
 
 def preprocess_text(text):
-    """Preprocess text: lowercase, remove punctuation, lemmatize, and normalize numbers."""
+    """Preprocess text: lowercase, remove punctuation and stopwords, lemmatize, and normalize numbers."""
     text = text.lower()  # Convert to lowercase
     text = convert_numbers_to_words(text)  # Convert numbers to words
     text = text.translate(str.maketrans("", "", string.punctuation))  # Remove punctuation
