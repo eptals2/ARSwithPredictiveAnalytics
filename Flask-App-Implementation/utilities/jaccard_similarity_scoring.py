@@ -1,3 +1,5 @@
+"""Module for job suitability prediction using Flask and machine learning."""
+
 import os
 from utilities.pre_processing import preprocess_text
 from utilities.text_extraction import extract_text

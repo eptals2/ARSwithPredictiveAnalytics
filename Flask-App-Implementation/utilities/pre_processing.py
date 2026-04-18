@@ -1,3 +1,5 @@
+"""Module for job suitability prediction using Flask and machine learning."""
+
 import string
 import nltk
 from nltk.tokenize import word_tokenize

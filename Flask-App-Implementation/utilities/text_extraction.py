@@ -1,3 +1,5 @@
+"""Module for job suitability prediction using Flask and machine learning."""
+
 import os
 import textract
 import PyPDF2

@@ -9,9 +9,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 app = Flask(__name__)
 
-import os
-print(os.getcwd())
-
 # Load trained model and encoders
 with open("./models/label_encoder.pkl", "rb") as f:
     label_encoder = pickle.load(f)
