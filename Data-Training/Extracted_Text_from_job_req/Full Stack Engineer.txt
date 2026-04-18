@@ -1,0 +1,29 @@
+Full Stack Engineer
+
+Required Skills & Experience
+Full Stack Development: 5+ years of experience in full stack development with a strong focus on backend systems.
+Node.js and Typescript Expertise: Advanced skills in building backend systems using Node.js and Typescript, ideally with ExpressJS.
+React Proficiency: Solid experience in front-end development using React, preferably with Material UI.
+API Development: Proven ability to design and implement RESTful APIs and microservices.
+Serverless Architecture: Experience with serverless technologies, ideally Google Cloud Platform (GCP) or alternatives like AWS Lambda, Azure Functions, etc.
+CI/CD Pipelines: Proficiency in managing CI/CD workflows to streamline deployments.
+NoSQL Databases: Experience with document-based databases like Firestore, MongoDB, or DynamoDB.
+Unit Testing and Automation: Strong experience in unit testing and feature-level automation to ensure reliability.
+Small Team Experience: Ability to work independently and take ownership within small, fast-paced teams.
+Communication Skills: Excellent verbal and written communication, capable of working closely with stakeholders, users, and teammates.
+
+
+Highly Valued Experience
+Hands-on expertise with Google Cloud Platform (GCP) services and tools.
+Experience with cloud infrastructure tools such as Terraform for infrastructure as code.
+Familiarity with object storage (e.g., Google Cloud Storage), task queues/async architecture, and key management/encryption techniques.
+Experience with webhooks, cron jobs, and search engines (e.g., Typesense) to support data-intensive applications.
+Experience designing and implementing scalable multi-tenant architectures.
+Exposure to automated testing and deployment practices in serverless environments.
+Familiarity with additional backend technologies such as task queues for robust feature handling.
+Soft Skills
+Strong analytical and problem-solving skills.
+Attention to detail in system design, data security, and user experience.
+Ability to simplify complex issues and focus on key outcomes, showing pragmatism and efficiency.
+Collaborative mindset to work seamlessly with developers, designers, and stakeholders.
+Comfort with ambiguity, open to feedback, and adaptable to evolving business needs.

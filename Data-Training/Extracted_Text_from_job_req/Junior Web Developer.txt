@@ -1,0 +1,21 @@
+Junior Web Developer (Angular/C#)
+
+Required Skills:
+Proficiency in Angular (TypeScript) and C# (minimum 2 years of experience).
+Solid knowledge of T-SQL for working with views and stored procedures.
+Basic understanding of RESTful APIs, event-driven programming, and responsive design.
+
+
+Preferred Skills:
+
+
+Familiarity with Windows Forms for desktop applications.
+Knowledge of CI/CD practices and Git for version control.
+Exposure to Agile/Scrum methodologies and development workflows.
+Experience with database design and ORM tools (e.g., Entity Framework).
+
+
+Qualifications:
+Bachelor’s degree in Computer Science, Information Technology, or a related field.
+At least 2 years of relevant experience in a similar role.
+Strong problem-solving skills and a willingness to learn and adapt to new technologies.
