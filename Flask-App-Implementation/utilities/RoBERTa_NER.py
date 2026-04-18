@@ -4,10 +4,16 @@ import torch.nn.functional as F
 from transformers import RobertaTokenizer, RobertaForTokenClassification
 
 # Load Fine-tuned RoBERTa Model and Tokenizer
-MODEL_PATH = "Flask-App-Implementation/models/RoBERTa-fine-tuned-model"
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-tokenizer = RobertaTokenizer.from_pretrained(MODEL_PATH)
-model = RobertaForTokenClassification.from_pretrained(MODEL_PATH).to(device)
+# MODEL_PATH = "Flask-App-Implementation/models/RoBERTa-fine-tuned-model"
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# tokenizer = RobertaTokenizer.from_pretrained(MODEL_PATH)
+# model = RobertaForTokenClassification.from_pretrained(MODEL_PATH).to(device)
+
+model = RobertaForTokenClassification.from_pretrained("roberta-base")
+tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
+
+model.save_pretrained("./models/RoBERTa-fine-tuned-model")
+tokenizer.save_pretrained("./models/RoBERTa-fine-tuned-model")
 
 # Declare label names
 label_names = ["O", "B-AGE", "I-AGE", "B-GENDER", "I-GENDER", "B-ADDRESS", "I-ADDRESS", "B-SKILLS", "I-SKILLS", "B-EXPERIENCE", "I-EXPERIENCE", "B-EDUCATION", "I-EDUCATION", "B-CERTIFICATION", "I-CERTIFICATION", "B-Others", "B-Role", "I-Others", "I-Role"]
