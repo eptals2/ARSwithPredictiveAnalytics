@@ -1,0 +1,104 @@
+age,gender,address,skills,education,skills,certificates,course
+25,Male,P1 Ong Yiu Butuan City,Computer Programming,College Graduate,"Work Experience - example format: Driver (3 yrs),  Cashier (3 yrs), Houskeeper (3 yrs)",Web Dev NCIII,Computer Science
+23,Male,Ong Yiu Butuan City,Driving,Senior High School Graduate,Backend Web Developer 3 years,Driving NCI,HUMMS
+31,Female,P3A Baan Km3 Ora New Road,communication,College Graduate,Driving 2 years,NONE,Business Administration
+22,Female,Doongan,Communication ,College Undergraduate,CASHIER 3 years,LTS,Information Technology
+21,Female,P-7 Dumalagan Butuan City ,Graphics Design,College Undergraduate,Virtual Assistant 6 months,"2nd Place in Visual Graphic Technology at Northern Mindanao, Buenavista, Agusan Del Northe",Information Technology
+20,Male,"Purok 8, Brgy.Bitan-agan, Butuan City, Agusan del Norte ",Video Editing ,College Undergraduate,"Encoder, Visual Graphic 6 months",NCI,Information Technology
+26,Female,Bitan Agan Butuan Cirty,Computer Literate,College Graduate,Driver (3 yrs),N/A,Information Technology
+22,Female,"Purok Nangka, Barangay 6, Buenavista, Agusan del Norte ",Computer Literate ,College Graduate,Site Engineer 1 year and 6 months,Certificate of Eligibility ,Elementary Education
+26,Female,Brgy J.P Rizal,Computer Literate,College Undergraduate,Private School Teacher 3 years,none,Information System
+19,Female,P-5 Bitan agan Butuan City,Video editing,College Undergraduate,Costumer Service Officer 1 year,None,Information System
+25,Male,Purok Nangka Barangay 6 Buenavista Agusan del Norte,Computer Literate,College Graduate,none,Web developer ,Information Technology
+21,Female,P-3 Amparo Butuan City,Video editing ,Senior High School Graduate,Human Resource 2 years,None,HUMMS
+22,Male,"P-8 Maug, Butuan City",Video Editing ,College Undergraduate,Cashier 1 year,None,Secondary Education
+19,Female,Butuan city,Communication,College Undergraduate,None,None,Information Technology
+21,Female,P-6 Bitan-agan Butuan City ,"Graphics Design, Communication ",College Undergraduate,None,Web development ,Information Technology
+19,Male,R.T.R Balangbalang purok-1,Video Editing,College Undergraduate,Web Development 1 year,None,Information Technology
+22,Male,Bitan-Agan Butuan City,Video Editing ,College Undergraduate,None,None,Information Technology
+23,Female,P-6 Bitan-agan Butuan City ,Communication ,College Undergraduate,None,Cookery ,Information Technology
+19,Female,"P-5 Bitan-agan, Butuan City",communications,College Undergraduate,Cashier  2 years,none,Information Technology
+20,Male,Purok 4 limaha,Video editing,College Undergraduate,none,None,Information Technology
+16,Female,"Anunas, Angeles City Pampanga ",Communications,Junior High School Graduate,"Janitor, assistant construction worker, housekeeper",None,N/A
+22,Female,"Purok 4 Amparo, Butuan City",Video Editing and Graphics Design ,College Undergraduate,None,None,Information Technology
+21,Male,Ecoland Davao city ,"Video editor, communication ",College Undergraduate,Web Development 3 years,N/A,Information System
+20,Female,"Bitan-agan, Butuan City ",Video editing and communication ,College Undergraduate,"Welder, electrician, plumbing",None,Information System
+22,Female,P9 upper Doongan ,Video editing ,Junior High School Graduate,None,None,N/A
+21,Female,"P-5A Amparo, Butuan City ",Graphics Design,College Undergraduate,"Cashier, Graphic Artist",N/A,Information Technology
+25,Male,"P-5 Ambago, Butuan City",Graphics Design,College Undergraduate,N/A,Cyber Security Sentinel,Information Technology
+25,Female,"P-1, Brgy. 19 Buhangin, Butuan City","Graphics Design, Video Editing, Computer Literate",College Graduate,Painters,Certified Xero Advisor,Business Administration
+26,Female,Km.3 Baan Butuan City ,Communications,Senior High School Graduate,Accounting Clerk,None,ABM
+40,Female,P-4 Ampayon Butuan City,Computer literate,College Graduate,Cashier ,None,Human Resource
+24,Female,Amparo butuan City ,Graphics ,Technical Vocational Graduate,Office staff,None,Visual Graphics Design
+32,Male,Butuan City,"Graphic Design, Photo and Video editing",College Graduate,Merchandiser ,Graphic Artist,Information Technology
+23,Female,Los Angeles Butuan City ,Computer Literate ,College Graduate,Graphic Artist,Agricultural Crops Production NCI,Information Technology
+22,Female,T Calo Muslim appears ,I.T,College Undergraduate,"Cashier, Encoder",Cookery,Information Technology
+31,Female,Buenavista Agusan Del Norte,Computer Literate,College Graduate,"Cashier,Oic, B.A",AMLA training Certificate,Business Administration
+31,Female,Barangay 8 Buenavista Agusan Del Norte ,Video,Elementary Graduate,Bank compliance officer II,NCI,N/A
+31,Female,Barangay 8 Buenavista Agusan Del Norte ,Video,Elementary Graduate,Housekeeper ,NCI,n/a
+38,Female,"P-3B Manapa Buenavista, Agusan del Norte","Communication, computer literate",College Graduate,Housekeeper ,None,Business Administration
+35,Female,Upper macalang buenavista agusan del norte,Communications ,Junior High School Graduate,"Teacher, HR officer, Project coordinator",None,n/a
+38,Female,Brgy. 1 District Adelfa Apagan Nasipit Agusan del Norte,video editing ,College Graduate,none,N/A,Business Administration
+18,Female,"P-3B Manapa, Buenavista Agusan Del Norte ",Volleyball ,Senior High School Graduate,Secretary ,None,STEM
+30,Female,Purok 6 macalang Buenavista Agusan del norte ,None ,Junior High School Graduate,Cashier ,None,N/A
+30,Female,Simbalan Buenavista Agusan del Norte,Housewife,Elementary Graduate,None,None,N/A
+31,Female,"Purok-6 Macalang, Buenavista agusan del Norte ",Cooking ,Junior High School Graduate,Housewife,None,N/A
+36,Female,Purok-3A Manapa Buenavista Agusan del Norte ,None ,College Undergraduate,Field Sales Agent,none,Accounting
+34,Female,Buenavista agusan del norte,computer,Senior High School Graduate,Cashier ,Casher,ABM
+18,Female,P1 Ong Yiu Butuan City,"Microsoft Word, Microsoft Excel, ",High School Graduate (Old Curriculum),Casher,Housekeeping NCII,n/a
+24,Male,"Ong Yiu, Butuan City",Driving,Senior High School Graduate,Cashier (3 years),none,HUMMS
+20,Female,Ong Yiu Butuan CIty,"Microsoft Word, Microsoft Excel, Microsoft Powerpoint, Programming",College Undergraduate,Driver (3 yrs),none,Information Technology
+25,Female,Pianing butuan city,Communications,Senior High School Graduate,none,None,ABM
+51,Female,Ong Yiu,Dressmaking,High School Graduate (Old Curriculum),Cashier 2 yrs,none,n/a
+18,Female, Greater Orlando,Web Developement,2 Year Diploma course,Messenger 1 yr, Lean Six Sigma DMAIC Certification,Information Technology
+18,Male,"Bohol, Central Visayas, Philippines","Analytical Skills, Multi-tasking",College Graduate,Accounting 6 years and 3 months,none,Information Technology
+18,Male," Cebu, Central Visayas, Philippines","Live Production, Social Media",College Graduate,"Data Entry Specialist 3 years 1 month, Sound Board Specialist 7 years 9 months","Introduction to Cybersecurity,  CCNA: Introduction to Networks",Computer Engineering
+20,Female," New Orleans, Louisiana, United States","Python, Network Administration, Wireshark",2 Year Diploma course,"Network Infrastructure Engineer 4 months,  Productions Team 6 months, Productions Team 2 years 5 months",none," Associate's Degree, Software Development"
+19,Male,"Pampanga, Central Luzon, Philippines","Microsoft Excel, Data Entry, Encoding",College Undergraduate,"Postal Worker 8 months, Manager 5 years 11 months",none,Information Technology
+30,Male," Caraga, Philippines",Microsoft Word,Masters Graduate,Data Encoder 1 year 2 months," Data-Driven Decision Making  (DDDM), Robotics: Computational Motion  Planning",Information Technology
+25,Male," Sariaya, Calabarzon, Philippines","Graphics Design, Microsoft Office, Online Marketing",College Undergraduate,"Researcher 1 year, Data Scientist 2 years 9 months, Computer Vision Engineer 1 year 4 months",none,Computer Graphics
+23,Male,"Doha, Qatar","Graphics Design, Marketing Materials",College Graduate,Graphic Designer 13 years 9 months,none,Information Technology
+30,Male,Butuan City Philippines,"Scholarly Research, University Lecturing, Web Design",Masters Graduate,"Internship Trainee 5 months,  Digital Marketing Executive 7 months","Python Project for Data Science,  Foundations of User Experience  (UX) Design",Computer Science
+22,Male," Cebu, Central Visayas, Philippines","ASP.NET, C#, MudBlazor",College Graduate,Instructor 5 years,"Responsive Web Design  Fundamentals, Back End Development and APIs ",Information Technology
+46,Male,"Davao, Davao Region, Philippines","Information Technology  Infrastructure,  Computer Networking, Wireless Networking",Masters Graduate,"Software Developer Intern 4 months, Software Engineer 5 months"," Licensed Professional Teacher, Edmodo Certified Trainer, Edmodo Ambassador, Linux System Administration, Network Security Seminar Part 1, Time & Project Management",Mathematics
+24,Female," Butuan, Caraga, Philippines","Engineering, Microsoft Office",College Undergraduate,"Computer Technician 7 months, Instructor 19 years",none,Aerospace Engineering
+20,Female," General Santos, Soccsksargen, Philippines","Web Developement, Programming, Cloud Computing",College Undergraduate,English Second Language Tutor 6 months, AWS Knowledge: Cloud Essentials,Computer Science
+22,Female,"Cagayan De Oro City, Northern Mindanao, Philippines"," HTML, Cascading Style Sheets (CSS),  Front-End Development",College Undergraduate,"Python 1 year 7 months, AWS Learning Club Co-Lead 7 months",none,Information Technology
+21,Male,"Davao, Davao Region, Philippines","User Experience (UX),  User Interface Design",College Undergraduate,none,none,Information Technology
+21,Male," Cagayan De Oro City, Northern Mindanao, Philippines","Web Developement,  Penetration Testing, C++",College Undergraduate,Technical Support Representative,none,Computer Science
+23,Male," Butuan, Caraga, Philippines","Machine Learning,  Supervised Learning,  PostgreSQL",College Graduate,none," Supervised Machine Learning:  Regression and Classification, Improving Deep Neural Networks:  Hyperparameter Tuning  Regularization and Optimization,  Structuring Machine Learning  Projects  Neural Networks and Deep Learning",Computer Science
+23,Male,"Cagayan De Oro City, Northern Mindanao, Philippines","Web Developement, Programming, Data Entry",College Graduate,none,"Customer Service Foundations,  Customer Service: Problem-Solving  and Troubleshooting, Building Rapport with Customers, Customer Service: Call Control  Strategies,  Customer Service: Handling Abusive  Customers",Information Technology
+23,Female," Davao del Sur, Davao Region, Philippines","Sales, Computer Hardware Troubleshooting,  Business Development Support",College Graduate," Information System Analyst 4 months,  Web Developer 10 months, Quality Assurance Specialist"," CCNA: Introduction to Networks, Computer System Servicing NC II",Information Technology
+23,Male,"Northern Mindanao, Philippines","Video Editing, Photography, Film Production",College Graduate,"Information Technology Desktop Engineer 4 months, Business Development Officer 4 months",3 years 4 months,"BS, Development Communication"
+36,Male,"Butuan, Caraga, Philippines"," 2D Animation, Adobe After Effects,  Adobe Photoshop",Masters Graduate,Media Production Crew,"Microsoft Office Specialist: Word  Associate (Office 2019),  Microsoft Office Specialist: Associate  (Office 2019),  Microsoft Office Specialist: Excel  Associate (Office 2019),  Microsoft Excel (Office 2016),  Microsoft Office Specialist:  PowerPoint Associate (Office 2019)","omputer Graphics and Animation, Digital Arts, Animation,  Production"
+31,Male,"Caraga, Philippines","Microsoft Excel, InkSoft, Gitlab",Masters Graduate,Instructor 10 years 7 months,edX Honor Code Certificate for  Introduction to Computer Science  and Programming Using Python  Microsoft Office Specialist Master  Certification (MOS)  Microsoft Office Specialist: Microsoft  Excel Expert (Excel and Excel 2019)  John Peter Abraham Ruero Best  Paper Award,Computer Science
+22,Male," General Santos, Soccsksargen, Philippines","Data Analysis, Network Security, Database Management System",College Undergraduate,"Python Programmer (4 years), Python Software Developer 2 months, Software Engineer 4 years 6 months, Python Developer 2 years, Faculty Member 9 years 9 months, Python Developer 2 years 10 months",none,Information Technology
+27,Male,"General Santos, Soccsksargen, Philippines","Image Design, Online Graphics, Advertising",College Graduate,none,none,Information Technology
+27,Male,"Bukidnon, Northern Mindanao, Philippines",Web Developement,College Graduate," Graphic Design Artist, Sales staff (3 years 7 months)",none,Information Technology
+22,Female,"Villanueva, Northern Mindanao, Philippines","Azure AI, Ai Document Intelligence, Microsoft Azure ",College Graduate,Intern 4 months," Cyber Law, Front End Nation 2024 Forge Day, Ai.Deas for Impact: AI for Innovation  and Social Impact Workshop -Camiguin,  Interactive Portfolio: Building Your  Personal Website, Generative Storytelling: Crafting  Narratives with AI Ingenuity",Information Technology
+20,Female,"Butuan, Caraga, Philippines","Communications, Strategy",College Undergraduate, Functional Consultant 2 months,none,Information Technology
+26,Male,"Borongan City, Eastern Visayas, Philippines","Computer Hardware Troubleshooting, Computer Literacy, Networking",College Graduate,"Customer Service Representative 8 months,  Marketing Officer 10 months, Virtual Marketing Assistant 6 months",none,Computer Engineering
+24,Male,"Cagayan De Oro City, Northern Mindanao, Philippines","Data Entry, Technical Support, Git",College Graduate, Information Technology Specialist 2 years,none,Information Technology
+20,Male,"Ormoc, Eastern Visayas, Philippines","Problem Solving, Creativity and Innovation, Critical Thinking",College Undergraduate,"Instructor 7 months, Mobile Application Developer 3 years 6 months, Quality Assurance Specialist 1 year 1 month, Web Developer 10 months,  Information System Analyst 4 months",none,"BTech, Computer Software Engineering"
+28,Female," Cagayan de Oro, Northern Mindanao, Philippines"," Assembly Language, Hardware Description Language, Machine Learning",Masters Graduate,Store Clerk 4 months,"Technical Support Fundamentals, The Bits and Bytes of Computer  Networking, Start the UX Design Process:  Empathize, Define, and Ideate, Foundations of User Experience (UX) Design, Foundations of Cybersecurity",Computer Engineering
+22,Male,"Tacloban, Eastern Visayas, Philippines","Laravel, HTML5, Cascading Style Sheets (CSS)",College Graduate,Customer Service Representative 1 year,none,Information Technology
+26,Male,"Caraga, Philippines","Graphics Design, Video Production, Article Writing",College Graduate, Information Technology Officer 7 months,none,Information Technology
+19,Male," Borongan City, Eastern Visayas, Philippines"," Sketching, Typography, Attention to Detail",College Graduate,"Chief Executive Director 1 year, Canvasser 1 year 10 months, Computer Programmer 3 years 9 months, Audio Visual Technician 1 year 6 months, Health Program Officer 6 months, Planning Office 10 months",Fundamentals of Graphic Design  Digital Ad Certificate - Digital  Marketing,"Professional Studies, Graphic Design, Digital Marketing"
+22,Male," Cagayan De Oro City, Northern Mindanao, Philippines","Node.js, Javascript, HTML",College Graduate,none, EF SET English Certificate 76/100  (C2 Proficient),Computer Science
+22,Male," Cagayan De Oro City, Northern Mindanao, Philippines","Shipping & Receiving, Front-End Development, Vue.js",College Graduate,Intern (4 months), EF SET English Certificate 82/100  (C2 Proficient),Computer Science
+21,Female,"Naawan, Northern Mindanao, Philippines","Microsoft Office, English, Planning",College Graduate, Warehouse Coordinator 1 year 2 months,"Ask Questions to Make Data-Driven, Decisions  Foundations: Data, Data,  Everywhere,  Prepare Data for Exploration",Information System
+19,Male,"Butuan, Caraga, Philippines","Leadership, Critical Thinking, Logical Reasoning, HTML, Python, C Programming language",College Undergraduate," IT Specialist, IS Specialist Project Manage 2 years, Software Developer - Project Manager - UI/UX Designer 2 years,",none,Information Technology
+21,Male,"Davao, Davao Region, Philippines","Mobile App Development, AI Prompting, Merch",College Graduate,none,AgriFood Systems Analytics Data  Science Hackhathon (2nd Place)  UXplore Design Day  Devfest 2022 - Nounce Project  Showcase  1st Davao Student Startup Summit  2023: Sparking Insights and Ideas  for Your Next Innovation,Computer Science
+22,Male,"Bayugan City, Caraga, Philippines"," Python, PHP, Laravel",College Graduate," Intern 2 months, Associate Project Manager 7 months",none,Computer Science
+24,Male,"Koronadal, Soccsksargen, Philippines","Technical Support,  Google Workspace, Game Design, Game Development",College Graduate,none,none,"Entertainment and Multimedia Computing, Game Design"
+21,Male," Southern Leyte, Eastern Visayas, Philippines","User Experience Design (UED),  User Interface Prototyping, Wireframing",2 Year Diploma course," Technical Support Consultant 2 years 4 months, Game Designer, 3 months",none,n/a
+35,Male,"Caraga, Philippines","Teaching, Risk Assessment, Cybersecurity",College Graduate,none, Introduction to Cybersecurity for  Business,Computer Science
+21,Male,"Cebu, Central Visayas, Philippines","C++, Software Systems Engineering",College Graduate," Data Entry Specialist 3 months,  Customer Service Representative 10 months, Technical Support Staff 7 years 5 months",none,Computer Science
+23,Male,"General Santos, Soccsksargen, Philippines","Java, Quality Management, Web Applications",College Graduate,none,GoIT Philippines: Software Tester  Webinar,Computer Science
+20,Female,"Davao, Davao Region, Philippines","Proactive Leadership, Front-End Development, Event Planning, UI/UX designer",College Graduate," Software Developer 2 months, Game Tester 1 year 2 months, Software Quality Assurance Engineer 10 months, Software Quality Assurance Engineer 9 months","Introduction to Data Science  Specialization,  Start the UX Design Process:  Empathize Define and Ideate, Python Data Structures, App Development with Swift Associate, Programming for Everybody (Getting  Started with Python)",Computer Science
+22,Female," Iligan, Northern Mindanao, Philippines","Lead Qualification, Online Lead Generation, Online Research",College Graduate,"Vice President External Affairs 11 months, Founding President 2 years 5 months ",none,Computer Application Major in Internet of Things
+32,Female,Charitoville 1 Imadejas Butuan City,"Video Editing, Communications, Photography, Networking, Nails artistery",College Graduate,none,TEFL Certificate,Elementary Education
+33,Female,San Vicente Butuan City,Microsoft Excel,College Graduate,Home-based Online Teacher (4yrs),N/A,BS HRM
+34,Female,"P-3 Brgy Libertad, Butuan City","Communications, Photography",College Undergraduate,Front Office Agent (9yrs),None,Hotel and Restaurant Management
+25,Male,P-8 Ong Yiu Butuan City,Computer Servicing,College Undergraduate,Red Apple Restaurant (3 yrs),CSS ,Diploma Course
+,,,,,Computer Technician,,
