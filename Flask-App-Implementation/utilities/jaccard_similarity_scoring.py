@@ -1,4 +1,8 @@
-from utilities.pre_processing import preprocess_text  # Import the existing preprocessing function
+"""Module for job suitability prediction using Flask and machine learning."""
+
+import os
+from utilities.pre_processing import preprocess_text
+from utilities.text_extraction import extract_text
 
 def jaccard_similarity(text1, text2):
     """Compute Jaccard similarity between two preprocessed texts."""

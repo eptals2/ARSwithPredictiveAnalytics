@@ -16,6 +16,18 @@ csrf = CSRFProtect(app)
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
+# Load trained model and encoders
+with open("./models/label_encoder.pkl", "rb") as f:
+    label_encoder = pickle.load(f)
+
+with open("./models/vectorizer.pkl", "rb") as f:
+    vectorizer = pickle.load(f)
+
+with open("./models/xgboost_model.pkl", "rb") as f:
+    model = pickle.load(f)
+
+# Allowed file types
+ALLOWED_EXTENSIONS = {"pdf", "docx", "txt"}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

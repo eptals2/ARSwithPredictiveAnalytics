@@ -12,3 +12,4 @@ __pycache__
 *.bin
 train_args
 *.jpg
+*.csv
