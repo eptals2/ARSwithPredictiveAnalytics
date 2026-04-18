@@ -11,3 +11,4 @@ __pycache__
 *.pth
 *.bin
 train_args
+*.pdf
