@@ -1,5 +1,0 @@
-PANEL DRIVER
--Male
--Elementary or High School Graduate
--Preferably with experience
--Has Driver's License Code (1,2,3 or A, A1, B, B1, B2, C, D)
