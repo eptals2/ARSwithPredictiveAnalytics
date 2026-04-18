@@ -592,13 +592,13 @@ class CandidateAssessmentModel:
     
     def _get_suitability_level(self, score):
         if score >= 0.85:
-            return "Highly Suitable"
+            return "Excellent"
         elif score >= 0.7:
-            return "Moderately Suitable"
+            return "Good"
         elif score >= 0.5:
-            return "Less Suitable"
+            return "Average"
         else:
-            return "Not Suitable"
+            return "Below Average"
     
     def _get_strengths(self, scores):
         strengths = []

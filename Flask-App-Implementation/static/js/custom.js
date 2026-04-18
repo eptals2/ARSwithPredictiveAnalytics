@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const resumeForm = document.getElementById("resumeForm");
     const extractBtn = document.getElementById("extractBtn");
-    const rankBtn = document.getElementById("rankBtn");
+    const compareBtn = document.getElementById("compareBtn");
     const loadingSpinner = document.getElementById("loadingSpinner");
     const resultsContainer = document.getElementById("resultsContainer");
     const candidateList = document.getElementById("candidateList");
@@ -48,11 +48,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     displayResults(analysisResults);
                     resultsContainer.classList.remove("hidden");
 
-                    // Show rank button only if there are multiple results
+                    // Show compare button only if there are multiple results
                     if (analysisResults.length > 1) {
-                        rankBtn.classList.remove("hidden");
+                        compareBtn.classList.remove("hidden");
                     } else {
-                        rankBtn.classList.add("hidden");
+                        compareBtn.classList.add("hidden");
                     }
                 } else {
                     alert("Error: " + data.error);
@@ -67,10 +67,10 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 
-    // Handle rank button click
-    rankBtn.addEventListener("click", function () {
+    // Handle compare button click
+    compareBtn.addEventListener("click", function () {
         if (analysisResults.length <= 1) {
-            alert("You need at least two candidates to rank.");
+            alert("You need at least two candidates to compare.");
             return;
         }
 
@@ -78,8 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
         loadingSpinner.style.display = "block";
         comparisonCard.classList.add("hidden");
 
-        // Send request to rank candidates
-        fetch("/rank", {
+        // Send request to compare candidates
+        fetch("/compare", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
             scoreDiv.className = "mb-3";
             
             const positions = result.entities.job_position || [];
-            const positionText = positions.length > 0 ? `<strong>Suitable Role:</strong> ${positions.join(", ")}<br>` : "";
+            const positionText = positions.length > 0 ? `<strong>Position:</strong> ${positions.join(", ")}<br>` : "";
             
             scoreDiv.innerHTML = `
                 ${positionText}
@@ -161,23 +161,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Create score section
         const scoreSection = document.createElement("div");
-        scoreSection.className = "mb-4 border-bottom pb-3";
+        scoreSection.className = "mb-4";
         
         const positions = entities.job_position || [];
-        const positionText = positions.length > 0 ? `${positions.join(", ")}` : "";
+        const positionText = positions.length > 0 ? `<p><strong>Position:</strong> ${positions.join(", ")}</p>` : "";
 
         scoreSection.innerHTML = `
-            <!--p><strong>Suitable Job:</strong> ${positionText}</p-->
-            <p><strong>Suitability Score:</strong> ${assessment.overall_score}%</p>
+            ${positionText}
+            <h4>Overall Assessment</h4>
+            <p><strong>Score:</strong> ${assessment.overall_score}%</p>
             <p><strong>Suitability:</strong> <span class="${assessment.suitability.toLowerCase().replace(" ", "-")}">${assessment.suitability}</span></p>
-            <!--p><strong>Recommendation:</strong> ${assessment.recommendation}</p-->
+            <p><strong>Recommendation:</strong> ${assessment.recommendation}</p>
         `;
         assessmentContainer.appendChild(scoreSection);
 
         // Create entities section
         const entitiesSection = document.createElement("div");
         entitiesSection.className = "mb-4";
-        //entitiesSection.innerHTML = "<h4>Candidate Details</h4>";
+        entitiesSection.innerHTML = "<h4>Candidate Details</h4>";
 
         // Display entities
         const entityGroups = {
