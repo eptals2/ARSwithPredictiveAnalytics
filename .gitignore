@@ -12,4 +12,6 @@ __pycache__
 *.bin
 train_args
 *.jpg
+*.JPG
+resumes-jobreq-pairs.csv
 *.csv

@@ -1,17 +1,23 @@
 import logging
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session, send_from_directory
 from sklearn.metrics.pairwise import cosine_similarity
-from utilities.pre_processing import preprocess_text
-from utilities.jaccard_similarity_scoring import jaccard_similarity
-from utilities.text_extraction import extract_text
+from utilities.preprocessing import preprocess_text
+from utilities.text_extractor import extract_text_from_resume
 from utilities.token_generator import generate_secret_key
 from utilities.entity_matching import EntityMatcher
 import os
+<<<<<<< HEAD
 import secrets
 
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+=======
+from werkzeug.utils import secure_filename
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
+>>>>>>> version-3.0-(RoBERTa+XGBoost-integration)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = generate_secret_key()
@@ -95,7 +101,7 @@ def login_page():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
 
 @app.route("/upload", methods=["POST"])
@@ -126,8 +132,8 @@ def rank_resumes():
             return jsonify({"success": False, "message": "Missing files"}), 400
 
         # Extract text from files
-        job_text = extract_text(job_file)
-        resume_texts = [extract_text(resume) for resume in resume_files]
+        job_text = extract_text_from_resume(job_file)
+        resume_texts = [extract_text_from_resume(resume) for resume in resume_files]
 
         if not job_text or not any(resume_texts):
             logging.warning("Could not extract text from one or more files.")

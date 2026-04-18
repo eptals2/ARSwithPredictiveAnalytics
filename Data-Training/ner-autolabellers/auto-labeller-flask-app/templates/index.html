@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>NER Auto Labeler</title>
+        <link rel="stylesheet" href="static/css/bootstrap-5.2.3.css" />
+        <style>
+            .token {
+                display: inline-block;
+                margin: 2px;
+                padding: 2px 5px;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            .token:hover {
+                background-color: #f0f0f0;
+            }
+            .entity-label {
+                padding: 2px 5px;
+                margin: 2px;
+                border-radius: 3px;
+                color: white;
+                font-weight: bold;
+            }
+            .AGE {
+                background-color: #ff5733;
+            }
+            .GENDER {
+                background-color: #33ff57;
+            }
+            .ADDRESS {
+                background-color: #3357ff;
+            }
+            .SOFT_SKILL {
+                background-color: #ff33a8;
+            }
+            .HARD_SKILL {
+                background-color: #33a8ff;
+            }
+            .EDUCATION_LEVEL {
+                background-color: #a833ff;
+            }
+            .COURSE {
+                background-color: #ffa833;
+            }
+            .EXPERIENCE {
+                background-color: #33ffa8;
+            }
+            .CERTIFICATION {
+                background-color: #a8ff33;
+            }
+
+            .selected-entity {
+                background-color: #e0e0e0;
+                font-weight: bold;
+            }
+
+            .text-container {
+                line-height: 2;
+                margin: 20px 0;
+                padding: 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
+
+            .shortcut-guide {
+                margin-bottom: 20px;
+                padding: 10px;
+                background-color: #f0f0f0;
+                border-radius: 5px;
+            }
+
+            .entity-count {
+                font-size: 0.8em;
+                margin-left: 5px;
+                color: #666;
+            }
+
+            .export-container {
+                margin-top: 30px;
+            }
+
+            .labeled-token {
+                border: 2px solid;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container mt-4">
+            <h1 class="mb-4">NER Auto Labeler</h1>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Text Input</h5>
+                        </div>
+                        <div class="card-body">
+                            <textarea
+                                id="textInput"
+                                class="form-control"
+                                rows="10"
+                                placeholder="Paste your resume text here..."
+                            ></textarea>
+                            <button
+                                id="processTextBtn"
+                                class="btn btn-primary mt-3"
+                            >
+                                Process Text
+                            </button>
+                            <button
+                                id="clearBtn"
+                                class="btn btn-secondary mt-3 ms-2"
+                            >
+                                Clear All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Entity Types</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="shortcut-guide">
+                                <p><strong>Keyboard Shortcuts:</strong></p>
+                                <p>
+                                    1. Press a number key to select an entity
+                                    type
+                                </p>
+                                <p>2. Click on words to label them</p>
+                                <p>3. Press Enter to finish labeling</p>
+                                <p>
+                                    4. Press Escape to cancel current selection
+                                </p>
+                            </div>
+                            <div id="entityTypes">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="entityType"
+                                        id="entity1"
+                                        value="AGE"
+                                        data-shortcut="1"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="entity1"
+                                    >
+                                        <span class="entity-label AGE"
+                                            >AGE</span
+                                        >
+                                        (Press 1)
+                                        <span id="ageCount" class="entity-count"
+                                            >(0)</span
+                                        >
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="entityType"
+                                        id="entity2"
+                                        value="GENDER"
+                                        data-shortcut="2"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="entity2"
+                                    >
+                                        <span class="entity-label GENDER"
+                                            >GENDER</span
+                                        >
+                                        (Press 2)
+                                        <span
+                                            id="genderCount"
+                                            class="entity-count"
+                                            >(0)</span
+                                        >
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="entityType"
+                                        id="entity3"
+                                        value="ADDRESS"
+                                        data-shortcut="3"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="entity3"
+                                    >
+                                        <span class="entity-label ADDRESS"
+                                            >ADDRESS</span
+                                        >
+                                        (Press 3)
+                                        <span
+                                            id="addressCount"
+                                            class="entity-count"
+                                            >(0)</span
+                                        >
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="entityType"
+                                        id="entity4"
+                                        value="SOFT_SKILL"
+                                        data-shortcut="4"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="entity4"
+                                    >
+                                        <span class="entity-label SOFT_SKILL"
+                                            >SOFT_SKILL</span
+                                        >
+                                        (Press 4)
+                                        <span
+                                            id="softSkillCount"
+                                            class="entity-count"
+                                            >(0)</span
+                                        >
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="entityType"
+                                        id="entity5"
+                                        value="HARD_SKILL"
+                                        data-shortcut="5"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="entity5"
+                                    >
+                                        <span class="entity-label HARD_SKILL"
+                                            >HARD_SKILL</span
+                                        >
+                                        (Press 5)
+                                        <span
+                                            id="hardSkillCount"
+                                            class="entity-count"
+                                            >(0)</span
+                                        >
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="entityType"
+                                        id="entity6"
+                                        value="EDUCATION_LEVEL"
+                                        data-shortcut="6"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="entity6"
+                                    >
+                                        <span
+                                            class="entity-label EDUCATION_LEVEL"
+                                            >EDUCATION_LEVEL</span
+                                        >
+                                        (Press 6)
+                                        <span
+                                            id="educationLevelCount"
+                                            class="entity-count"
+                                            >(0)</span
+                                        >
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="entityType"
+                                        id="entity7"
+                                        value="COURSE"
+                                        data-shortcut="7"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="entity7"
+                                    >
+                                        <span class="entity-label COURSE"
+                                            >COURSE</span
+                                        >
+                                        (Press 7)
+                                        <span
+                                            id="courseCount"
+                                            class="entity-count"
+                                            >(0)</span
+                                        >
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="entityType"
+                                        id="entity8"
+                                        value="EXPERIENCE"
+                                        data-shortcut="8"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="entity8"
+                                    >
+                                        <span class="entity-label EXPERIENCE"
+                                            >EXPERIENCE</span
+                                        >
+                                        (Press 8)
+                                        <span
+                                            id="experienceCount"
+                                            class="entity-count"
+                                            >(0)</span
+                                        >
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="entityType"
+                                        id="entity9"
+                                        value="CERTIFICATION"
+                                        data-shortcut="9"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="entity9"
+                                    >
+                                        <span class="entity-label CERTIFICATION"
+                                            >CERTIFICATION</span
+                                        >
+                                        (Press 9)
+                                        <span
+                                            id="certificationCount"
+                                            class="entity-count"
+                                            >(0)</span
+                                        >
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Text for Labeling</h5>
+                </div>
+                <div class="card-body">
+                    <div id="textContainer" class="text-container"></div>
+                </div>
+            </div>
+
+            <div class="export-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Export Data</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="exportFormat" class="form-label"
+                                >Export Format</label
+                            >
+                            <select id="exportFormat" class="form-select">
+                                <option value="conll">CoNLL Format</option>
+                                <option value="json">JSON Format</option>
+                            </select>
+                        </div>
+                        <button id="exportBtn" class="btn btn-success">
+                            Export Labeled Data
+                        </button>
+                        <div class="mt-3">
+                            <textarea
+                                id="exportOutput"
+                                class="form-control"
+                                rows="10"
+                                readonly
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="static/js/bootstrap-5.2.3.bundle.min.js"></script>
+        <script src="static/js/labeler.js"></script>
+    </body>
+</html>
