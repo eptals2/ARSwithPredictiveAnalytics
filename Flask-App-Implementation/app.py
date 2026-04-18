@@ -5,7 +5,7 @@ import os
 from utilities.text_extraction import extract_text_from_file
 from utilities.roBERTa_NER import calculate_resume_similarities    
 from utilities.XGBoost import analyze_resumes
-
+import torch
 # from utilities.XGBoost import predict_job_fit
 
 """     
