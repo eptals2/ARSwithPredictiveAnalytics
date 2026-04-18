@@ -4,6 +4,7 @@ import xgboost as xgb
 import nltk
 from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
 from collections import defaultdict
+import logging
 
 nltk.download('punkt', quiet=True)
 
