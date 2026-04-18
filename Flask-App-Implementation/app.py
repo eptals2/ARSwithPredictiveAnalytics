@@ -6,18 +6,10 @@ from utilities.text_extractor import extract_text_from_resume
 from utilities.token_generator import generate_secret_key
 from utilities.entity_matching import EntityMatcher
 import os
-<<<<<<< HEAD
-import secrets
-
-
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-=======
 from werkzeug.utils import secure_filename
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
->>>>>>> version-3.0-(RoBERTa+XGBoost-integration)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = generate_secret_key()
