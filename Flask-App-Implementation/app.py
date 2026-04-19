@@ -62,7 +62,7 @@ def login_page():
         if request.method == 'POST':
             username = request.form['username']
             password = request.form['password']
-            if username == 'admin' and password == 'admin':
+            if username == 'demo' and password == 'demo':
                 session['username'] = username
                 return redirect(url_for('home'))
             return render_template('login_page.html', error='Invalid username or password')
