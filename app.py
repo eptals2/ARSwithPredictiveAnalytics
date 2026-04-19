@@ -57,9 +57,9 @@ def match_entities(resume_entities, job_entities, entity_type):
 logging.info("Starting application...")
 
 # Initialize EntityMatcher with model paths
-MODEL_PATH = "C:/Users/Acer/Desktop/ARSwithPredictiveAnalytics/Flask-App-Implementation/models/RoBERTa-fine-tuned-model"
+MODEL_PATH = "models/RoBERTa-fine-tuned-model"
 # New XGBoost model path for suitability prediction
-XGBOOST_PATH = "C:/Users/Acer/Desktop/ARSwithPredictiveAnalytics/Flask-App-Implementation/models/XGBoost-model/xgboost_model.pkl"
+XGBOOST_PATH = "models/XGBoost-model/xgboost_model.pkl"
 try:
     entity_matcher = EntityMatcher(MODEL_PATH, xgboost_model_path=XGBOOST_PATH)
     logging.info("EntityMatcher initialized successfully.")
