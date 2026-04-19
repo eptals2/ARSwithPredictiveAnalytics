@@ -1,0 +1,48 @@
+{
+    "version": [1, 0, 0],
+    "learner": {
+        "gradient_booster": {
+            "model": {
+                "gbtree_model_param": {
+                    "num_trees": 10,
+                    "size_leaf_vector": 0
+                },
+                "tree_info": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                "trees": [
+                    {
+                        "base_weights": [0.5],
+                        "categories": [],
+                        "categories_nodes": [],
+                        "categories_segments": [],
+                        "categories_sizes": [],
+                        "default_left": [true],
+                        "id": 0,
+                        "left_children": [-1],
+                        "loss_changes": [0.0],
+                        "parents": [],
+                        "right_children": [-1],
+                        "split_conditions": [0.5],
+                        "split_indices": [0],
+                        "split_type": [0],
+                        "sum_hessian": [1.0],
+                        "tree_param": {
+                            "num_deleted": 0,
+                            "num_feature": 8,
+                            "num_nodes": 1,
+                            "size_leaf_vector": 0
+                        }
+                    }
+                ]
+            },
+            "name": "gbtree"
+        },
+        "learner_model_param": {
+            "base_score": 0.5,
+            "num_class": 0,
+            "num_feature": 8
+        },
+        "objective": {
+            "name": "binary:logistic"
+        }
+    }
+}

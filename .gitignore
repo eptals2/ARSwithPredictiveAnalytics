@@ -1,0 +1,17 @@
+.venv
+uploads
+__pycache__
+*.docx
+*.pdf
+*.jpg
+*.jpeg
+*.png
+*.safetensors
+*.pt
+*.pth
+*.bin
+train_args
+*.jpg
+*.JPG
+resumes-jobreq-pairs.csv
+*.csv
